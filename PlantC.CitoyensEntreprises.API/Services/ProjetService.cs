@@ -1,32 +1,29 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprises.API.DTO;
+using System;
+using System.Data.SqlClient;
 
 namespace PlantC.CitoyensEntreprises.API.Services {
     public class ProjetService {
 
-        private readonly PlantDBContext dBContext;
+        private SqlConnection oConn;
 
-        public ProjetService(PlantDBContext dBContext) {
-            this.dBContext = dBContext;
+        public ProjetService(SqlConnection oConn) {
+            this.oConn = oConn;
         }
 
-        public void Create(ProjetAddDTO dto) {
-            dBContext.Projets.Add(new Projet {
-                CodePostal = dto.CodePostal,
-                Description = dto.Description,
-                Latitude = dto.Latitude,
-                Longitude = dto.Longitude,
-                Localite = dto.Localite,
-                NbArbresTotal = dto.NbArbresTotal,
-                NbParticipantsTotal = dto.NbParticipantsTotal,
-                ObjectifArbres = dto.ObjectifArbres,
-                ObjectifMonetaire = dto.ObjectifMonetaire,
-                SommeRecoltee = dto.SommeRecoltee,
-                Statut = dto.StatutProjet,
-                Titre = dto.Titre,
-                TypeDeProjet = dto.TypeDeProjet
-            });
-            dBContext.SaveChanges();
+        public int Create(ProjetAddDTO dto) {
+            try {
+                oConn.Open();
+                SqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "INSERT INTO Projet OUTPUT inserted.Id VALUES (@p1)";
+                cmd.Parameters.AddWithValue("p1", dto);
+                return (int)cmd.ExecuteScalar();
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
         }
 
     }
