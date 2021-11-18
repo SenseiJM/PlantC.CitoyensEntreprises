@@ -52,5 +52,6 @@ namespace PlantC.CitoyensEntreprises.API.Services {
                 oConn.Close();
             }
 
+        }
     }
 }
