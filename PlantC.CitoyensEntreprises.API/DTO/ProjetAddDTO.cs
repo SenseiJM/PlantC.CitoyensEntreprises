@@ -1,27 +1,42 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace PlantC.CitoyensEntreprise.DAL.Entities
-{
-    public class Projet {
+namespace PlantC.CitoyensEntreprises.API.DTO {
+    public class ProjetAddDTO {
 
-        public uint Id { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string Titre { get; set; }
+
+        [Required]
+        [MaxLength(100)]
         public string Localite { get; set; }
+
+        [Required]
         public double Longitude { get; set; }
+
+        [Required]
         public double Latitude { get; set; }
+
+        [Required]
         public TypeProjet TypeDeProjet { get; set; }
-        public StatutProjet Statut { get; set; }
+
+        [Required]
+        public StatutProjet StatutProjet { get; set; }
+
+        [Required]
         public ushort CodePostal { get; set; }
+
+        [Required]
         public string Description { get; set; }
         public uint NbArbresTotal { get; set; }
         public uint NbParticipantsTotal { get; set; }
         public double SommeRecoltee { get; set; }
+
+        [Required]
         public double ObjectifMonetaire { get; set; }
+
+        [Required]
         public uint ObjectifArbres { get; set; }
 
     }
