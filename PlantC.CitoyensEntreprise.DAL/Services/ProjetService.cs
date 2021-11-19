@@ -31,25 +31,19 @@ namespace PlantC.CitoyensEntreprises.API.Services {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT Titre, Localite, TypeProjet, StatutProjet, ObjectifMonetaire, SommeRecoltee FROM Projet";
+                cmd.CommandText = "SELECT Reference, Infrastructure, Quantite, UniteDeMesure, IDLocalisation, TonnesCO2,HeuresTravail, CoutDuProjet FROM Projet";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Projet> result = new List<Projet>();
                 while (reader.Read()) {
                     result.Add(new Projet {
-                        Localite = reader["Localite"].ToString(),
-                        ObjectifMonetaire = (double)reader["ObjectifMonetaire"],
-                        SommeRecoltee = (double)reader["SommeRecoltee"],
-                        Statut = (StatutProjet)reader["StatutProjet"],
-                        Titre = reader["Titre"].ToString(),
-                        TypeDeProjet = (TypeProjet)reader["TypeProjet"],
-                        CodePostal = (ushort)reader["CodePostal"],
-                        Description = reader["Description"].ToString(),
-                        Id = (uint)reader["Id"],
-                        Latitude = (double)reader["Latitude"],
-                        Longitude = (double)reader["Longitude"],
-                        NbArbresTotal = (uint)reader["NbArbresTotal"],
-                        NbParticipantsTotal = (uint)reader["NbParticipantsTotal"],
-                        ObjectifArbres = (uint)reader["ObjectifArbres"]
+                        Reference = reader["Reference"].ToString(),
+                        Infrastructure = reader["Infrastructure"].ToString(),
+                        Quantite = (double)reader["Quantite"],
+                        UniteDeMesure = reader["UniteDeMesure"].ToString(),
+                        IDLocalisation = (int)reader["IDLocalisation"],
+                        TonnesCO2 = (double)reader["TonnesCO2"],
+                        HeuresTravail = (double)reader["HeuresTravail"],
+                        CoutDuProjet = (double)reader["CoutDuProjet"]
                     });
                 }
                 return result;
