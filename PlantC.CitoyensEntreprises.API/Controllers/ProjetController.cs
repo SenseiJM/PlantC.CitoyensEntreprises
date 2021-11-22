@@ -18,8 +18,8 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Get() {
-            IEnumerable<ProjetIndexDTO> dto = _projetService.Get().Select(p => p.ToIndexDTO());
+        public IActionResult GetAll() {
+            IEnumerable<ProjetIndexDTO> dto = _projetService.GetAll().Select(p => p.ToIndexDTO());
             return Ok(dto);
         }
     }

@@ -14,7 +14,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             _projetRepository = projetRepository;
         }
 
-        public IEnumerable<ProjetModel> Get() {
+        public IEnumerable<ProjetModel> GetAll() {
             return _projetRepository.GetAll().Select(p => p.ToSimpleModel());
         }
 

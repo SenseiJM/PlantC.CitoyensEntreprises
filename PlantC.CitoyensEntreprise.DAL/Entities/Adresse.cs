@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public struct Adresse {
+    public class Adresse {
         public string AdressLine1;
         public string AdressLine2;
         public string Number;

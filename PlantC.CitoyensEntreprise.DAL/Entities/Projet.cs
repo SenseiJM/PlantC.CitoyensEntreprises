@@ -1,15 +1,7 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlantC.CitoyensEntreprise.DAL.Entities
-{
+﻿namespace PlantC.CitoyensEntreprise.DAL.Entities {
     public class Projet {
 
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string Reference { get; set; }
         public string Infrastructure { get; set; }
         public double Quantite { get; set; }

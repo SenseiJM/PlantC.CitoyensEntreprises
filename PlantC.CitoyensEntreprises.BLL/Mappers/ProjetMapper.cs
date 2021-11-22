@@ -11,12 +11,15 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
 
         public static ProjetModel ToSimpleModel(this Projet p) {
             return new ProjetModel {
-                TypeProjet = p.TypeDeProjet,
-                Localite = p.Localite,
-                ObjectifMonetaire = p.ObjectifMonetaire,
-                SommeRecoltee = p.SommeRecoltee,
-                StatutProjet = p.Statut,
-                Titre = p.Titre
+                CoutDuProjet = p.CoutDuProjet,
+                HeuresTravail = p.HeuresTravail,
+                Id = p.Id,
+                IDLocalisation = p.IDLocalisation,
+                Infrastructure = p.Infrastructure,
+                Quantite = p.Quantite,
+                Reference = p.Reference,
+                TonnesCO2 = p.TonnesCO2,
+                UniteDeMesure = p.UniteDeMesure
             };
         }
 

@@ -1,11 +1,7 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
-using PlantC.CitoyensEntreprise.DAL.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories {
     public class ProjetRepository {
@@ -16,6 +12,29 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             this.oConn = oConn;
         }
 
+        /// <summary>
+        /// Adds a new Projet entity in the database
+        /// </summary>
+        /// <param name="p">New Projet Entity to be added in the database</param>
+        /// <returns>ID of the created Entity</returns>
+        public int Create(Projet p) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "INSERT INTO Projet OUTPUT inserted.Id VALUES (@p1)";
+                cmd.Parameters.AddWithValue("p1", p);
+                return (int)cmd.ExecuteScalar();
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Fetches a full list of all existing Projet Entities in the database
+        /// </summary>
+        /// <returns>IEnumerable of Projet Entity</returns>
         public IEnumerable<Projet> GetAll() {
             try {
                 oConn.Open();
