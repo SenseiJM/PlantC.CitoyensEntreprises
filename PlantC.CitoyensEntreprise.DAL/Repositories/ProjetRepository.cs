@@ -39,9 +39,10 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT Reference, Infrastructure, Quantite, UniteDeMesure, IDLocalisation, TonnesCO2, HeuresTravail, CoutDuProjet FROM Projet";
+                cmd.CommandText = "SELECT * FROM Projet";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Projet> result = new List<Projet>();
+                //On peut faire un mapper ici aussi (sur IDataRecord)
                 while (reader.Read()) {
                     result.Add(new Projet {
                         Reference = reader["Reference"].ToString(),

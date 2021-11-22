@@ -23,5 +23,19 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             };
         }
 
+        public static Projet ToEntity(this ProjetModel model) {
+            return new Projet {
+                Id = model.Id,
+                CoutDuProjet = model.CoutDuProjet,
+                HeuresTravail = model.HeuresTravail,
+                IDLocalisation = model.IDLocalisation,
+                Infrastructure = model.Infrastructure,
+                Quantite = model.Quantite,
+                Reference = model.Reference,
+                TonnesCO2 = model.TonnesCO2,
+                UniteDeMesure = model.UniteDeMesure
+            };
+        }
+
     }
 }

@@ -18,5 +18,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             return _projetRepository.GetAll().Select(p => p.ToSimpleModel());
         }
 
+        public int Create(ProjetModel model) {
+            return _projetRepository.Create(model.ToEntity());
+        }
+
     }
 }
