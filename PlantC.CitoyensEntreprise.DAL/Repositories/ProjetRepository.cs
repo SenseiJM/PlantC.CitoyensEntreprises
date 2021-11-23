@@ -68,7 +68,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="id">ID to be updated</param>
         /// <returns>True if Projet Entity has been updated, False if ID is not existing</returns>
-        public bool UpdateProjet(Projet p)
+        public bool UpdateProjet(int id, Projet p)
         {
             try
             {
@@ -83,8 +83,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "TonnesCO2 = @p7," +
                     "HeuresTravail = @p8," +
                     "CoutDuProjet = @p9," +
-                    "WHERE Id = @p1";
-                cmd.Parameters.AddWithValue("p1", p.Id);
+                    "WHERE Id = id";
                 cmd.Parameters.AddWithValue("p2", p.Reference);
                 cmd.Parameters.AddWithValue("p3", p.Infrastructure);
                 cmd.Parameters.AddWithValue("p4", p.Quantite);

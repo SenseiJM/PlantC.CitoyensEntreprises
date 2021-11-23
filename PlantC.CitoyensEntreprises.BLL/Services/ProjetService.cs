@@ -30,5 +30,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             return _projetRepository.GetByID(id).ToSimpleModel();
         }
 
+        public bool UpdateProjet(int id, ProjetModel model)
+        {
+            return _projetRepository.UpdateProjet(id, model.ToEntity());
+        }
+
     }
 }
