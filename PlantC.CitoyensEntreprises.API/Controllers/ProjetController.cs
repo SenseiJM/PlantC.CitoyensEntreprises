@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;

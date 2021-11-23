@@ -1,6 +1,4 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-
-namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
+﻿namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetIndexDTO {
 
         public int Id { get; set; }

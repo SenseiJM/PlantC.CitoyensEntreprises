@@ -63,7 +63,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
-
+        /// <summary>
+        /// Searches the database to delete the Projet corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be deleted</param>
+        /// <returns>True if Projet Entity has been deleted, False if ID is not existing</returns>
         public bool DeleteProjet(int id)
         {
             try
