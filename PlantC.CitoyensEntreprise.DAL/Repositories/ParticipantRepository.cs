@@ -61,5 +61,30 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+        // <summary>
+        /// Searches the database to delete the articipant corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be deleted</param>
+        /// <returns>True if Participant Entity has been deleted, False if ID is not existing</returns>
+        public bool DeleteParticipant(int id)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Participant WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                return cmd.ExecuteNonQuery() != 0;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
     }
 }

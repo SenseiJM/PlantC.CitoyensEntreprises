@@ -26,5 +26,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(dto);
         }
 
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteParticipant(int id)
+        {
+            _participantService.DeleteParticipant(id);
+            return Ok(new { message = "Participant deleted successfully" });
+        }
     }
 }
