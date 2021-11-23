@@ -63,5 +63,41 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+        /// <summary>
+        /// Searches the database to find the Projet corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be searched</param>
+        /// <returns>Returns corresponding Projet Entity</returns>
+        public Projet GetByID(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Projet WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                Projet p = null;
+                if (reader.Read()) {
+                    p = new Projet {
+                        CoutDuProjet = (double)reader["CoutDuProjet"],
+                        HeuresTravail = (double)reader["HeuresTravail"],
+                        Id = (int)reader["Id"],
+                        IDLocalisation = (int)reader["IDLocalisation"],
+                        Infrastructure = (string)reader["Infrastructure"],
+                        Quantite = (double)reader["Quantite"],
+                        Reference = (string)reader["Reference"],
+                        TonnesCO2 = (double)reader["TonnesCO2"],
+                        UniteDeMesure = (string)reader["UniteDeMesure"]
+                    };
+                    return p;
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
     }
 }

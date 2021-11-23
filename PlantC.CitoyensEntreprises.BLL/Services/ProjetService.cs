@@ -22,5 +22,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             return _projetRepository.Create(model.ToEntity());
         }
 
+        public ProjetModel GetByID(int id) {
+            return _projetRepository.GetByID(id).ToSimpleModel();
+        }
+
     }
 }

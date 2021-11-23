@@ -22,5 +22,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             IEnumerable<ProjetIndexDTO> dto = _projetService.GetAll().Select(p => p.ToIndexDTO());
             return Ok(dto);
         }
+
+        [HttpGet("byID/{id}")]
+        public IActionResult GetByID(int id) {
+            ProjetIndexDTO dto = _projetService.GetByID(id).ToIndexDTO();
+            return Ok(dto);
+        }
+
     }
 }
