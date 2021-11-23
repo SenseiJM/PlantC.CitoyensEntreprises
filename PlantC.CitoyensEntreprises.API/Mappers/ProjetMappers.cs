@@ -6,12 +6,15 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
 
         public static ProjetIndexDTO ToIndexDTO(this ProjetModel model) {
             return new ProjetIndexDTO {
-                Localite = model.Localite,
-                ObjectifMonetaire = model.ObjectifMonetaire,
-                SommeRecoltee = model.SommeRecoltee,
-                StatutProjet = model.StatutProjet,
-                Titre = model.Titre,
-                TypeProjet = model.TypeProjet
+                CoutDuProjet = model.CoutDuProjet,
+                HeuresTravail = model.HeuresTravail,
+                Id = model.Id,
+                IDLocalisation = model.IDLocalisation,
+                Infrastructure = model.Infrastructure,
+                Quantite = model.Quantite,
+                Reference = model.Reference,
+                TonnesCO2 = model.TonnesCO2,
+                UniteDeMesure = model.UniteDeMesure
             };
         }
 

@@ -3,7 +3,7 @@
 namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetIndexDTO {
 
-        public uint Id { get; set; }
+        public int Id { get; set; }
         public string Reference { get; set; }
         public string Infrastructure { get; set; }
         public double Quantite { get; set; }

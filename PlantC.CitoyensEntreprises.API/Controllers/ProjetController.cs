@@ -23,11 +23,20 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(dto);
         }
 
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _projetService.DeleteProjet(id);
             return Ok(new { message = "User deleted successfully" });
         }
+
+        [HttpGet("byID/{id}")]
+        public IActionResult GetByID(int id) {
+            ProjetIndexDTO dto = _projetService.GetByID(id).ToIndexDTO();
+            return Ok(dto);
+        }
+
+
     }
 }

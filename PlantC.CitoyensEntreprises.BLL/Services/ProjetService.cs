@@ -26,5 +26,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             return _projetRepository.DeleteProjet(id);
         }
 
+        public ProjetModel GetByID(int id) {
+            return _projetRepository.GetByID(id).ToSimpleModel();
+        }
+
     }
 }
