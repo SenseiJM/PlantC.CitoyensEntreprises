@@ -23,5 +23,15 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 NomEntreprise = model.NomEntreprise
             };
         }
+        public static ParticipantModel UpdateRequestToModel(this UpdatePartcipantRequestDTO dto)
+        {
+            return new ParticipantModel
+            {
+                Fonction = dto.Fonction,
+                NomEntreprise = dto.NomEntreprise,
+                IdContact = dto.IdContact,
+                BCE = dto.BCE,
+            };
+        }
     }
 }

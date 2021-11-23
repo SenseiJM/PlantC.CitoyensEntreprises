@@ -28,5 +28,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         {
             return _participantRepository.DeleteParticipant(id);
         }
+
+        public bool UpdateParticipant(int id, ParticipantModel model)
+        {
+            return _participantRepository.UpdateParticipant(id, model.ToEntity());
+        }
     } 
 }
