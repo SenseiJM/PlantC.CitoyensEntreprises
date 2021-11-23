@@ -20,5 +20,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             return _contactRepository.Create(model.ToEntity());
         }
 
+        public bool Update(int id, ContactModel model) {
+            return _contactRepository.Update(id, model.ToEntity());
+        }
+
     }
 }

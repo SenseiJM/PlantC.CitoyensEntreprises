@@ -20,5 +20,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_contactService.Create(dto.ToModel()));
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, ContactUpdateRequestDTO dto) {
+            _contactService.Update(id, dto.UpdateRequestToModel());
+            return Ok(new { message = "Contact updated succesfully" });
+        }
+
     }
 }

@@ -15,5 +15,16 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
+        public static ContactModel UpdateRequestToModel(this ContactUpdateRequestDTO dto) {
+            return new ContactModel {
+                Adresse = dto.Adresse,
+                Id = dto.Id,
+                Mail = dto.Mail,
+                Nom = dto.Nom,
+                Prenom = dto.Prenom,
+                Telephone = dto.Telephone
+            };
+        }
+
     }
 }

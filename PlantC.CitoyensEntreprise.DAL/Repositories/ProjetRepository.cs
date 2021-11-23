@@ -63,10 +63,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
-        // <summary>
+        /// <summary>
         /// Searches the database to update the Projet corresponding to the ID
         /// </summary>
         /// <param name="id">ID to be updated</param>
+        /// <param name="p"></param>
         /// <returns>True if Projet Entity has been updated, False if ID is not existing</returns>
         public bool UpdateProjet(int id, Projet p)
         {
