@@ -20,14 +20,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             return _contactRepository.Create(model.ToEntity());
         }
 
-<<<<<<< HEAD
+
         public IEnumerable<ContactModel> GetAllContacts()
         {
             return _contactRepository.GettAllContacts().Select(c => c.ToSimpleModel());
-=======
+        }
         public bool Update(int id, ContactModel model) {
             return _contactRepository.Update(id, model.ToEntity());
->>>>>>> 08875cb14549968febbd8034a80d5b64b6f58f3e
         }
 
     }

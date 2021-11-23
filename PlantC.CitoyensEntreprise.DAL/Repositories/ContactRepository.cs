@@ -32,7 +32,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Fetches a full list of all existing Contact Entities in the database
         /// </summary>
         /// <returns>IEnumerable of Contact Entity</returns>
@@ -44,7 +43,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Contact";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-                List < Contact > result = new List<Contact>();
+                List<Contact> result = new List<Contact>();
                 while (reader.Read())
                 {
                     result.Add(new Contact
@@ -52,9 +51,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         Nom = reader["Nom"].ToString(),
                         Prenom = reader["Prenom"].ToString(),
                         Mail = reader["Mail"].ToString(),
-                        Telephone = reader ["Telephone"].ToString(),
+                        Telephone = reader["Telephone"].ToString(),
                         Adresse = (Adresse)reader["Adresse"]
-                    }); 
+                    });
                 }
                 return result;
             }
@@ -62,15 +61,18 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             {
                 throw;
             }
+
             finally
             {
-=======
-        /// Searches the database to update the Contact corresponding to the ID
-        /// </summary>
-        /// <param name="id">ID to be updated</param>
-        /// <param name="c"></param>
-        /// <returns>True if Contact Entity has been updated, False if ID is not existing</returns>
-        public bool Update(int id, Contact c) {
+                oConn.Close();
+            }
+        }
+            /// Searches the database to update the Contact corresponding to the ID
+            /// </summary>
+            /// <param name="id">ID to be updated</param>
+            /// <param name="c"></param>
+            /// <returns>True if Contact Entity has been updated, False if ID is not existing</returns>
+            public bool Update(int id, Contact c) {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
@@ -102,7 +104,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             } catch (Exception e) {
                 throw;
             } finally {
->>>>>>> 08875cb14549968febbd8034a80d5b64b6f58f3e
                 oConn.Close();
             }
         }
