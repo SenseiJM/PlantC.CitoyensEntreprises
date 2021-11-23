@@ -22,5 +22,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             IEnumerable<ProjetIndexDTO> dto = _projetService.GetAll().Select(p => p.ToIndexDTO());
             return Ok(dto);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _projetService.DeleteProjet(id);
+            return Ok(new { message = "User deleted successfully" });
+        }
     }
 }

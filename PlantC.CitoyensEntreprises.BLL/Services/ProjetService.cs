@@ -21,6 +21,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         public int Create(ProjetModel model) {
             return _projetRepository.Create(model.ToEntity());
         }
+        public bool DeleteProjet(int id)
+        {
+            return _projetRepository.DeleteProjet(id);
+        }
 
     }
 }

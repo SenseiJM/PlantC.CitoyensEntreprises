@@ -63,5 +63,24 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+        public bool DeleteProjet(int id)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Projet WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                return cmd.ExecuteNonQuery() != 0;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
     }
 }
