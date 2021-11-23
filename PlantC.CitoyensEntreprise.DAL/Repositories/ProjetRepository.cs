@@ -63,12 +63,55 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
-        /// <summary>
-        /// Searches the database to delete the Projet corresponding to the ID
+        // <summary>
+        /// Searches the database to update the Projet corresponding to the ID
         /// </summary>
-        /// <param name="id">ID to be deleted</param>
-        /// <returns>True if Projet Entity has been deleted, False if ID is not existing</returns>
-        public bool DeleteProjet(int id)
+        /// <param name="id">ID to be updated</param>
+        /// <returns>True if Projet Entity has been updated, False if ID is not existing</returns>
+        public bool UpdateProjet(Projet p)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "UPDATE Fishs SET" +
+                    "Reference = @p2," +
+                    "Infrastructure = @p3," +
+                    "Quantite = @p4," +
+                    "UniteDeMesure = @p5," +
+                    "IDLocalisation = @p6," +
+                    "TonnesCO2 = @p7," +
+                    "HeuresTravail = @p8," +
+                    "CoutDuProjet = @p9," +
+                    "WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", p.Id);
+                cmd.Parameters.AddWithValue("p2", p.Reference);
+                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
+                cmd.Parameters.AddWithValue("p4", p.Quantite);
+                cmd.Parameters.AddWithValue("p5", p.UniteDeMesure);
+                cmd.Parameters.AddWithValue("p6", p.IDLocalisation);
+                cmd.Parameters.AddWithValue("p7", p.TonnesCO2);
+                cmd.Parameters.AddWithValue("p8", p.HeuresTravail);
+                cmd.Parameters.AddWithValue("p9", p.CoutDuProjet);
+
+                return cmd.ExecuteNonQuery() != 0;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
+
+            /// <summary>
+            /// Searches the database to delete the Projet corresponding to the ID
+            /// </summary>
+            /// <param name="id">ID to be deleted</param>
+            /// <returns>True if Projet Entity has been deleted, False if ID is not existing</returns>
+            public bool DeleteProjet(int id)
         {
             try
             {

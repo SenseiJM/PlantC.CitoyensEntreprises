@@ -36,6 +36,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(dto);
         }
 
-
+        [HttpPut("{id}")]
+        public IActionResult UpdateProjet(int id, ProjetUpdateRequestDTO)
+        {
+            _projetService.UpdateProjet(id, dto);
+            return Ok(new { message = "User updated successfully" });
+        }
     }
 }
