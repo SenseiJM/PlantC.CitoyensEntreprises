@@ -18,5 +18,19 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
+        public static ProjetModel ToModel(this ProjetAddDTO dto) {
+            return new ProjetModel {
+                CoutDuProjet = dto.CoutDuProjet,
+                HeuresTravail = dto.HeuresTravail,
+                Id = dto.Id,
+                IDLocalisation = dto.IDLocalisation,
+                Infrastructure = dto.Infrastructure,
+                Quantite = dto.Quantite,
+                Reference = dto.Reference,
+                TonnesCO2 = dto.TonnesCO2,
+                UniteDeMesure = dto.UniteDeMesure
+            };
+        }
+
     }
 }

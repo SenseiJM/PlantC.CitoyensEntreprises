@@ -36,6 +36,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(dto);
         }
 
+        [HttpPost]
+        public IActionResult Create(ProjetAddDTO dto) {
+            return Ok(_projetService.Create(dto.ToModel()));
+        }
+
 
     }
 }
