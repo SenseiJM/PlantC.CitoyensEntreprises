@@ -28,7 +28,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         public IActionResult Delete(int id)
         {
             _projetService.DeleteProjet(id);
-            return Ok(new { message = "User deleted successfully" });
+            return Ok(new { message = "Project deleted successfully" });
         }
 
         [HttpGet("byID/{id}")]
