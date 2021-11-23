@@ -1,5 +1,8 @@
-﻿namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public class Contact {
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+
+namespace PlantC.CitoyensEntreprises.BLL.Models {
+    public class ContactModel {
+
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
