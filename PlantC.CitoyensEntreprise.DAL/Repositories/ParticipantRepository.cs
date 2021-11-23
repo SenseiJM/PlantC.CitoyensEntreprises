@@ -88,6 +88,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+
         /// <summary>
         /// Fetches a full list of all existing Participant Entities in the database
         /// </summary>
@@ -112,6 +113,40 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             } catch (Exception e) {
                 throw;
             } finally {
+                oConn.Close();
+            }
+        }
+
+        // <summary>
+        /// Searches the database to update the Participant corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be updated</param>
+        /// <returns>True if Participant Entity has been updated, False if ID is not existing</returns>
+        public bool UpdateParticipant(int id, Participant p)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "UPDATE Participant SET" +
+                    "Fonction = @p2," +
+                    "NomEntreprise = @p3," +
+                    "BCE = @p4," +
+                    "IdContact = @p5," +
+                cmd.Parameters.AddWithValue("p1", id);
+                cmd.Parameters.AddWithValue("p2", p.Fonction);
+                cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
+                cmd.Parameters.AddWithValue("p4", p.BCE);
+                cmd.Parameters.AddWithValue("p5", p.IdContact);
+
+                return cmd.ExecuteNonQuery() != 0;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
                 oConn.Close();
             }
         }

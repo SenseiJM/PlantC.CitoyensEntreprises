@@ -28,7 +28,6 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(dto);
         }
 
-
         [HttpDelete("{id}")]
         public IActionResult DeleteParticipant(int id)
         {
@@ -40,6 +39,13 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         public IActionResult GetAll() {
             IEnumerable<ParticipantIndexDTO> dto = _participantService.GetAll().Select(p => p.ToIndexDTO());
             return Ok(dto);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateParticipant(int id, UpdatePartcipantRequestDTO dto)
+        {
+            _participantService.UpdateParticipant(id, dto.UpdateRequestToModel());
+            return Ok(new { message = "Participant updated successfully" });
         }
     }
 }

@@ -32,5 +32,11 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         public IEnumerable<ParticipantModel> GetAll() {
             return _participantRepository.GetAll().Select(p => p.ToSimpleModel());
         }
+
+        public bool UpdateParticipant(int id, ParticipantModel model)
+        {
+            return _participantRepository.UpdateParticipant(id, model.ToEntity());
+
+        }
     } 
 }
