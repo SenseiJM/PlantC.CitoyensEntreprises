@@ -1,12 +1,7 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public class Participant {
+namespace PlantC.CitoyensEntreprises.BLL.Models {
+    public class ParticipantModel {
         public int Id { get; set; }
         public Fonction Fonction { get; set; }
         public string NomEntreprise { get; set; }
