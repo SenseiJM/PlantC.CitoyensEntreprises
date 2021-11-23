@@ -5,39 +5,31 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetAddDTO {
 
         [Required]
-        [MaxLength(100)]
-        public string Titre { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string Localite { get; set; }
+        public string Reference { get; set; }
 
         [Required]
-        public double Longitude { get; set; }
+        public string Infrastructure { get; set; }
 
         [Required]
-        public double Latitude { get; set; }
+        public double Quantite { get; set; }
 
         [Required]
-        public TypeProjet TypeDeProjet { get; set; }
+        public string UniteDeMesure { get; set; }
 
         [Required]
-        public StatutProjet StatutProjet { get; set; }
+        public int IDLocalisation { get; set; }
 
         [Required]
-        public ushort CodePostal { get; set; }
+        public double TonnesCO2 { get; set; }
 
         [Required]
-        public string Description { get; set; }
-        public uint NbArbresTotal { get; set; }
-        public uint NbParticipantsTotal { get; set; }
-        public double SommeRecoltee { get; set; }
+        public double HeuresTravail { get; set; }
 
         [Required]
-        public double ObjectifMonetaire { get; set; }
-
-        [Required]
-        public uint ObjectifArbres { get; set; }
+        public double CoutDuProjet { get; set; }
 
     }
 }
