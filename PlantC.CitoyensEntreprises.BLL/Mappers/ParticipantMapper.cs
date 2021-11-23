@@ -19,5 +19,15 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             };
         }
 
+        public static ParticipantModel ToSimpleModel(this Participant p) {
+            return new ParticipantModel {
+                BCE = p.BCE,
+                Fonction = p.Fonction,
+                Id = p.Id,
+                IdContact = p.IdContact,
+                NomEntreprise = p.NomEntreprise
+            };
+        }
+
     }
 }

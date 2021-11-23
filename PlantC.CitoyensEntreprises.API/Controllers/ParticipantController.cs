@@ -20,5 +20,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_participantService.Create(dto.ToModel()));
         }
 
+        [HttpGet("byID/{id}")]
+        public IActionResult GetByID(int id) {
+            ParticipantIndexDTO dto = _participantService.GetByID(id).ToIndexDTO();
+            return Ok(dto);
+        }
+
     }
 }

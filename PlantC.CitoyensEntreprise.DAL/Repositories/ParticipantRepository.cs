@@ -1,10 +1,6 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories {
     public class ParticipantRepository {
@@ -26,6 +22,38 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.CommandText = "INSERT INTO Participant OUTPUT inserted.Id VALUES (@p1)";
                 cmd.Parameters.AddWithValue("p1", p);
                 return (int)cmd.ExecuteScalar();
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Searches the database to find the Participant corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be searched</param>
+        /// <returns>Returns corresponding Participant Entity</returns>
+        public Participant GetByID(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Participant WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                Participant p = null;
+                if (reader.Read()) {
+                    p = new Participant {
+                        BCE = (uint?)reader["BCE"],
+                        Fonction = (Enums.Fonction)reader["Fonction"],
+                        Id = (int)reader["Id"],
+                        IdContact = (int)reader["IdContact"],
+                        NomEntreprise = (string)reader["NomEntreprise"]
+                    };
+                    return p;
+                } else {
+                    return null;
+                }
             } catch (Exception e) {
                 throw;
             } finally {

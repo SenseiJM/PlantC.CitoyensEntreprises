@@ -14,5 +14,14 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
+        public static ParticipantIndexDTO ToIndexDTO(this ParticipantModel model) {
+            return new ParticipantIndexDTO {
+                BCE = model.BCE,
+                Fonction = model.Fonction,
+                Id = model.Id,
+                IdContact = model.IdContact,
+                NomEntreprise = model.NomEntreprise
+            };
+        }
     }
 }
