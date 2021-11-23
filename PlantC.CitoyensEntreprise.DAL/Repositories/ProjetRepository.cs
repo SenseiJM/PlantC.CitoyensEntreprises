@@ -74,7 +74,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "UPDATE Fishs SET" +
+                cmd.CommandText = "UPDATE Projet SET" +
                     "Reference = @p2," +
                     "Infrastructure = @p3," +
                     "Quantite = @p4," +
@@ -83,7 +83,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "TonnesCO2 = @p7," +
                     "HeuresTravail = @p8," +
                     "CoutDuProjet = @p9," +
-                    "WHERE Id = id";
+                    "WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Reference);
                 cmd.Parameters.AddWithValue("p3", p.Infrastructure);
                 cmd.Parameters.AddWithValue("p4", p.Quantite);
