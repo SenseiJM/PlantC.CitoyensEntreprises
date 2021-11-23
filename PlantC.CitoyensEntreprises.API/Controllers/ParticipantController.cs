@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers {
     [Route("api/[controller]")]
@@ -32,6 +34,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         {
             _participantService.DeleteParticipant(id);
             return Ok(new { message = "Participant deleted successfully" });
+        }
+
+        [HttpGet]
+        public IActionResult GetAll() {
+            IEnumerable<ParticipantIndexDTO> dto = _participantService.GetAll().Select(p => p.ToIndexDTO());
+            return Ok(dto);
         }
     }
 }

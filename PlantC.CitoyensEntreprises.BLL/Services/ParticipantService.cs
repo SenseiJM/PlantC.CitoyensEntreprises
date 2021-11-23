@@ -28,5 +28,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         {
             return _participantRepository.DeleteParticipant(id);
         }
+
+        public IEnumerable<ParticipantModel> GetAll() {
+            return _participantRepository.GetAll().Select(p => p.ToSimpleModel());
+        }
     } 
 }

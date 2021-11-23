@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories {
     public class ParticipantRepository {
@@ -83,6 +84,34 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
             finally
             {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Fetches a full list of all existing Participant Entities in the database
+        /// </summary>
+        /// <returns>IEnumerable of Projet Entity</returns>
+        public IEnumerable<Participant> GetAll() {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Participant";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Participant> result = new List<Participant>();
+                while (reader.Read()) {
+                    result.Add(new Participant {
+                        BCE = (uint?)reader["BCE"],
+                        Fonction = (Enums.Fonction)reader["Fonction"],
+                        Id = (int)reader["Id"],
+                        IdContact = (int)reader["IdContact"],
+                        NomEntreprise = (string)reader["NomEntreprise"]
+                    });
+                }
+                return result;
+            } catch (Exception e) {
+                throw;
+            } finally {
                 oConn.Close();
             }
         }
