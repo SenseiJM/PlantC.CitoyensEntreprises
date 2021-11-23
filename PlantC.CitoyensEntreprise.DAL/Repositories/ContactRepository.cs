@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories {
     public class ContactRepository {
@@ -26,6 +27,42 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             } catch (Exception e) {
                 throw;
             } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Fetches a full list of all existing Contact Entities in the database
+        /// </summary>
+        /// <returns>IEnumerable of Contact Entity</returns>
+        public IEnumerable<Contact> GettAllContacts()
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Contact";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List < Contact > result = new List<Contact>();
+                while (reader.Read())
+                {
+                    result.Add(new Contact
+                    {
+                        Nom = reader["Nom"].ToString(),
+                        Prenom = reader["Prenom"].ToString(),
+                        Mail = reader["Mail"].ToString(),
+                        Telephone = reader ["Telephone"].ToString(),
+                        Adresse = (Adresse)reader["Adresse"]
+                    }); 
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
                 oConn.Close();
             }
         }

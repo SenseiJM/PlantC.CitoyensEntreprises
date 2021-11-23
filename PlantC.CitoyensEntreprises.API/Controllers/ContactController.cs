@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprises.API.DTO.Contact;
 using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers {
     [Route("api/[controller]")]
@@ -18,6 +20,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         [HttpPost]
         public IActionResult Create(ContactAddDTO dto) {
             return Ok(_contactService.Create(dto.ToModel()));
+        }
+        [HttpGet]
+        public IActionResult GetAllContacts()
+        {
+            IEnumerable<ContactIndexDTO> dto = _contactService.GetAllContacts().Select(c => c.ToIndexDTO());
+            return Ok(dto);
         }
 
     }

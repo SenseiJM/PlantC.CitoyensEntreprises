@@ -19,6 +19,18 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Telephone = model.Telephone
             };
         }
+        public static ContactModel ToSimpleModel(this Contact c)
+        {
+            return new ContactModel
+            {
+                Adresse = c.Adresse,
+                Id = c.Id,
+                Mail = c.Mail,
+                Nom = c.Nom,
+                Prenom = c.Prenom,
+                Telephone = c.Telephone
+            };
+        }
 
     }
 }

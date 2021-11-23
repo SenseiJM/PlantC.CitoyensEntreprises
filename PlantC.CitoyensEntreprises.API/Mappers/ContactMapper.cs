@@ -15,5 +15,18 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
+        public static ContactIndexDTO ToIndexDTO(this ContactModel c)
+        {
+            return new ContactIndexDTO
+            {
+                Adresse = c.Adresse,
+                Id = c.Id,
+                Mail = c.Mail,
+                Nom = c.Nom,
+                Prenom = c.Prenom,
+                Telephone = c.Telephone
+            };
+        }
+
     }
 }
