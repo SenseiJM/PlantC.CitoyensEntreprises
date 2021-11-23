@@ -132,7 +132,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "Fonction = @p2," +
                     "NomEntreprise = @p3," +
                     "BCE = @p4," +
-                    "IdContact = @p5," +
+                    "IdContact = @p5,";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
                 cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
