@@ -67,12 +67,13 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 oConn.Close();
             }
         }
-            /// Searches the database to update the Contact corresponding to the ID
-            /// </summary>
-            /// <param name="id">ID to be updated</param>
-            /// <param name="c"></param>
-            /// <returns>True if Contact Entity has been updated, False if ID is not existing</returns>
-            public bool Update(int id, Contact c) {
+
+        /// Searches the database to update the Contact corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be updated</param>
+        /// <param name="c">Contact Entity to be updated</param>
+        /// <returns>True if Contact Entity has been updated, False if ID is not existing</returns>
+        public bool Update(int id, Contact c) {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
@@ -100,6 +101,25 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.Parameters.AddWithValue("p10", c.Adresse.City);
                 cmd.Parameters.AddWithValue("p11", c.Adresse.Country);
 
+                return cmd.ExecuteNonQuery() != 0;
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Searches the database to delete the Contact corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be deleted</param>
+        /// <returns>True if Contact Entity has been deleted, False if ID is not existing</returns>
+        public bool Delete(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Contact WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
                 return cmd.ExecuteNonQuery() != 0;
             } catch (Exception e) {
                 throw;

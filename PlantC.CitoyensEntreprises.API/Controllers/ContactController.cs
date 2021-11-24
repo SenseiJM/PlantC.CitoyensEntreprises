@@ -34,5 +34,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(new { message = "Contact updated succesfully" });
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id) {
+            _contactService.Delete(id);
+            return Ok(new { message = "Contact deleted successfully" });
+        }
+
     }
 }

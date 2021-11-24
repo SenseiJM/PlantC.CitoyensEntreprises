@@ -29,5 +29,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             return _contactRepository.Update(id, model.ToEntity());
         }
 
+        public bool Delete(int id) {
+            return _contactRepository.Delete(id);
+        }
+
     }
 }
