@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprise.DAL.Entities {
     public class Adresse {
-        public string AdressLine1;
-        public string AdressLine2;
-        public string Number;
-        public string ZipCode;
-        public string City;
-        public string Country;
+        public int Id { get; set; }
+        public string AdressLine1 { get; set; }
+        public string AdressLine2 { get; set; }
+        public string Number { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
     }
 }

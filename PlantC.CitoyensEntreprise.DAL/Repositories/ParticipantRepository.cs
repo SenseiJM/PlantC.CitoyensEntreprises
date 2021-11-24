@@ -45,11 +45,15 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 Participant p = null;
                 if (reader.Read()) {
                     p = new Participant {
-                        BCE = (uint?)reader["BCE"],
+                        BCE = (int?)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
-                        IdContact = (int)reader["IdContact"],
-                        NomEntreprise = (string)reader["NomEntreprise"]
+                        NomEntreprise = (string)reader["NomEntreprise"],
+                        IdAdresse = (int)reader["IdAdresse"],
+                        Mail = (string)reader["Mail"],
+                        Nom = (string)reader["Nom"],
+                        Prenom = (string)reader["Prenom"],
+                        Telephone = (string)reader["Telephone"]
                     };
                     return p;
                 } else {
@@ -102,11 +106,15 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 List<Participant> result = new List<Participant>();
                 while (reader.Read()) {
                     result.Add(new Participant {
-                        BCE = (uint?)reader["BCE"],
+                        BCE = (int?)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
-                        IdContact = (int)reader["IdContact"],
-                        NomEntreprise = (string)reader["NomEntreprise"]
+                        NomEntreprise = (string)reader["NomEntreprise"],
+                        Telephone = (string)reader["Telephone"],
+                        Prenom = (string)reader["Prenom"],
+                        Nom = (string)reader["Nom"],
+                        Mail = (string)reader["Mail"],
+                        IdAdresse = (int)reader["IdAdresse"]
                     });
                 }
                 return result;
@@ -132,12 +140,20 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "Fonction = @p2," +
                     "NomEntreprise = @p3," +
                     "BCE = @p4," +
-                    "IdContact = @p5,";
+                    "Nom = @p5," +
+                    "Prenom = @p6," +
+                    "Telephone = @p7," +
+                    "IdAdresse = @p8," +
+                    "Mail = @p9";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
                 cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
                 cmd.Parameters.AddWithValue("p4", p.BCE);
-                cmd.Parameters.AddWithValue("p5", p.IdContact);
+                cmd.Parameters.AddWithValue("p5", p.Nom);
+                cmd.Parameters.AddWithValue("p6", p.Prenom);
+                cmd.Parameters.AddWithValue("p7", p.Telephone);
+                cmd.Parameters.AddWithValue("p8", p.IdAdresse);
+                cmd.Parameters.AddWithValue("p9", p.Mail);
 
                 return cmd.ExecuteNonQuery() != 0;
             }

@@ -9,8 +9,12 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 BCE = dto.BCE,
                 Fonction = dto.Fonction,
                 Id = dto.Id,
-                IdContact = dto.IdContact,
-                NomEntreprise = dto.NomEntreprise
+                NomEntreprise = dto.NomEntreprise,
+                Mail = dto.Mail,
+                Nom = dto.Nom,
+                Prenom = dto.Prenom,
+                Telephone = dto.Telephone,
+                IdAdresse = dto.IdAdresse
             };
         }
 
@@ -19,8 +23,12 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 BCE = model.BCE,
                 Fonction = model.Fonction,
                 Id = model.Id,
-                IdContact = model.IdContact,
-                NomEntreprise = model.NomEntreprise
+                NomEntreprise = model.NomEntreprise,
+                Mail = model.Mail,
+                IdAdresse = model.IdAdresse,
+                Telephone = model.Telephone,
+                Nom = model.Nom,
+                Prenom = model.Prenom
             };
         }
         public static ParticipantModel UpdateRequestToModel(this UpdatePartcipantRequestDTO dto)
@@ -29,8 +37,13 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             {
                 Fonction = dto.Fonction,
                 NomEntreprise = dto.NomEntreprise,
-                IdContact = dto.IdContact,
                 BCE = dto.BCE,
+                Prenom = dto.Prenom,
+                Telephone = dto.Telephone,
+                IdAdresse = dto.IdAdresse,
+                Nom = dto.Nom,
+                Mail = dto.Mail,
+                Id = dto.Id
             };
         }
     }
