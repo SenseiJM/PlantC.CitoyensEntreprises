@@ -46,7 +46,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
 
         [HttpPost]
         public IActionResult Create(ProjetAddDTO dto) {
-            return Ok(_projetService.Create(dto.ToModel()));
+            try {
+                return Ok(_projetService.Create(dto.ToModel()));
+            } catch (System.ArgumentException e) {
+                return BadRequest(e.Message);
+            }
         }
 
 
