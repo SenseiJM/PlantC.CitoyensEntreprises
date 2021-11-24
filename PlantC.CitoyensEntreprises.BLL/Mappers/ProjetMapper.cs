@@ -16,10 +16,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Id = p.Id,
                 IDLocalisation = p.IDLocalisation,
                 Infrastructure = p.Infrastructure,
-                Quantite = p.Quantite,
                 Reference = p.Reference,
                 TonnesCO2 = p.TonnesCO2,
-                UniteDeMesure = p.UniteDeMesure
+                Hectares = p.Hectares,
+                Metres = p.Metres,
+                NbFruits = p.NbFruits,
+                NbArbres = p.NbArbres,
+                Contribution = p.Contribution
             };
         }
 
@@ -30,10 +33,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 HeuresTravail = model.HeuresTravail,
                 IDLocalisation = model.IDLocalisation,
                 Infrastructure = model.Infrastructure,
-                Quantite = model.Quantite,
                 Reference = model.Reference,
                 TonnesCO2 = model.TonnesCO2,
-                UniteDeMesure = model.UniteDeMesure
+                NbArbres = model.NbArbres,
+                NbFruits = model.NbFruits,
+                Metres = model.Metres,
+                Hectares = model.Hectares,
+                Contribution = model.Contribution
             };
         }
 

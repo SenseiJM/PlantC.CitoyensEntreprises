@@ -47,12 +47,16 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     result.Add(new Projet {
                         Reference = reader["Reference"].ToString(),
                         Infrastructure = reader["Infrastructure"].ToString(),
-                        Quantite = (double)reader["Quantite"],
-                        UniteDeMesure = reader["UniteDeMesure"].ToString(),
+                        Hectares = (double)reader["Hectares"],
+                        Id = (int)reader["Id"],
+                        Metres = (int)reader["Metres"],
+                        NbArbres = (int)reader["NbArbres"],
+                        NbFruits = (int)reader["NbFruits"],
                         IDLocalisation = (int)reader["IDLocalisation"],
                         TonnesCO2 = (double)reader["TonnesCO2"],
                         HeuresTravail = (double)reader["HeuresTravail"],
-                        CoutDuProjet = (double)reader["CoutDuProjet"]
+                        CoutDuProjet = (double)reader["CoutDuProjet"],
+                        Contribution = (double)reader["Contribution"]
                     });
                 }
                 return result;
@@ -78,22 +82,28 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.CommandText = "UPDATE Projet SET" +
                     "Reference = @p2," +
                     "Infrastructure = @p3," +
-                    "Quantite = @p4," +
-                    "UniteDeMesure = @p5," +
+                    "Hectares = @p4," +
+                    "Metres = @p5," +
                     "IDLocalisation = @p6," +
                     "TonnesCO2 = @p7," +
                     "HeuresTravail = @p8," +
                     "CoutDuProjet = @p9," +
+                    "NbFruits = @p10," +
+                    "NbArbres = @p11," +
+                    "Contribution = @p12," +
                     "WHERE Id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Reference);
                 cmd.Parameters.AddWithValue("p3", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p4", p.Quantite);
-                cmd.Parameters.AddWithValue("p5", p.UniteDeMesure);
+                cmd.Parameters.AddWithValue("p4", p.Hectares);
+                cmd.Parameters.AddWithValue("p5", p.Metres);
                 cmd.Parameters.AddWithValue("p6", p.IDLocalisation);
                 cmd.Parameters.AddWithValue("p7", p.TonnesCO2);
                 cmd.Parameters.AddWithValue("p8", p.HeuresTravail);
                 cmd.Parameters.AddWithValue("p9", p.CoutDuProjet);
+                cmd.Parameters.AddWithValue("p10", p.NbFruits);
+                cmd.Parameters.AddWithValue("p11", p.NbArbres);
+                cmd.Parameters.AddWithValue("p12", p.Contribution);
 
                 return cmd.ExecuteNonQuery() != 0;
             }
@@ -152,10 +162,13 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         Id = (int)reader["Id"],
                         IDLocalisation = (int)reader["IDLocalisation"],
                         Infrastructure = (string)reader["Infrastructure"],
-                        Quantite = (double)reader["Quantite"],
                         Reference = (string)reader["Reference"],
                         TonnesCO2 = (double)reader["TonnesCO2"],
-                        UniteDeMesure = (string)reader["UniteDeMesure"]
+                        NbArbres = (int)reader["NbArbres"],
+                        NbFruits = (int)reader["NbFruits"],
+                        Metres = (int)reader["Metres"],
+                        Hectares = (double)reader["Hectares"],
+                        Contribution = (double)reader["Contribution"]
                     };
                     return p;
                 } else {

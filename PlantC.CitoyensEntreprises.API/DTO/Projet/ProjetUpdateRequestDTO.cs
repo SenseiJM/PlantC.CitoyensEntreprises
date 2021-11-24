@@ -33,6 +33,11 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
 
         [Required]
         public double CoutDuProjet { get; set; }
-
+        public double Contribution { get; internal set; }
+        public double Hectares { get; internal set; }
+        public int Metres { get; internal set; }
+        public int NbFruits { get; internal set; }
+        public int NbArbres { get; internal set; }
+        public int Id { get; internal set; }
     }
 }

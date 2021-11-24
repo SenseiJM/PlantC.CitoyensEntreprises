@@ -14,10 +14,13 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public string Infrastructure { get; set; }
 
         [Required]
-        public double Quantite { get; set; }
+        public int NbArbres { get; set; }
 
         [Required]
-        public string UniteDeMesure { get; set; }
+        public int NbFruits { get; set; }
+
+        public int Metres { get; set; }
+        public double Hectares { get; set; }
 
         [Required]
         public int IDLocalisation { get; set; }
@@ -31,5 +34,6 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         [Required]
         public double CoutDuProjet { get; set; }
 
+        public double Contribution { get; set; }
     }
 }
