@@ -128,5 +128,38 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+        /// <summary>
+        /// Searches the database to find the Contact corresponding to the ID
+        /// </summary>
+        /// <param name="id">ID to be searched</param>
+        /// <returns>Returns corresponding Contact Entity</returns>
+        public Contact GetByID(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Contact WHERE Id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                Contact c = null;
+                if (reader.Read()) {
+                    c = new Contact {
+                        Adresse = (Adresse)reader["Adresse"],
+                        Id = (int)reader["Id"],
+                        Mail = (string)reader["Mail"],
+                        Nom = (string)reader["Nom"],
+                        Prenom = (string)reader["Prenom"],
+                        Telephone = (string)reader["Telephone"]
+                    };
+                    return c;
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
     }
 }

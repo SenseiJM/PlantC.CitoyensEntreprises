@@ -30,5 +30,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             return _contactRepository.Delete(id);
         }
 
+        public ContactModel GetByID(int id) {
+            return _contactRepository.GetByID(id).ToSimpleModel();
+        }
+
     }
 }

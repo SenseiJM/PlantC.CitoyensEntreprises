@@ -39,5 +39,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(new { message = "Contact deleted successfully" });
         }
 
+        [HttpGet("byID/{id}")]
+        public IActionResult GetByID(int id) {
+            ContactIndexDTO dto = _contactService.GetByID(id).ToIndexDTO();
+            return Ok(dto);
+        }
+
     }
 }
