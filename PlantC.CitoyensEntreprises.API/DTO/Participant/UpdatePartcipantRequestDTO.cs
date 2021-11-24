@@ -16,7 +16,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Participant
         public Fonction Fonction { get; set; }
 
         public string NomEntreprise { get; set; }
-        public int? BCE { get; set; }
+        public string BCE { get; set; }
 
         [Required]
         public string Nom { get; set; }

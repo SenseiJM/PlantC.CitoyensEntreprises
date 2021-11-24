@@ -45,7 +45,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 Participant p = null;
                 if (reader.Read()) {
                     p = new Participant {
-                        BCE = (int?)reader["BCE"],
+                        BCE = (string)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
                         NomEntreprise = (string)reader["NomEntreprise"],
@@ -106,7 +106,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 List<Participant> result = new List<Participant>();
                 while (reader.Read()) {
                     result.Add(new Participant {
-                        BCE = (int?)reader["BCE"],
+                        BCE = (string)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
                         NomEntreprise = (string)reader["NomEntreprise"],
