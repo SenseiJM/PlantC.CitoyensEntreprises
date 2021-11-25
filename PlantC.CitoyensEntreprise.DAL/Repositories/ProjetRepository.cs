@@ -21,8 +21,17 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Projet OUTPUT inserted.Id VALUES (@p1)";
-                cmd.Parameters.AddWithValue("p1", p);
+                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
+                cmd.Parameters.AddWithValue("p1", p.IDLocalisation);
+                cmd.Parameters.AddWithValue("p2", p.Reference);
+                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
+                cmd.Parameters.AddWithValue("p4", p.NbArbres);
+                cmd.Parameters.AddWithValue("p5", p.NbFruits);
+                cmd.Parameters.AddWithValue("p6", p.Metres);
+                cmd.Parameters.AddWithValue("p7", p.Hectares);
+                cmd.Parameters.AddWithValue("p8", p.TonnesCO2);
+                cmd.Parameters.AddWithValue("p9", p.HeuresTravail);
+                cmd.Parameters.AddWithValue("p10", p.CoutDuProjet);
                 return (int)cmd.ExecuteScalar();
             } catch (Exception e) {
                 throw;
