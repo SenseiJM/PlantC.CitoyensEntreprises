@@ -24,7 +24,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.Parameters.AddWithValue("p1", p);
                 return (int)cmd.ExecuteScalar();
             } catch (Exception e) {
-                throw;
+                throw; //return e.Message
             } finally {
                 oConn.Close();
             }
