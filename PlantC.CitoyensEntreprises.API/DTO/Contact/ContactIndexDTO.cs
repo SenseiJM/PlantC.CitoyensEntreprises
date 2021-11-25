@@ -8,6 +8,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Contact {
         public string Prenom { get; set; }
         public string Mail { get; set; }
         public string Telephone { get; set; }
+        public string Token { get; set; }
         public Adresse Adresse { get; set; }
     }
 }

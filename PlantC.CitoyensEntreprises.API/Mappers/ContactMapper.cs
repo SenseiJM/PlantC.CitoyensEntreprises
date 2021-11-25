@@ -8,7 +8,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             return new ContactModel {
                 Adresse = dto.Adresse,
                 Id = dto.Id,
-                Mail = dto.Mail,
+                Email = dto.Mail,
                 Nom = dto.Nom,
                 Prenom = dto.Prenom,
                 Telephone = dto.Telephone
@@ -22,7 +22,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             {
                 Adresse = c.Adresse,
                 Id = c.Id,
-                Mail = c.Mail,
+                Mail = c.Email,
                 Nom = c.Nom,
                 Prenom = c.Prenom,
                 Telephone = c.Telephone
@@ -32,7 +32,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             return new ContactModel {
                 Adresse = dto.Adresse,
                 Id = dto.Id,
-                Mail = dto.Mail,
+                Email = dto.Mail,
                 Nom = dto.Nom,
                 Prenom = dto.Prenom,
                 Telephone = dto.Telephone

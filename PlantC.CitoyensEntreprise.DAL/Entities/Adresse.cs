@@ -8,8 +8,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities {
     public class Adresse {
         public string AdressLine1;
         public string AdressLine2;
-        public string Number;
-        public string ZipCode;
+        public int Number;
+        public int ZipCode;
         public string City;
         public string Country;
     }

@@ -13,7 +13,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             return new Contact {
                 Adresse = model.Adresse,
                 Id = model.Id,
-                Mail = model.Mail,
+                Mail = model.Email,
                 Nom = model.Nom,
                 Prenom = model.Prenom,
                 Telephone = model.Telephone
@@ -25,7 +25,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             {
                 Adresse = c.Adresse,
                 Id = c.Id,
-                Mail = c.Mail,
+                Email = c.Mail,
                 Nom = c.Nom,
                 Prenom = c.Prenom,
                 Telephone = c.Telephone

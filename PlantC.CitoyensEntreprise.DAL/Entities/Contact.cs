@@ -6,5 +6,8 @@
         public string Mail { get; set; }
         public string Telephone { get; set; }
         public Adresse Adresse { get; set; }
+        public string Salt { get; set; }
+        public string MdpClient { get; set; }
+        public string UserLevel { get; set; }
     }
 }

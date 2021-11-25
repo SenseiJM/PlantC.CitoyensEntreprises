@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlantC.CitoyensEntreprises.BLL\PlantC.CitoyensEntreprises.BLL.csproj" />
+    <ProjectReference Include="..\ToolBox.Security\ToolBox.Security.csproj" />
   </ItemGroup>
 
 </Project>
