@@ -12,7 +12,9 @@
         public double TonnesCO2 { get; set; }
         public double HeuresTravail { get; set; }
         public double CoutDuProjet { get; set; }
-        public double Contribution { get; set; }
+
+        //Ne pas le stocker. Les informations calculables ne doivent pas être stockées !!!
+        //public double Contribution { get; set; }
 
     }
 }

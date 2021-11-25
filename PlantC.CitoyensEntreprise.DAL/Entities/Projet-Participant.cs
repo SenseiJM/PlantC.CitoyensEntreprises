@@ -10,5 +10,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities {
         public int IdProjet { get; set; }
         public double Contribution { get; set; }
         public DateTime DateContribution { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }
