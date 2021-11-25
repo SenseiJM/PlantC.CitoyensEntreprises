@@ -21,6 +21,25 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         public IActionResult Create(TaskAddDTO dto) {
             return Ok(_taskService.Create(dto.ToModel()));
         }
+        
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            IEnumerable<TaskIndexDTO> dto = _taskService.GetAll().Select(c => c.ToIndexDTO());
+            return Ok(dto);
+        }
+        
+        [HttpGet("byID/{id}")]
+        public IActionResult GetByID(int id) {
+            TaskIndexDTO dto = _taskService.GetByID(id).ToIndexDTO();
+            return Ok(dto);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, TaskUpdateRequestDTO dto) {
+            _taskService.Update(id, dto.UpdateRequestToModel());
+            return Ok(new { message = "Task updated succesfully" });
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id) {

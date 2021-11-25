@@ -31,42 +31,42 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
-        /// <summary>
-        /// Fetches a full list of all existing Contact Entities in the database
-        /// </summary>
-        /// <returns>IEnumerable of Contact Entity</returns>
-        public IEnumerable<Contact> GettAllContacts()
-        {
-            try
+            /// <summary>
+            /// Fetches a full list of all existing Contact Entities in the database
+            /// </summary>
+            /// <returns>IEnumerable of Contact Entity</returns>
+            public IEnumerable<Contact> GetAllContacts()
             {
-                oConn.Open();
-                NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Contact";
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                List<Contact> result = new List<Contact>();
-                while (reader.Read())
+                try
                 {
-                    result.Add(new Contact
+                    oConn.Open();
+                    NpgsqlCommand cmd = oConn.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Contact";
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    List<Contact> result = new List<Contact>();
+                    while (reader.Read())
                     {
-                        Nom = reader["Nom"].ToString(),
-                        Prenom = reader["Prenom"].ToString(),
-                        Mail = reader["Mail"].ToString(),
-                        Telephone = reader["Telephone"].ToString(),
-                        Adresse = (Adresse)reader["Adresse"]
-                    });
+                        result.Add(new Contact
+                        {
+                            Nom = reader["Nom"].ToString(),
+                            Prenom = reader["Prenom"].ToString(),
+                            Mail = reader["Mail"].ToString(),
+                            Telephone = reader["Telephone"].ToString(),
+                            Adresse = (Adresse)reader["Adresse"]
+                        });
+                    }
+                    return result;
                 }
-                return result;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+                catch (Exception e)
+                {
+                    throw;
+                }
 
-            finally
-            {
-                oConn.Close();
+                finally
+                {
+                    oConn.Close();
+                }
             }
-        }
 
         /// Searches the database to update the Contact corresponding to the ID
         /// </summary>
