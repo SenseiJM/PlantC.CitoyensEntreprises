@@ -22,7 +22,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Participant
         public string Nom { get; set; }
         [Required]
         public string Prenom { get; set; }
-        public string Mail { get; set; }
+        public string Email { get; set; }
         public string Telephone { get; set; }
         public int? IdAdresse { get; set; }
     }

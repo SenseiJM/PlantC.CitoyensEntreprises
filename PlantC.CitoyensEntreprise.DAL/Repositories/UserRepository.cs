@@ -18,19 +18,19 @@ namespace PlantC.CitoyensEntreprises.BLL.Utils
             this.oConn = oConn;
         }
 
-        public Contact GetByMail(string mail) 
+        public Participant GetByMail(string mail) 
         {
             try
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Contact Where mail = @p1";
+                cmd.CommandText = "SELECT * FROM Participant Where mail = @p1";
                 cmd.Parameters.AddWithValue("p1", mail);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
   
                 if (reader.Read())
                 {
-                    return reader.ToContact();
+                    return reader.ToParticipant();
                     //return  new Contact
                     //{
                     //    Id = (int)reader["id"],

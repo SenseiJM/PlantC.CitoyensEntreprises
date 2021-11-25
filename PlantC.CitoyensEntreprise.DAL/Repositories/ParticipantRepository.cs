@@ -50,7 +50,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         Id = (int)reader["Id"],
                         NomEntreprise = (string)reader["NomEntreprise"],
                         IdAdresse = (int)reader["IdAdresse"],
-                        Mail = (string)reader["Mail"],
+                        Email = (string)reader["Email"],
                         Nom = (string)reader["Nom"],
                         Prenom = (string)reader["Prenom"],
                         Telephone = (string)reader["Telephone"]
@@ -113,7 +113,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         Telephone = (string)reader["Telephone"],
                         Prenom = (string)reader["Prenom"],
                         Nom = (string)reader["Nom"],
-                        Mail = (string)reader["Mail"],
+                        Email = (string)reader["Email"],
                         IdAdresse = (int)reader["IdAdresse"]
                     });
                 }
@@ -144,7 +144,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "Prenom = @p6," +
                     "Telephone = @p7," +
                     "IdAdresse = @p8," +
-                    "Mail = @p9";
+                    "Email = @p9";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
                 cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
@@ -153,7 +153,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.Parameters.AddWithValue("p6", p.Prenom);
                 cmd.Parameters.AddWithValue("p7", p.Telephone);
                 cmd.Parameters.AddWithValue("p8", p.IdAdresse);
-                cmd.Parameters.AddWithValue("p9", p.Mail);
+                cmd.Parameters.AddWithValue("p9", p.Email);
 
                 return cmd.ExecuteNonQuery() != 0;
             }

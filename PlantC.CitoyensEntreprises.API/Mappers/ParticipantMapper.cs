@@ -10,7 +10,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Fonction = dto.Fonction,
                 Id = dto.Id,
                 NomEntreprise = dto.NomEntreprise,
-                Mail = dto.Mail,
+                Email = dto.Email,
                 Nom = dto.Nom,
                 Prenom = dto.Prenom,
                 Telephone = dto.Telephone,
@@ -24,7 +24,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Fonction = model.Fonction,
                 Id = model.Id,
                 NomEntreprise = model.NomEntreprise,
-                Mail = model.Mail,
+                Email = model.Email,
                 IdAdresse = model.IdAdresse,
                 Telephone = model.Telephone,
                 Nom = model.Nom,
@@ -42,7 +42,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Telephone = dto.Telephone,
                 IdAdresse = dto.IdAdresse,
                 Nom = dto.Nom,
-                Mail = dto.Mail,
+                Email = dto.Email,
                 Id = dto.Id
             };
         }

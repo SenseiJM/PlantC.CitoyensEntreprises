@@ -13,16 +13,16 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
     {
         private readonly UserRepository _userRepository;
         private readonly HashService _hashService;
-        private readonly ContactService _contactService;
+        private readonly ParticipantService _contactService;
 
-        public UserService(UserRepository userRepository, HashService hashService, ContactService contactService)
+        public UserService(UserRepository userRepository, HashService hashService, ParticipantService contactService)
         {
             _userRepository = userRepository;
             _hashService = hashService;
             _contactService = contactService;
         }
 
-        public int Register(ContactModel contact)
+        public int Register(ParticipantModel contact)
         {
             if (_userRepository.GetByMail(contact.Email) != null)
             {
@@ -30,8 +30,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             }
             string salt = Guid.NewGuid().ToString();
             string hashPassword = _hashService.Hash(contact.MdpContact, salt);
-            ContactModel temp = new ContactModel
-            {
+            ParticipantModel temp = new ParticipantModel {
                 Email = contact.Email,
                 MdpContact = hashPassword,
                 Nom = contact.Nom,
@@ -39,27 +38,19 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
                 Telephone = contact.Telephone,
                 Salt = salt,
                 Userlevel = "USER",
-                Adresse = new Adresse
-                {
-                    AdressLine1 = contact.Adresse.AdressLine1,
-                    AdressLine2 = contact.Adresse.AdressLine2,
-                    City = contact.Adresse.City,
-                    Country = contact.Adresse.Country,
-                    Number = contact.Adresse.Number,
-                    ZipCode = contact.Adresse.ZipCode
-                }
+                IdAdresse = contact.IdAdresse
             };
             _contactService.Create(temp);
             return temp.Id;
         }
-        public ContactModel Login(string mail, string password)
+        public ParticipantModel Login(string mail, string password)
         {
-            Contact contact = _userRepository.GetByMail(mail);
+            Participant contact = _userRepository.GetByMail(mail);
             if(contact != null && contact.MdpClient == _hashService.Hash(password, contact.Salt))
             {
-                return new ContactModel //check Front end quel info renvoyer
+                return new ParticipantModel //check Front end quel info renvoyer
                 {
-                    Email = contact.Mail,
+                    Email = contact.Email,
                     Nom = contact.Nom,
                     Prenom = contact.Prenom,
                 };

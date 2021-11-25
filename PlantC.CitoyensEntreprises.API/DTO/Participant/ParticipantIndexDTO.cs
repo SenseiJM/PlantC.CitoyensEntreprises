@@ -9,9 +9,10 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Participant {
         public string BCE { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public string Mail { get; set; }
+        public string Email { get; set; }
         public string Telephone { get; set; }
         public int? IdAdresse { get; set; }
+        public string Token { get; set; }
 
     }
 }

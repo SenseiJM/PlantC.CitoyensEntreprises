@@ -19,7 +19,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Telephone = model.Telephone,
                 Prenom = model.Prenom,
                 Nom = model.Nom,
-                Mail = model.Mail
+                Email = model.Email
             };
         }
 
@@ -29,7 +29,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Fonction = p.Fonction,
                 Id = p.Id,
                 NomEntreprise = p.NomEntreprise,
-                Mail = p.Mail,
+                Email = p.Email,
                 Nom = p.Nom,
                 Prenom = p.Prenom,
                 Telephone = p.Telephone,

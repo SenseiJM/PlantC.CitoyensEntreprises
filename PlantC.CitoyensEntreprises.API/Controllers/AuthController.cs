@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PlantC.CitoyensEntreprises.API.DTO.Contact;
 using PlantC.CitoyensEntreprises.API.DTO.Login;
+using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using PlantC.CitoyensEntreprises.BLL.Utils;
@@ -30,12 +30,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
         {
             try
             {
-                ContactModel contact = _userService.Login(login.Email, login.Password);
+                ParticipantModel contact = _userService.Login(login.Email, login.Password);
                 if (contact == null) return Unauthorized();
-                else return Ok(new ContactIndexDTO
+                else return Ok(new ParticipantIndexDTO
                 {
                     Id = contact.Id,
-                    Mail = contact.Email,
+                    Email = contact.Email,
                     Token = _jwtService.CreateToken(contact),
                     Nom = contact.Nom,
                     Prenom = contact.Prenom
@@ -51,22 +51,13 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
         {
             try
             {
-                int temp = _userService.Register(new ContactModel
-                {
+                int temp = _userService.Register(new ParticipantModel {
                     Email = register.Mail,
                     MdpContact = register.MdpContact,
                     Nom = register.Nom,
                     Prenom = register.Prenom,
                     Telephone = register.Telephone,
-                    Adresse = new CitoyensEntreprise.DAL.Entities.Adresse
-                    {
-                        AdressLine1 = register.Adresse.AdressLine1,
-                        AdressLine2 = register.Adresse.AdressLine2,
-                        City = register.Adresse.City,
-                        Country = register.Adresse.Country,
-                        Number = register.Adresse.Number,
-                        ZipCode = register.Adresse.ZipCode
-                    }
+                    IdAdresse = register.IdAdresse
 
                 });
                 return Ok(temp);

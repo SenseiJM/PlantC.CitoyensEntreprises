@@ -13,8 +13,8 @@
         public double HeuresTravail { get; set; }
         public double CoutDuProjet { get; set; }
 
-        //Ne pas le stocker. Les informations calculables ne doivent pas être stockées !!!
-        //public double Contribution { get; set; }
+        public double Contribution { get; set; }
+        //Ne pas le stocker en DB, le calcul sera fait au fur et à mesure
 
     }
 }
