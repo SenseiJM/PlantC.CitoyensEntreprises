@@ -36,7 +36,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         public bool UpdateParticipant(int id, ParticipantModel model)
         {
             return _participantRepository.UpdateParticipant(id, model.ToEntity());
-
         }
     } 
 }
