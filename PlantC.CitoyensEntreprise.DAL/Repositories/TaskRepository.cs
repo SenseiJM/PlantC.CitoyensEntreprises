@@ -1,10 +1,10 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Task;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories
 {
@@ -16,7 +16,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             this.oConn = oConn;
         }
 
-        public int Create(Tasks t)
+        public int Create(Task t)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         ProjetId = (int)reader["ProjetId"],
                         NomTache = reader["NomTache"].ToString(),
                         TaskType = (TaskType)reader["TaskType"],
-                        DateTime = (DateTime)reader["Datetime"]
+                        Date = (DateTime)reader["Datetime"]
                     });
                 }
                 return result;
@@ -95,7 +95,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         ProjetId = (int)reader["ProjetId"],
                         NomTache = reader["NomTache"].ToString(),
                         TaskType = (TaskType)reader["TaskType"],
-                        DateTime = (DateTime)reader["Datetime"]
+                        Date = (DateTime)reader["Datetime"]
                     };
                     return t;
                 } else {
@@ -130,7 +130,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p3", c.ProjetId);
                 cmd.Parameters.AddWithValue("p4", c.NomTache);
                 cmd.Parameters.AddWithValue("p5", c.TaskType);
-                cmd.Parameters.AddWithValue("p6", c.DateTime);
+                cmd.Parameters.AddWithValue("p6", c.Date);
 
                 return cmd.ExecuteNonQuery() != 0;
             } catch (Exception e) {
