@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using System;
 using System.Collections.Generic;
 
@@ -190,6 +191,53 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+
+        public IEnumerable<ProjetListing> GetListing() {
+
+            try {
+
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT p.id AS id_projet, p.reference, ph.url_photo, p.description, l.localite, p.cout_du_projet, p.infrastructure, p.est_nouveau, pp.est_favori, l.latitude, l.longitude FROM projet p LEFT JOIN photo ph ON ph.id_projet = p.id AND ph.est_publique = true LEFT JOIN localisation l ON p.id_localisation = l.id LEFT JOIN projet_participant ON p.id = pp.id_projet AND pp.est_favori = true LIMIT 1";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<ProjetListing> result = new List<ProjetListing> ();
+                while (reader.Read()) {
+                    result.Add(new ProjetListing {
+                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        Description = (string)reader["description"],
+                        EstFavori = (bool)reader["est_favori"],
+                        EstNouveau = (bool)reader["est_nouveau"],
+                        Id = (int)reader["id_projet"],
+                        imageUrl = (string)reader["url_photo"],
+                        Infrastructure = (string)reader["infrastructure"],
+                        Latitude = (double)reader["latitude"],
+                        Longitude = (double)reader["longitude"],
+                        NomLocalite = (string)reader["localite"],
+                        Reference = (string)reader["reference"]
+                    });
+                }
+
+                foreach (ProjetListing listing in result) {
+
+                    listing.MontantRecolte = 0;
+                    cmd.CommandText = "SELECT pp.contribution AS montant FROM projet_participant pp WHERE pp.id_projet = @p1";
+                    cmd.Parameters.AddWithValue("p1", listing.Id);
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        listing.MontantRecolte += (double)reader["montant"];
+                    }
+
+                }
+
+                return result;
+
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+
+        }
 
     }
 }
