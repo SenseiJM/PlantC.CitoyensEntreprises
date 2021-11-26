@@ -1,4 +1,6 @@
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Enums;
+using System;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Task {
     public class TaskIndexDTO {

@@ -1,4 +1,6 @@
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Task {
