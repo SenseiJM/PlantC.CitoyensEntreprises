@@ -9,8 +9,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
 
         private readonly TaskRepository _taskRepository;
 
-        public TaskService(TaskRepository TaskRepository) {
-            _TaskRepository = TaskRepository;
+        public TaskService(TaskRepository taskRepository) {
+            _taskRepository = taskRepository;
         }
 
         public int Create(TaskModel model) {
