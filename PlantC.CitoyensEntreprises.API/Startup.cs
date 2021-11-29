@@ -61,6 +61,7 @@ namespace PlantC.CitoyensEntreprises.API
             services.AddScoped<ParticipantRepository>();
             services.AddScoped<ProjetRepository>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<TacheRepository>();
 
             services.AddScoped<HashService>();
             services.AddScoped<ParticipantService>();
