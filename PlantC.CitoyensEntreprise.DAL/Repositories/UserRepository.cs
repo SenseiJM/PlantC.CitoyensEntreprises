@@ -2,14 +2,10 @@
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Mappers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprises.BLL.Utils
 {
-    public class UserRepository 
+    public class UserRepository
     {
         private NpgsqlConnection oConn;
 
@@ -18,7 +14,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Utils
             this.oConn = oConn;
         }
 
-        public Participant GetByMail(string mail) 
+        public Participant GetByMail(string mail)
         {
             try
             {
@@ -27,7 +23,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Utils
                 cmd.CommandText = "SELECT * FROM Participant Where mail = @p1";
                 cmd.Parameters.AddWithValue("p1", mail);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-  
+
                 if (reader.Read())
                 {
                     return reader.ToParticipant();
@@ -49,7 +45,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Utils
                     //        ZipCode = (int)reader["zipCode"]
                     //    }
                     //};
-                    
+
                 };
                 return null;
             }

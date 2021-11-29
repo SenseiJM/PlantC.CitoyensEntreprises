@@ -1,11 +1,15 @@
 ﻿using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
 
-namespace PlantC.CitoyensEntreprises.API.Mappers {
-    static class ParticipantMapper {
+namespace PlantC.CitoyensEntreprises.API.Mappers
+{
+    static class ParticipantMapper
+    {
 
-        public static ParticipantModel ToModel(this ParticipantAddDTO dto) {
-            return new ParticipantModel {
+        public static ParticipantModel ToModel(this ParticipantAddDTO dto)
+        {
+            return new ParticipantModel
+            {
                 BCE = dto.BCE,
                 Fonction = dto.Fonction,
                 Id = dto.Id,
@@ -18,8 +22,10 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
-        public static ParticipantIndexDTO ToIndexDTO(this ParticipantModel model) {
-            return new ParticipantIndexDTO {
+        public static ParticipantIndexDTO ToIndexDTO(this ParticipantModel model)
+        {
+            return new ParticipantIndexDTO
+            {
                 BCE = model.BCE,
                 Fonction = model.Fonction,
                 Id = model.Id,

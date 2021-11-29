@@ -1,8 +1,9 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
-    public class ProjetAddDTO {
+namespace PlantC.CitoyensEntreprises.API.DTO.Projet
+{
+    public class ProjetAddDTO
+    {
 
         [Required]
         public int Id { get; set; }
@@ -20,20 +21,20 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public int NbFruits { get; set; }
 
         public int Metres { get; set; }
-        public double Hectares { get; set; }
+        public decimal Hectares { get; set; }
 
         [Required]
         public int IDLocalisation { get; set; }
 
         [Required]
-        public double TonnesCO2 { get; set; }
+        public decimal TonnesCO2 { get; set; }
 
         [Required]
-        public double HeuresTravail { get; set; }
+        public decimal HeuresTravail { get; set; }
 
         [Required]
-        public double CoutDuProjet { get; set; }
+        public decimal CoutDuProjet { get; set; }
 
-        public double Contribution { get; set; }
+        public decimal Contribution { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprises.API.Attribut
 {
@@ -18,12 +15,12 @@ namespace PlantC.CitoyensEntreprises.API.Attribut
         {
             foreach (string role in _roles)
             {
-                if (context.HttpContext.User.IsInRole(role)) 
+                if (context.HttpContext.User.IsInRole(role))
                 {
-                    return; 
+                    return;
                 }
             }
-            context.Result = new UnauthorizedResult(); 
+            context.Result = new UnauthorizedResult();
         }
     }
 }

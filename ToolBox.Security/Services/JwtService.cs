@@ -1,5 +1,4 @@
 ﻿using Google.Apis.Auth;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
@@ -46,7 +44,7 @@ namespace ToolBox.Security.Services
             //furfooz import
             //_signature = configSignature.GetSection("Jwt").GetValue<string>("Signature");
         }
-        
+
         /// <summary>
         /// Creates token based on payload and configuration
         /// </summary>
@@ -79,7 +77,7 @@ namespace ToolBox.Security.Services
                 claims = _handler.ValidateToken(token, _validationParameters, out SecurityToken secutityToken);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
                 claims = null;
@@ -118,20 +116,20 @@ namespace ToolBox.Security.Services
         /// <param name="full"></param>
         /// <returns></returns>
         private IEnumerable<Claim> GetClaims(IPayload payload, bool full = true)
-        { 
+        {
             // yield return basic claims
             yield return new Claim(ClaimTypes.Email, payload.Email);
             yield return new Claim(ClaimTypes.NameIdentifier, payload.Identifier);
-            foreach (string role in payload.Roles) 
+            foreach (string role in payload.Roles)
             {
                 yield return new Claim(ClaimTypes.Role, role);
             }
-            if(full)
+            if (full)
             {
                 // yield return other claims
                 foreach (PropertyInfo prop in payload.GetType().GetProperties())
                 {
-                    if(prop.GetValue(payload) != null)
+                    if (prop.GetValue(payload) != null)
                         yield return CreatePropertyClaim(prop, payload);
                 }
             }

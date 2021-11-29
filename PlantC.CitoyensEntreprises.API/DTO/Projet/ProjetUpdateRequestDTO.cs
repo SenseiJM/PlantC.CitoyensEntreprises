@@ -1,9 +1,4 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Projet
 {
@@ -17,7 +12,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
         public string Infrastructure { get; set; }
 
         [Required]
-        public double Quantite { get; set; }
+        public decimal Quantite { get; set; }
 
         [Required]
         public string UniteDeMesure { get; set; }
@@ -26,15 +21,15 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
         public int IDLocalisation { get; set; }
 
         [Required]
-        public double TonnesCO2 { get; set; }
+        public decimal TonnesCO2 { get; set; }
 
         [Required]
-        public double HeuresTravail { get; set; }
+        public decimal HeuresTravail { get; set; }
 
         [Required]
-        public double CoutDuProjet { get; set; }
-        public double Contribution { get; internal set; }
-        public double Hectares { get; internal set; }
+        public decimal CoutDuProjet { get; set; }
+        public decimal Contribution { get; internal set; }
+        public decimal Hectares { get; internal set; }
         public int Metres { get; internal set; }
         public int NbFruits { get; internal set; }
         public int NbArbres { get; internal set; }

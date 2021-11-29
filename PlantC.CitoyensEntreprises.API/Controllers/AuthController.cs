@@ -5,9 +5,6 @@ using PlantC.CitoyensEntreprises.BLL.Models;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using PlantC.CitoyensEntreprises.BLL.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ToolBox.Security.Services;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers
@@ -51,7 +48,8 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
         {
             try
             {
-                int temp = _userService.Register(new ParticipantModel {
+                int temp = _userService.Register(new ParticipantModel
+                {
                     Email = register.Mail,
                     MdpContact = register.MdpContact,
                     Nom = register.Nom,

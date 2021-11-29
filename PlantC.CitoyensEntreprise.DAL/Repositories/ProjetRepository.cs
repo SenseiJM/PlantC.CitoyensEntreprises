@@ -3,12 +3,15 @@ using PlantC.CitoyensEntreprise.DAL.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprise.DAL.Repositories {
-    public class ProjetRepository {
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
+{
+    public class ProjetRepository
+    {
 
         private NpgsqlConnection oConn;
 
-        public ProjetRepository(NpgsqlConnection oConn) {
+        public ProjetRepository(NpgsqlConnection oConn)
+        {
             this.oConn = oConn;
         }
 
@@ -17,16 +20,22 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="p">New Projet Entity to be added in the database</param>
         /// <returns>ID of the created Entity</returns>
-        public int Create(Projet p) {
-            try {
+        public int Create(Projet p)
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "INSERT INTO Projet OUTPUT inserted.Id VALUES (@p1)";
                 cmd.Parameters.AddWithValue("p1", p);
                 return (int)cmd.ExecuteScalar();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -35,34 +44,41 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// Fetches a full list of all existing Projet Entities in the database
         /// </summary>
         /// <returns>IEnumerable of Projet Entity</returns>
-        public IEnumerable<Projet> GetAll() {
-            try {
+        public IEnumerable<Projet> GetAll()
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Projet";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Projet> result = new List<Projet>();
                 //On peut faire un mapper ici aussi (sur IDataRecord)
-                while (reader.Read()) {
-                    result.Add(new Projet {
-                        Reference = reader["Reference"].ToString(),
-                        Infrastructure = reader["Infrastructure"].ToString(),
-                        Hectares = (double)reader["Hectares"],
-                        Id = (int)reader["Id"],
-                        Metres = (int)reader["Metres"],
-                        NbArbres = (int)reader["NbArbres"],
-                        NbFruits = (int)reader["NbFruits"],
-                        IDLocalisation = (int)reader["IDLocalisation"],
-                        TonnesCO2 = (double)reader["TonnesCO2"],
-                        HeuresTravail = (double)reader["HeuresTravail"],
-                        CoutDuProjet = (double)reader["CoutDuProjet"],
-                        Contribution = (double)reader["Contribution"]
+                while (reader.Read())
+                {
+                    result.Add(new Projet
+                    {
+                        Reference = reader["reference"].ToString(),
+                        Infrastructure = reader["infrastructure"].ToString(),
+                        Hectares = reader["hectare"] as decimal?,
+                        Id = (int)reader["id"],
+                        Metres = reader["metre"] as int?,
+                        NbArbres = reader["nb_arbre"] as int?,
+                        NbFruits = reader["nb_fruits"] as int?,
+                        IDLocalisation = (int)reader["id_localisation"],
+                        TonnesCO2 = (decimal)reader["tonnes_co2"],
+                        HeuresTravail = (decimal)reader["heures_travail"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"]        
                     });
                 }
                 return result;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -147,36 +163,45 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="id">ID to be searched</param>
         /// <returns>Returns corresponding Projet Entity</returns>
-        public Projet GetByID(int id) {
-            try {
+        public Projet GetByID(int id)
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Projet WHERE Id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 Projet p = null;
-                if (reader.Read()) {
-                    p = new Projet {
-                        CoutDuProjet = (double)reader["CoutDuProjet"],
-                        HeuresTravail = (double)reader["HeuresTravail"],
-                        Id = (int)reader["Id"],
-                        IDLocalisation = (int)reader["IDLocalisation"],
-                        Infrastructure = (string)reader["Infrastructure"],
-                        Reference = (string)reader["Reference"],
-                        TonnesCO2 = (double)reader["TonnesCO2"],
-                        NbArbres = (int)reader["NbArbres"],
-                        NbFruits = (int)reader["NbFruits"],
-                        Metres = (int)reader["Metres"],
-                        Hectares = (double)reader["Hectares"],
-                        Contribution = (double)reader["Contribution"]
+                if (reader.Read())
+                {
+                    p = new Projet
+                    {
+                        Reference = reader["reference"].ToString(),
+                        Infrastructure = reader["infrastructure"].ToString(),
+                        Hectares = reader["hectare"] as decimal?,
+                        Id = (int)reader["id"],
+                        Metres = reader["metre"] as int?,
+                        NbArbres = reader["nb_arbre"] as int?,
+                        NbFruits = reader["nb_fruits"] as int?,
+                        IDLocalisation = (int)reader["id_localisation"],
+                        TonnesCO2 = (decimal)reader["tonnes_co2"],
+                        HeuresTravail = (decimal)reader["heures_travail"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"]
                     };
                     return p;
-                } else {
+                }
+                else
+                {
                     return null;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }

@@ -1,10 +1,5 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Npgsql;
+﻿using Npgsql;
+using PlantC.CitoyensEntreprise.DAL.Entities;
 
 namespace PlantC.CitoyensEntreprise.DAL.Mappers
 {

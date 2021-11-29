@@ -1,7 +1,9 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Participant {
-    public class ParticipantIndexDTO {
+namespace PlantC.CitoyensEntreprises.API.DTO.Participant
+{
+    public class ParticipantIndexDTO
+    {
 
         public int Id { get; set; }
         public Fonction Fonction { get; set; }

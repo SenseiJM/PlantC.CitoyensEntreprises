@@ -3,11 +3,14 @@ using PlantC.CitoyensEntreprise.DAL.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprise.DAL.Repositories {
-    public class ParticipantRepository {
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
+{
+    public class ParticipantRepository
+    {
 
         private NpgsqlConnection oConn;
-        public ParticipantRepository(NpgsqlConnection oConn) {
+        public ParticipantRepository(NpgsqlConnection oConn)
+        {
             this.oConn = oConn;
         }
 
@@ -16,16 +19,22 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="p">New Participant Entity to be added in the database</param>
         /// <returns>ID of the created Entity</returns>
-        public int Create(Participant p) {
-            try {
+        public int Create(Participant p)
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "INSERT INTO Participant OUTPUT inserted.Id VALUES (@p1)";
                 cmd.Parameters.AddWithValue("p1", p);
                 return (int)cmd.ExecuteScalar();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw; //return e.Message
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -35,16 +44,20 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="id">ID to be searched</param>
         /// <returns>Returns corresponding Participant Entity</returns>
-        public Participant GetByID(int id) {
-            try {
+        public Participant GetByID(int id)
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Participant WHERE Id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 Participant p = null;
-                if (reader.Read()) {
-                    p = new Participant {
+                if (reader.Read())
+                {
+                    p = new Participant
+                    {
                         BCE = (string)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
@@ -56,12 +69,18 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         Telephone = (string)reader["Telephone"]
                     };
                     return p;
-                } else {
+                }
+                else
+                {
                     return null;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -97,15 +116,19 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// Fetches a full list of all existing Participant Entities in the database
         /// </summary>
         /// <returns>IEnumerable of Projet Entity</returns>
-        public IEnumerable<Participant> GetAll() {
-            try {
+        public IEnumerable<Participant> GetAll()
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Participant";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Participant> result = new List<Participant>();
-                while (reader.Read()) {
-                    result.Add(new Participant {
+                while (reader.Read())
+                {
+                    result.Add(new Participant
+                    {
                         BCE = (string)reader["BCE"],
                         Fonction = (Enums.Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
@@ -118,9 +141,13 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     });
                 }
                 return result;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
