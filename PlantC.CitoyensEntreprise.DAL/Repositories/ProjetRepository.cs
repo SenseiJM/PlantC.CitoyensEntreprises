@@ -42,35 +42,91 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         }
 
         /// <summary>
-        /// Fetches a full list of all existing Projet Entities in the database
+        /// Fetches a list of all existing Projet Entities in the database
         /// </summary>
-        /// <returns>IEnumerable of Projet Entity</returns>
-        public IEnumerable<Projet> GetAll() {
+        /// <returns>IEnumerable of ProjetResumeView Entity</returns>
+        public IEnumerable<ProjetResumeView> GetAllResume() {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Projet";
+                cmd.CommandText = "SELECT * FROM vue_projet";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-                List<Projet> result = new List<Projet>();
+                List<ProjetResumeView> result = new List<ProjetResumeView>();
                 //On peut faire un mapper ici aussi (sur IDataRecord)
                 while (reader.Read()) {
-                    result.Add(new Projet {
-                        Reference = reader["Reference"].ToString(),
-                        Infrastructure = reader["Infrastructure"].ToString(),
-                        Hectares = (double)reader["Hectares"],
-                        Id = (int)reader["Id"],
-                        Metres = (int)reader["Metres"],
-                        NbArbres = (int)reader["NbArbres"],
-                        NbFruits = (int)reader["NbFruits"],
-                        IDLocalisation = (int)reader["IDLocalisation"],
-                        TonnesCO2 = (double)reader["TonnesCO2"],
-                        HeuresTravail = (double)reader["HeuresTravail"],
-                        CoutDuProjet = (double)reader["CoutDuProjet"],
-                        Contribution = (double)reader["Contribution"]
+                    result.Add(new ProjetResumeView {
+                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        Description = (string)reader["description"],
+                        FirstImageUrl = (string)reader["image_url"],
+                        Id = (int)reader["id"],
+                        MontantRecolte = (double)reader["montant"],
+                        NomLocalite = (string)reader["localite"],
+                        Titre = (string)reader["titre"]
                     });
                 }
                 return result;
             } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Searches the database for a specific Projet ID
+        /// </summary>
+        /// <param name="id">ID of searched Projet Entity</param>
+        /// <returns>A ProjetResumeView of the corresponding ID if found. Returns null if ID does not exist.</returns>
+        public ProjetResumeView GetResumeByID(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM vue_projet WHERE id = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                ProjetResumeView p = null;
+                if (reader.Read()) {
+                    p = new ProjetResumeView {
+                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        Description = (string)reader["description"],
+                        FirstImageUrl = (string)reader["image_url"],
+                        Id = (int)reader["id"],
+                        MontantRecolte = (double)reader["montant"],
+                        NomLocalite = (string)reader["localite"],
+                        Titre = (string)reader["titre"]
+                    };
+                    return p;
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Gets all markers for the Front-End Map
+        /// </summary>
+        /// <returns>A list of Markers</returns>
+        public IEnumerable<MarqueurView> GetAllMarqueurs() {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Marqueurs";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<MarqueurView> result = new List<MarqueurView>();
+                while (reader.Read()) {
+                    result.Add(new MarqueurView {
+                        IdProjet = (int)reader["id"],
+                        Infrastructure = (string)reader["infrastructure"],
+                        Latitude = (double)reader["latitude"],
+                        Longitude = (double)reader["longitude"]
+                    });
+                }
+                return result;
+            } catch (Exception) {
                 throw;
             } finally {
                 oConn.Close();
@@ -189,54 +245,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             } finally {
                 oConn.Close();
             }
-        }
-
-
-        public IEnumerable<ProjetListing> GetListing() {
-
-            try {
-
-                oConn.Open();
-                NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT p.id AS id_projet, p.reference, ph.url_photo, p.description, l.localite, p.cout_du_projet, p.infrastructure, p.est_nouveau, pp.est_favori, l.latitude, l.longitude FROM projet p LEFT JOIN photo ph ON ph.id_projet = p.id AND ph.est_publique = true LEFT JOIN localisation l ON p.id_localisation = l.id LEFT JOIN projet_participant ON p.id = pp.id_projet AND pp.est_favori = true LIMIT 1";
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                List<ProjetListing> result = new List<ProjetListing> ();
-                while (reader.Read()) {
-                    result.Add(new ProjetListing {
-                        CoutDuProjet = (double)reader["cout_du_projet"],
-                        Description = (string)reader["description"],
-                        EstFavori = (bool)reader["est_favori"],
-                        EstNouveau = (bool)reader["est_nouveau"],
-                        Id = (int)reader["id_projet"],
-                        imageUrl = (string)reader["url_photo"],
-                        Infrastructure = (string)reader["infrastructure"],
-                        Latitude = (double)reader["latitude"],
-                        Longitude = (double)reader["longitude"],
-                        NomLocalite = (string)reader["localite"],
-                        Reference = (string)reader["reference"]
-                    });
-                }
-
-                foreach (ProjetListing listing in result) {
-
-                    listing.MontantRecolte = 0;
-                    cmd.CommandText = "SELECT pp.contribution AS montant FROM projet_participant pp WHERE pp.id_projet = @p1";
-                    cmd.Parameters.AddWithValue("p1", listing.Id);
-                    reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        listing.MontantRecolte += (double)reader["montant"];
-                    }
-
-                }
-
-                return result;
-
-            } catch (Exception e) {
-                throw;
-            } finally {
-                oConn.Close();
-            }
-
         }
 
     }
