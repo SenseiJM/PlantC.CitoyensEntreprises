@@ -15,10 +15,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             _projetRepository = projetRepository;
         }
 
-        public IEnumerable<ProjetModel> GetAll() {
-            return _projetRepository.GetAll().Select(p => p.ToSimpleModel());
-        }
-
         public int Create(ProjetModel model) {
             if (model.Infrastructure == "Verger") {
                 if (model.NbArbres is null || model.NbFruits is null || model.Hectares is null) {
@@ -68,6 +64,22 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         public bool UpdateProjet(int id, ProjetModel model)
         {
             return _projetRepository.UpdateProjet(id, model.ToEntity());
+        }
+
+        public IEnumerable<ProjetResumeModel> GetAllResume() {
+            return _projetRepository.GetAllResume().Select(p => p.ToSimpleModel());
+        }
+
+        public ProjetResumeModel GetResumeByID(int id) {
+            return _projetRepository.GetResumeByID(id).ToSimpleModel();
+        }
+
+        public ProjetDetailsModel GetDetailsByID(int id) {
+            return _projetRepository.GetDetailsByID(id).ToSimpleModel();
+        }
+
+        public IEnumerable<MarqueurModel> GetAllMarqueurs() {
+            return _projetRepository.GetAllMarqueurs().Select(m => m.ToSimpleModel());
         }
 
     }

@@ -14,34 +14,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         }
 
         /// <summary>
-        /// Adds a new Projet entity in the database
-        /// </summary>
-        /// <param name="p">New Projet Entity to be added in the database</param>
-        /// <returns>ID of the created Entity</returns>
-        public int Create(Projet p) {
-            try {
-                oConn.Open();
-                NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
-                cmd.Parameters.AddWithValue("p1", p.IDLocalisation);
-                cmd.Parameters.AddWithValue("p2", p.Reference);
-                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p4", p.NbArbres);
-                cmd.Parameters.AddWithValue("p5", p.NbFruits);
-                cmd.Parameters.AddWithValue("p6", p.Metres);
-                cmd.Parameters.AddWithValue("p7", p.Hectares);
-                cmd.Parameters.AddWithValue("p8", p.TonnesCO2);
-                cmd.Parameters.AddWithValue("p9", p.HeuresTravail);
-                cmd.Parameters.AddWithValue("p10", p.CoutDuProjet);
-                return (int)cmd.ExecuteScalar();
-            } catch (Exception e) {
-                throw;
-            } finally {
-                oConn.Close();
-            }
-        }
-
-        /// <summary>
         /// Fetches a list of all existing Projet Entities in the database
         /// </summary>
         /// <returns>IEnumerable of ProjetResumeView Entity</returns>
@@ -49,7 +21,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM vue_projet";
+                cmd.CommandText = "SELECT * FROM projet_resume";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<ProjetResumeView> result = new List<ProjetResumeView>();
                 //On peut faire un mapper ici aussi (sur IDataRecord)
@@ -57,9 +29,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     result.Add(new ProjetResumeView {
                         CoutDuProjet = (double)reader["cout_du_projet"],
                         Description = (string)reader["description"],
-                        FirstImageUrl = (string)reader["image_url"],
-                        Id = (int)reader["id"],
-                        MontantRecolte = (double)reader["montant"],
+                        FirstImageUrl = (string)reader["url_photo"],
+                        Id = (int)reader["id_projet"],
+                        MontantRecolte = (double)reader["tot"],
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"]
                     });
@@ -81,7 +53,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM vue_projet WHERE id = @p1";
+                cmd.CommandText = "SELECT * FROM projet_resume WHERE id_projet = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 ProjetResumeView p = null;
@@ -89,9 +61,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     p = new ProjetResumeView {
                         CoutDuProjet = (double)reader["cout_du_projet"],
                         Description = (string)reader["description"],
-                        FirstImageUrl = (string)reader["image_url"],
-                        Id = (int)reader["id"],
-                        MontantRecolte = (double)reader["montant"],
+                        FirstImageUrl = (string)reader["url_photo"],
+                        Id = (int)reader["id_projet"],
+                        MontantRecolte = (double)reader["tot"],
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"]
                     };
@@ -127,6 +99,75 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 }
                 return result;
             } catch (Exception) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Searches the database for a specific Projet ID
+        /// </summary>
+        /// <param name="id">ID of searched Projet Entity</param>
+        /// <returns>A ProjetDetailsView of the corresponding ID if found. Returns null if ID does not exist.</returns>
+        public ProjetDetailsView GetDetailsByID(int id) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM projet_details WHERE id_projet = @p1";
+                cmd.Parameters.AddWithValue("p1", id);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                ProjetDetailsView p = null;
+                if (reader.Read()) {
+                    p = new ProjetDetailsView {
+                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        Description = (string)reader["description"],
+                        Localite = (string)reader["localite"],
+                        SommeRecoltee = (double)reader["tot"],
+                        Titre = (string)reader["titre"],
+                        TonnesCO2 = (double)reader["tonnes_co2"],
+                    };
+                    if (reader["url_photo"] != DBNull.Value) {
+                        p.ImagesURLs = new List<string> {
+                            (string)reader["url_photo"]
+                        };
+                        while (reader.Read()) {
+                            p.ImagesURLs.Add((string)reader["url_photo"]);
+                        }
+                    }
+                    return p;
+                } else {
+                    return null;
+                }
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Adds a new Projet entity in the database
+        /// </summary>
+        /// <param name="p">New Projet Entity to be added in the database</param>
+        /// <returns>ID of the created Entity</returns>
+        public int Create(Projet p) {
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
+                cmd.Parameters.AddWithValue("p1", p.IDLocalisation);
+                cmd.Parameters.AddWithValue("p2", p.Reference);
+                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
+                cmd.Parameters.AddWithValue("p4", p.NbArbres);
+                cmd.Parameters.AddWithValue("p5", p.NbFruits);
+                cmd.Parameters.AddWithValue("p6", p.Metres);
+                cmd.Parameters.AddWithValue("p7", p.Hectares);
+                cmd.Parameters.AddWithValue("p8", p.TonnesCO2);
+                cmd.Parameters.AddWithValue("p9", p.HeuresTravail);
+                cmd.Parameters.AddWithValue("p10", p.CoutDuProjet);
+                return (int)cmd.ExecuteScalar();
+            } catch (Exception e) {
                 throw;
             } finally {
                 oConn.Close();

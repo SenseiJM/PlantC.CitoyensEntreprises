@@ -1,23 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.API
-{
+namespace PlantC.CitoyensEntreprises.API {
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -40,6 +32,8 @@ namespace PlantC.CitoyensEntreprises.API
             services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("MaConnection")));
             services.AddScoped<ParticipantService>();
             services.AddScoped<ParticipantRepository>();
+            services.AddScoped<ProjetService>();
+            services.AddScoped<ProjetRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

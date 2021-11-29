@@ -1,4 +1,5 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,39 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 NbFruits = p.NbFruits,
                 NbArbres = p.NbArbres,
                 Contribution = p.Contribution
+            };
+        }
+
+        public static ProjetResumeModel ToSimpleModel(this ProjetResumeView p) {
+            return new ProjetResumeModel {
+                CoutDuProjet = p.CoutDuProjet,
+                Description = p.Description,
+                FirstImageUrl = p.FirstImageUrl,
+                Id = p.Id,
+                MontantRecolte = p.MontantRecolte,
+                NomLocalite = p.NomLocalite,
+                Titre = p.Titre
+            };
+        }
+
+        public static ProjetDetailsModel ToSimpleModel(this ProjetDetailsView p) {
+            return new ProjetDetailsModel {
+                ImagesURLs = p.ImagesURLs,
+                CoutDuProjet = p.CoutDuProjet,
+                Description = p.Description,
+                Localite = p.Localite,
+                SommeRecoltee = p.SommeRecoltee,
+                Titre = p.Titre,
+                TonnesCO2 = p.TonnesCO2
+            };
+        }
+
+        public static MarqueurModel ToSimpleModel(this MarqueurView m) {
+            return new MarqueurModel {
+                IdProjet = m.IdProjet,
+                Latitude = m.Latitude,
+                Infrastructure = m.Infrastructure,
+                Longitude = m.Longitude
             };
         }
 
