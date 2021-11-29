@@ -10,13 +10,18 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Participant {
         [Required]
         public Fonction Fonction { get; set; }
 
-        [Required]
         public string NomEntreprise { get; set; }
-
-        public uint? BCE { get; set; }
+        public string BCE { get; set; }
 
         [Required]
-        public int IdContact { get; set; }
+        public string Nom { get; set; }
+
+        [Required]
+        public string Prenom { get; set; }
+
+        public string Email { get; set; }
+        public string Telephone { get; set; }
+        public int? IdAdresse { get; set; }
 
     }
 }

@@ -11,10 +11,13 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Id = model.Id,
                 IDLocalisation = model.IDLocalisation,
                 Infrastructure = model.Infrastructure,
-                Quantite = model.Quantite,
                 Reference = model.Reference,
                 TonnesCO2 = model.TonnesCO2,
-                UniteDeMesure = model.UniteDeMesure
+                Hectares = model.Hectares,
+                Metres = model.Metres,
+                NbFruits = model.NbFruits,
+                NbArbres = model.NbArbres,
+                Contribution = model.Contribution
             };
         }
 
@@ -25,10 +28,13 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Id = dto.Id,
                 IDLocalisation = dto.IDLocalisation,
                 Infrastructure = dto.Infrastructure,
-                Quantite = dto.Quantite,
                 Reference = dto.Reference,
                 TonnesCO2 = dto.TonnesCO2,
-                UniteDeMesure = dto.UniteDeMesure
+                NbArbres = dto.NbArbres,
+                NbFruits= dto.NbFruits,
+                Metres= dto.Metres,
+                Hectares= dto.Hectares,
+                Contribution = dto.Contribution
             };
         }
 
@@ -40,10 +46,14 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 HeuresTravail = dto.HeuresTravail,
                 IDLocalisation = dto.IDLocalisation,
                 Infrastructure = dto.Infrastructure,
-                Quantite = dto.Quantite,
                 Reference = dto.Reference,
                 TonnesCO2 = dto.TonnesCO2,
-                UniteDeMesure = dto.UniteDeMesure
+                Contribution = dto.Contribution,
+                Hectares = dto.Hectares,
+                Metres = dto.Metres,
+                NbFruits = dto.NbFruits,
+                NbArbres = dto.NbArbres,
+                Id = dto.Id
             };
         }
 

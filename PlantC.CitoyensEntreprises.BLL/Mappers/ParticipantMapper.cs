@@ -14,8 +14,12 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 BCE = model.BCE,
                 Fonction = model.Fonction,
                 Id = model.Id,
-                IdContact = model.IdContact,
-                NomEntreprise = model.NomEntreprise
+                NomEntreprise = model.NomEntreprise,
+                IdAdresse = model.IdAdresse,
+                Telephone = model.Telephone,
+                Prenom = model.Prenom,
+                Nom = model.Nom,
+                Email = model.Email
             };
         }
 
@@ -24,8 +28,12 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 BCE = p.BCE,
                 Fonction = p.Fonction,
                 Id = p.Id,
-                IdContact = p.IdContact,
-                NomEntreprise = p.NomEntreprise
+                NomEntreprise = p.NomEntreprise,
+                Email = p.Email,
+                Nom = p.Nom,
+                Prenom = p.Prenom,
+                Telephone = p.Telephone,
+                IdAdresse = p.IdAdresse
             };
         }
 
