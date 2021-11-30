@@ -13,10 +13,8 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         [Required]
         public string Infrastructure { get; set; }
 
-        [Required]
         public int NbArbres { get; set; }
 
-        [Required]
         public int NbFruits { get; set; }
 
         public int Metres { get; set; }

@@ -34,6 +34,8 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<ParticipantRepository>();
             services.AddScoped<ProjetService>();
             services.AddScoped<ProjetRepository>();
+            services.AddScoped<LocalisationRepository>();
+            services.AddScoped<LocalisationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
