@@ -22,8 +22,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Hectares = p.Hectares,
                 Metres = p.Metres,
                 NbFruits = p.NbFruits,
-                NbArbres = p.NbArbres,
-                Contribution = p.Contribution
+                NbArbres = p.NbArbres
             };
         }
 
@@ -73,7 +72,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 NbFruits = model.NbFruits,
                 Metres = model.Metres,
                 Hectares = model.Hectares,
-                Contribution = model.Contribution
+                DateCreation = model.DateCreation,
+                Description = model.Description,
+                Titre = model.Titre,
+                Contribution = 0
             };
         }
 

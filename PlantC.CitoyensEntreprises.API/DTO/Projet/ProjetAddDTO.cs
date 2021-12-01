@@ -8,7 +8,16 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public int Id { get; set; }
 
         [Required]
+        public int IDLocalisation { get; set; }
+
+        [Required]
         public string Reference { get; set; }
+
+        [Required]
+        public string Titre { get; set; }
+
+        [Required]
+        public string Description { get; set; }
 
         [Required]
         public string Infrastructure { get; set; }
@@ -21,9 +30,6 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public double Hectares { get; set; }
 
         [Required]
-        public int IDLocalisation { get; set; }
-
-        [Required]
         public double TonnesCO2 { get; set; }
 
         [Required]
@@ -31,7 +37,5 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
 
         [Required]
         public double CoutDuProjet { get; set; }
-
-        public double Contribution { get; set; }
     }
 }

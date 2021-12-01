@@ -16,8 +16,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Hectares = model.Hectares,
                 Metres = model.Metres,
                 NbFruits = model.NbFruits,
-                NbArbres = model.NbArbres,
-                Contribution = model.Contribution
+                NbArbres = model.NbArbres
             };
         }
 
@@ -34,7 +33,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 NbFruits= dto.NbFruits,
                 Metres= dto.Metres,
                 Hectares= dto.Hectares,
-                Contribution = dto.Contribution
+                Titre = dto.Titre,
+                Description = dto.Description
             };
         }
 
@@ -48,7 +48,6 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Infrastructure = dto.Infrastructure,
                 Reference = dto.Reference,
                 TonnesCO2 = dto.TonnesCO2,
-                Contribution = dto.Contribution,
                 Hectares = dto.Hectares,
                 Metres = dto.Metres,
                 NbFruits = dto.NbFruits,

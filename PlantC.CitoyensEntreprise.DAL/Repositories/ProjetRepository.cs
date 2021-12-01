@@ -155,17 +155,20 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
+                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, titre, description, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet, date_creation) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) RETURNING id";
                 cmd.Parameters.AddWithValue("p1", p.IDLocalisation);
                 cmd.Parameters.AddWithValue("p2", p.Reference);
-                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p4", p.NbArbres);
-                cmd.Parameters.AddWithValue("p5", p.NbFruits);
-                cmd.Parameters.AddWithValue("p6", p.Metres);
-                cmd.Parameters.AddWithValue("p7", p.Hectares);
-                cmd.Parameters.AddWithValue("p8", p.TonnesCO2);
-                cmd.Parameters.AddWithValue("p9", p.HeuresTravail);
-                cmd.Parameters.AddWithValue("p10", p.CoutDuProjet);
+                cmd.Parameters.AddWithValue("p3", p.Titre);
+                cmd.Parameters.AddWithValue("p4", p.Description);
+                cmd.Parameters.AddWithValue("p5", p.Infrastructure);
+                cmd.Parameters.AddWithValue("p6", p.NbArbres);
+                cmd.Parameters.AddWithValue("p7", p.NbFruits);
+                cmd.Parameters.AddWithValue("p8", p.Metres);
+                cmd.Parameters.AddWithValue("p9", p.Hectares);
+                cmd.Parameters.AddWithValue("p10", p.TonnesCO2);
+                cmd.Parameters.AddWithValue("p11", p.HeuresTravail);
+                cmd.Parameters.AddWithValue("p12", p.CoutDuProjet);
+                cmd.Parameters.AddWithValue("p13", p.DateCreation);
                 return (int)cmd.ExecuteScalar();
             } catch (Exception e) {
                 throw;
