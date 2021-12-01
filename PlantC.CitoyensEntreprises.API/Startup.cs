@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Npgsql;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using PlantC.CitoyensEntreprises.BLL.Utils;
@@ -57,6 +58,7 @@ namespace PlantC.CitoyensEntreprises.API
 
             services.AddJwt(Configuration.GetSection("Jwt").Get<JwtConfiguration>());
 
+            NpgsqlConnection.GlobalTypeMapper.MapEnum<Fonction>();
             services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("Default")));
             services.AddScoped<ParticipantRepository>();
             services.AddScoped<ProjetRepository>();
@@ -67,6 +69,7 @@ namespace PlantC.CitoyensEntreprises.API
             services.AddScoped<ParticipantService>();
             services.AddScoped<ProjetService>();
             services.AddScoped<UserService>();
+            services.AddScoped<TacheService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

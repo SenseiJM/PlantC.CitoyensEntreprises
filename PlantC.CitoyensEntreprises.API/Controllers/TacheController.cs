@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PlantC.CitoyensEntreprises.API.DTO.Tache;
+using PlantC.CitoyensEntreprises.API.Mappers;
+using PlantC.CitoyensEntreprises.BLL.Services;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers
 {
@@ -7,6 +10,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
     [ApiController]
     public class TacheController : ControllerBase
     {
+        private readonly TacheService _tacheService;
+        public TacheController(TacheService tacheService)
+        {
+            _tacheService = tacheService;
+        }
         // GET: TacheController
         [HttpGet]
         public IActionResult GetAll()
@@ -30,9 +38,16 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
 
         // POST: TacheController/Create
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(TacheAddDTO dto )
         {
-            return null;
+            try
+            {
+                return Ok(_tacheService.Create(dto.ToBLLAdd()));
+            }
+            catch (System.ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // POST: TacheController/Edit

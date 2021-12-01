@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -59,7 +60,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     p = new Participant
                     {
                         BCE = (string)reader["BCE"],
-                        Fonction = (Enums.Fonction)reader["Fonction"],
+                        Fonction = (Fonction)reader["Fonction"],
                         Id = (int)reader["Id"],
                         NomEntreprise = (string)reader["NomEntreprise"],
                         IdAdresse = (int)reader["IdAdresse"],
@@ -122,22 +123,22 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Participant";
+                cmd.CommandText = "SELECT * FROM participant";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Participant> result = new List<Participant>();
                 while (reader.Read())
                 {
                     result.Add(new Participant
                     {
-                        BCE = (string)reader["BCE"],
-                        Fonction = (Enums.Fonction)reader["Fonction"],
-                        Id = (int)reader["Id"],
-                        NomEntreprise = (string)reader["NomEntreprise"],
-                        Telephone = (string)reader["Telephone"],
-                        Prenom = (string)reader["Prenom"],
-                        Nom = (string)reader["Nom"],
-                        Email = (string)reader["Email"],
-                        IdAdresse = (int)reader["IdAdresse"]
+                        BCE = reader["bce"] as string,
+                        Fonction = (Enums.Fonction)reader["fonction"],
+                        Id = (int)reader["id"],
+                        NomEntreprise = reader["nom_entreprise"] as string,
+                        Telephone = (string)reader["telephone"],
+                        Prenom = (string)reader["prenom"],
+                        Nom = (string)reader["nom"],
+                        Email = (string)reader["mail"],
+                        IdAdresse = reader["id_adresse"] as int?
                     });
                 }
                 return result;
