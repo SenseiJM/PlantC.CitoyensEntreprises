@@ -25,34 +25,19 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
                     throw new ArgumentException("Nombre d'arbres fruitiers trop important !");
                 }
 
-                model.Metres = null;
-
             } else if (model.Infrastructure == "Haie") {
                 if (model.NbArbres == 0 || model.Metres == 0) {
                     throw new ArgumentException("Les champs 'Mètres' et 'NbArbres' sont des champs requis pour les haies !");
                 }
 
-                if (model.NbFruits == 0) {
-                    model.NbFruits = null;
-                }
-
-                model.Hectares = null;
-
             } else if (model.Infrastructure == "Miscanthus") {
                 if (model.Hectares == 0) {
                     throw new ArgumentException("Le champ 'Hectares' est un champ requis pour le Miscanthus !");
                 }
-
-                model.NbArbres = null;
-                model.Metres = null;
-                model.NbFruits = null;
             } else if (model.Infrastructure == "Reboisement") {
                 if (model.Hectares == 0 || model.NbArbres == 0) {
                     throw new ArgumentException("Les champs 'Hectares' et 'NbArbres' sont des champs requis pour le reboisement !");
                 }
-
-                model.NbFruits = null;
-                model.Metres = null;
             }
             model.DateCreation = DateTime.Now;
             return _projetRepository.Create(model.ToEntity());

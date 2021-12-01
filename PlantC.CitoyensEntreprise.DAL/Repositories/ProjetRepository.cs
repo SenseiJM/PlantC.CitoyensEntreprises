@@ -161,10 +161,10 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.Parameters.AddWithValue("p3", p.Titre);
                 cmd.Parameters.AddWithValue("p4", p.Description);
                 cmd.Parameters.AddWithValue("p5", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p6", p.NbArbres);
-                cmd.Parameters.AddWithValue("p7", p.NbFruits);
-                cmd.Parameters.AddWithValue("p8", p.Metres);
-                cmd.Parameters.AddWithValue("p9", p.Hectares);
+                cmd.Parameters.AddWithValue("p6", (object)p.NbArbres??DBNull.Value);
+                cmd.Parameters.AddWithValue("p7", (object)p.NbFruits??DBNull.Value);
+                cmd.Parameters.AddWithValue("p8", (object)p.Metres??DBNull.Value);
+                cmd.Parameters.AddWithValue("p9", (object)p.Hectares??DBNull.Value);
                 cmd.Parameters.AddWithValue("p10", p.TonnesCO2);
                 cmd.Parameters.AddWithValue("p11", p.HeuresTravail);
                 cmd.Parameters.AddWithValue("p12", p.CoutDuProjet);
