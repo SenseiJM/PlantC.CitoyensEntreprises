@@ -3,8 +3,6 @@ using PlantC.CitoyensEntreprises.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprises.BLL.Mappers
 {
@@ -14,6 +12,58 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
         {
             return new Tache
             {
+                Id_localisation = model.Id_localisation,
+                Id_Participant = model.Id_Participant,
+                Id_Projet = model.Id_Projet,
+                Intitule = model.Intitule,
+                Date_Debut = model.Date_Debut,
+                Date_Fin = model.Date_Fin,
+                Type = model.Type,
+                Description = model.Description,
+            };
+        }
+        public static IEnumerable<TacheModel> ToBLLModel(this IEnumerable<Tache> taches)
+        {
+            List<TacheModel> result = new List<TacheModel>();
+            foreach (Tache tache in taches)
+            {
+                result.Add(new TacheModel
+                {
+                    Id = tache.Id,
+                    Id_localisation = tache.Id_localisation,
+                    Id_Participant = tache.Id_Participant,
+                    Id_Projet = tache.Id_Projet,
+                    Intitule = tache.Intitule,
+                    Date_Debut = tache.Date_Debut,
+                    Date_Fin = tache.Date_Fin,
+                    Description = tache.Description,
+                    Type = tache.Type,
+                    Est_Assigne = tache.Est_Assigne,
+                    Est_Termine = tache.Est_Termine,
+                });
+            }
+            return result;
+        }
+        public static TacheModel ToBLLIndexId(this Tache model)
+        {
+            return new TacheModel
+            {
+                Id = model.Id,
+                Id_localisation = model.Id_localisation,
+                Id_Participant = model.Id_Participant,
+                Id_Projet = model.Id_Projet,
+                Intitule = model.Intitule,
+                Date_Debut = model.Date_Debut,
+                Date_Fin = model.Date_Fin,
+                Type = model.Type,
+                Description = model.Description,
+            };
+        }
+        public static Tache ToDALPut(this TacheModel model)
+        {
+            return new Tache
+            {
+                Id= model.Id,
                 Id_localisation = model.Id_localisation,
                 Id_Participant = model.Id_Participant,
                 Id_Projet = model.Id_Projet,

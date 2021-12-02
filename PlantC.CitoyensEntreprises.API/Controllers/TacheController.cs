@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprises.API.DTO.Tache;
 using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers
 {
@@ -19,49 +21,104 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return null;
+            try
+            {
+                if (_tacheService.GetAll().ToDTOIndexList().Count() == 0)
+                {
+                    return Ok("Pas de données");
+                }
+                return Ok(_tacheService.GetAll().ToDTOIndexList());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // GET: TacheController/GetById
-        [HttpGet("byID/{id}")]
+        [HttpGet("ByID/{id}")]
         public IActionResult GetById(int id)
         {
-            return null;
+            try
+            {
+                if (_tacheService.GetById(id).ToDTOIndexId() == null)
+                {
+                    return Ok("Pas de données");
+                }
+                return Ok(_tacheService.GetById(id).ToDTOIndexId());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
-        // GET: TacheController/GetById
-        [HttpGet("byProjectID/{id}")]
+        // GET: TacheController/GetByProjectId
+        [HttpGet("ByProjectID/{id}")]
         public IActionResult GetByProjetId(int id)
         {
-            return null;
+            try
+            {
+                if (_tacheService.GetByProjectId(id) == null)
+                {
+                    return Ok("Pas de données");
+                }
+                return Ok(_tacheService.GetByProjectId(id));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // POST: TacheController/Create
         [HttpPost]
-        public IActionResult Create(TacheAddDTO dto )
+        public IActionResult Create(TacheAddDTO dto)
         {
             try
             {
                 return Ok(_tacheService.Create(dto.ToBLLAdd()));
             }
-            catch (System.ArgumentException e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
 
         // POST: TacheController/Edit
-        [HttpPut("{id}")]
-        public IActionResult Edit(int id)
+        [HttpPut]
+        public IActionResult Edit(TacheUpdateRequestDTO dto)
         {
-            return null;
+            try
+            {
+                if (!_tacheService.UpDate(dto.ToBLLPut()))
+                {
+                    return Ok("La tache que vous voulez modifier n'existe pas");
+                }
+                return Ok(_tacheService.UpDate(dto.ToBLLPut()));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // DELETE: TacheController/Delete
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return null;
+            try
+            {
+                if (!_tacheService.Delete(id))
+                {
+                    return Ok("Pas de donnée à supprimer");
+                }
+                return Ok(_tacheService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
     }
