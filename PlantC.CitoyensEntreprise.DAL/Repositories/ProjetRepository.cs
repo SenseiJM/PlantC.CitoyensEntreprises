@@ -93,8 +93,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     result.Add(new MarqueurView {
                         IdProjet = (int)reader["id"],
                         Infrastructure = (string)reader["infrastructure"],
-                        Latitude = (double)reader["latitude"],
-                        Longitude = (double)reader["longitude"]
+                        Latitude = System.Convert.ToDouble(reader["latitude"]),
+                        Longitude = System.Convert.ToDouble(reader["longitude"])
                     });
                 }
                 return result;
@@ -183,37 +183,39 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// <param name="id">ID to be updated</param>
         /// <param name="p"></param>
         /// <returns>True if Projet Entity has been updated, False if ID is not existing</returns>
-        public bool UpdateProjet(int id, Projet p)
+        public bool Update(int id, Projet p)
         {
             try
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "UPDATE Projet SET" +
-                    "Reference = @p2," +
-                    "Infrastructure = @p3," +
-                    "Hectares = @p4," +
-                    "Metres = @p5," +
-                    "IDLocalisation = @p6," +
-                    "TonnesCO2 = @p7," +
-                    "HeuresTravail = @p8," +
-                    "CoutDuProjet = @p9," +
-                    "NbFruits = @p10," +
-                    "NbArbres = @p11," +
-                    "Contribution = @p12," +
-                    "WHERE Id = @p1";
+                cmd.CommandText = "UPDATE projet SET" +
+                    "id_localisation = @p2," +
+                    "reference = @p3," +
+                    "titre = @p4," +
+                    "description = @p5," +
+                    "infrastructure = @p6," +
+                    "nb_arbre = @p7," +
+                    "nb_fruits = @p8," +
+                    "metre = @p9," +
+                    "hectare = @p10," +
+                    "tonnes_co2 = @p11," +
+                    "heures_travail = @p12," +
+                    "cout_du_projet = @p13" +
+                    "WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
-                cmd.Parameters.AddWithValue("p2", p.Reference);
-                cmd.Parameters.AddWithValue("p3", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p4", p.Hectares);
-                cmd.Parameters.AddWithValue("p5", p.Metres);
-                cmd.Parameters.AddWithValue("p6", p.IDLocalisation);
-                cmd.Parameters.AddWithValue("p7", p.TonnesCO2);
-                cmd.Parameters.AddWithValue("p8", p.HeuresTravail);
-                cmd.Parameters.AddWithValue("p9", p.CoutDuProjet);
-                cmd.Parameters.AddWithValue("p10", p.NbFruits);
-                cmd.Parameters.AddWithValue("p11", p.NbArbres);
-                cmd.Parameters.AddWithValue("p12", p.Contribution);
+                cmd.Parameters.AddWithValue("p2", p.IDLocalisation);
+                cmd.Parameters.AddWithValue("p3", p.Reference);
+                cmd.Parameters.AddWithValue("p4", p.Titre);
+                cmd.Parameters.AddWithValue("p5", p.Description);
+                cmd.Parameters.AddWithValue("p6", p.Infrastructure);
+                cmd.Parameters.AddWithValue("p7", (object)p.NbArbres??DBNull.Value);
+                cmd.Parameters.AddWithValue("p8", (object)p.NbFruits??DBNull.Value);
+                cmd.Parameters.AddWithValue("p9", (object)p.Metres??DBNull.Value);
+                cmd.Parameters.AddWithValue("p10", (object)p.Hectares ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("p11", p.TonnesCO2);
+                cmd.Parameters.AddWithValue("p12", p.HeuresTravail);
+                cmd.Parameters.AddWithValue("p13", p.CoutDuProjet);
 
                 return cmd.ExecuteNonQuery() != 0;
             }

@@ -1,29 +1,30 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Projet
-{
+namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetUpdateRequestDTO
     {
+        [Required]
+        public int IDLocalisation { get; set; }
 
         [Required]
         public string Reference { get; set; }
 
         [Required]
+        public string Titre { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
         public string Infrastructure { get; set; }
 
-        [Required]
-        public double Quantite { get; set; }
+        public int? NbArbres { get; set; }
 
-        [Required]
-        public string UniteDeMesure { get; set; }
+        public int? NbFruits { get; set; }
 
-        [Required]
-        public int IDLocalisation { get; set; }
+        public int? Metres { get; set; }
+
+        public double? Hectares { get; set; }
 
         [Required]
         public double TonnesCO2 { get; set; }
@@ -33,11 +34,5 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
 
         [Required]
         public double CoutDuProjet { get; set; }
-        public double Contribution { get; internal set; }
-        public double Hectares { get; internal set; }
-        public int Metres { get; internal set; }
-        public int NbFruits { get; internal set; }
-        public int NbArbres { get; internal set; }
-        public int Id { get; internal set; }
     }
 }

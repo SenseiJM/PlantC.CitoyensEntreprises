@@ -42,7 +42,6 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
         {
             return new ProjetModel
             {
-                CoutDuProjet = dto.CoutDuProjet,
                 HeuresTravail = dto.HeuresTravail,
                 IDLocalisation = dto.IDLocalisation,
                 Infrastructure = dto.Infrastructure,
@@ -52,7 +51,9 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Metres = dto.Metres,
                 NbFruits = dto.NbFruits,
                 NbArbres = dto.NbArbres,
-                Id = dto.Id
+                CoutDuProjet = dto.CoutDuProjet,
+                Description = dto.Description,
+                Titre = dto.Titre
             };
         }
 

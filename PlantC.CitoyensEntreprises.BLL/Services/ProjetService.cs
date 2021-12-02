@@ -54,7 +54,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
 
         public bool UpdateProjet(int id, ProjetModel model)
         {
-            return _projetRepository.UpdateProjet(id, model.ToEntity());
+            return _projetRepository.Update(id, model.ToEntity());
         }
 
         public IEnumerable<ProjetResumeModel> GetAllResume() {
