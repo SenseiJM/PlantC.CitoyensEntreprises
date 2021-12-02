@@ -57,5 +57,29 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
+        public static ProjetDetailsDTO ToDetailsDTO(this ProjetDetailsModel model) {
+            return new ProjetDetailsDTO {
+                CoutDuProjet = model.CoutDuProjet,
+                Description = model.Description,
+                Id = model.Id,
+                ImagesURLs = model.ImagesURLs,
+                Localite = model.Localite,
+                SommeRecoltee = model.SommeRecoltee,
+                Titre = model.Titre
+            };
+        }
+
+        public static ProjetResumeDTO ToResumeDTO(this ProjetResumeModel model) {
+            return new ProjetResumeDTO {
+                CoutDuProjet = model.CoutDuProjet,
+                Description = model.Description,
+                FirstImageUrl = model.FirstImageUrl,
+                Id = model.Id,
+                MontantRecolte = model.MontantRecolte,
+                NomLocalite = model.NomLocalite,
+                Titre = model.Titre
+            };
+        }
+
     }
 }

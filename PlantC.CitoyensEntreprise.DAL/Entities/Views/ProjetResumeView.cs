@@ -6,8 +6,8 @@
         public string FirstImageUrl { get; set; }
         public string Description { get; set; }
         public string NomLocalite { get; set; }
-        public double CoutDuProjet { get; set; }
-        public double MontantRecolte { get; set; }
+        public decimal CoutDuProjet { get; set; }
+        public decimal MontantRecolte { get; set; }
 
     }
 }

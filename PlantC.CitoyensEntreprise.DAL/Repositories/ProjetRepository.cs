@@ -27,11 +27,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 //On peut faire un mapper ici aussi (sur IDataRecord)
                 while (reader.Read()) {
                     result.Add(new ProjetResumeView {
-                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         FirstImageUrl = (string)reader["url_photo"],
                         Id = (int)reader["id_projet"],
-                        MontantRecolte = (double)reader["tot"],
+                        MontantRecolte = (decimal)reader["tot"],
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"]
                     });
@@ -59,11 +59,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 ProjetResumeView p = null;
                 if (reader.Read()) {
                     p = new ProjetResumeView {
-                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         FirstImageUrl = (string)reader["url_photo"],
                         Id = (int)reader["id_projet"],
-                        MontantRecolte = (double)reader["tot"],
+                        MontantRecolte = (decimal)reader["tot"],
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"]
                     };
@@ -93,8 +93,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     result.Add(new MarqueurView {
                         IdProjet = (int)reader["id"],
                         Infrastructure = (string)reader["infrastructure"],
-                        Latitude = System.Convert.ToDouble(reader["latitude"]),
-                        Longitude = System.Convert.ToDouble(reader["longitude"])
+                        Latitude = (decimal)reader["latitude"],
+                        Longitude = (decimal)reader["longitude"]
                     });
                 }
                 return result;
@@ -120,12 +120,12 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 ProjetDetailsView p = null;
                 if (reader.Read()) {
                     p = new ProjetDetailsView {
-                        CoutDuProjet = (double)reader["cout_du_projet"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         Localite = (string)reader["localite"],
-                        SommeRecoltee = (double)reader["tot"],
+                        SommeRecoltee = (decimal)reader["tot"],
                         Titre = (string)reader["titre"],
-                        TonnesCO2 = (double)reader["tonnes_co2"],
+                        TonnesCO2 = (decimal)reader["tonnes_co2"],
                     };
                     if (reader["url_photo"] != DBNull.Value) {
                         p.ImagesURLs = new List<string> {
@@ -189,7 +189,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "UPDATE projet SET" +
+                cmd.CommandText = "UPDATE projet SET " +
                     "id_localisation = @p2," +
                     "reference = @p3," +
                     "titre = @p4," +
@@ -201,7 +201,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                     "hectare = @p10," +
                     "tonnes_co2 = @p11," +
                     "heures_travail = @p12," +
-                    "cout_du_projet = @p13" +
+                    "cout_du_projet = @p13 " +
                     "WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.IDLocalisation);
@@ -221,7 +221,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
             catch (Exception e)
             {
-                throw;
+                throw; //'42601: syntax error at or near "="
             }
             finally
             {

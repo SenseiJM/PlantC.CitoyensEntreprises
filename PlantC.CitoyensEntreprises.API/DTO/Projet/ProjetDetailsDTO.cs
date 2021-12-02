@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprises.BLL.Models {
-    public class ProjetDetailsModel {
+namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
+    public class ProjetDetailsDTO {
+
         public int Id { get; set; }
         public List<string> ImagesURLs { get; set; }
         public string Titre { get; set; }
@@ -13,6 +10,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public string Description { get; set; }
         public decimal CoutDuProjet { get; set; }
         public decimal SommeRecoltee { get; set; }
-        public decimal TonnesCO2 { get; set; }
+        public decimal tonnesCO2 { get; set; }
+
     }
 }

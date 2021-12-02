@@ -2,6 +2,7 @@
 using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers {
     [Route("api/[controller]")]
@@ -43,17 +44,17 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
 
         [HttpGet("details/{id}")]
         public IActionResult GetDetailsByID(int id) {
-            return Ok(_projetService.GetDetailsByID(id));
+            return Ok(_projetService.GetDetailsByID(id).ToDetailsDTO());
         }
 
         [HttpGet("resume")]
         public IActionResult GetAllResume() {
-            return Ok(_projetService.GetAllResume());
+            return Ok(_projetService.GetAllResume().Select(r => r.ToResumeDTO()));
         }
 
         [HttpGet("resume/{id}")]
         public IActionResult GetResumeByID(int id) {
-            return Ok(_projetService.GetResumeByID(id));
+            return Ok(_projetService.GetResumeByID(id).ToResumeDTO());
         }
 
         [HttpGet("marqueurs")]

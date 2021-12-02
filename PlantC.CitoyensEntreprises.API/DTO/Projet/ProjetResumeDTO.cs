@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlantC.CitoyensEntreprises.BLL.Models {
-    public class ProjetResumeModel {
+﻿namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
+    public class ProjetResumeDTO {
 
         public int Id { get; set; }
         public string Titre { get; set; }

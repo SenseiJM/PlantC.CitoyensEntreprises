@@ -46,7 +46,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Localite = p.Localite,
                 SommeRecoltee = p.SommeRecoltee,
                 Titre = p.Titre,
-                TonnesCO2 = p.TonnesCO2
+                TonnesCO2 = p.TonnesCO2,
+                Id = p.Id
             };
         }
 
