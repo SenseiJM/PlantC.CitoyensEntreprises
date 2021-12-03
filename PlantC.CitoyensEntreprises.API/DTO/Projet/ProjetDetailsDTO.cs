@@ -10,7 +10,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public string Description { get; set; }
         public decimal CoutDuProjet { get; set; }
         public decimal SommeRecoltee { get; set; }
-        public decimal tonnesCO2 { get; set; }
+        public decimal TonnesCO2 { get; set; }
 
     }
 }
