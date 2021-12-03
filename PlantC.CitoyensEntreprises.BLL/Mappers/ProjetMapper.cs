@@ -1,11 +1,6 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using PlantC.CitoyensEntreprises.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprises.BLL.Mappers {
     static class ProjetMapper {

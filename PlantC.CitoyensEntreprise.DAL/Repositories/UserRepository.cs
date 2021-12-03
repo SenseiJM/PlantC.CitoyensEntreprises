@@ -2,13 +2,8 @@
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Mappers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Utils
-{
+namespace PlantC.CitoyensEntreprises.BLL.Utils {
     public class UserRepository 
     {
         private NpgsqlConnection oConn;

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Services
-{
+namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class HashService
     {
         public string Hash(string password, string salt = null)

@@ -2,13 +2,8 @@
 using PlantC.CitoyensEntreprises.BLL.Models;
 using PlantC.CitoyensEntreprises.BLL.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Services
-{
+namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class UserService
     {
         private readonly UserRepository _userRepository;

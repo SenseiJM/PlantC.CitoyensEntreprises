@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using System;
 using System.Collections.Generic;

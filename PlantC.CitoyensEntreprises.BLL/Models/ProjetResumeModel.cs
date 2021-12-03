@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlantC.CitoyensEntreprises.BLL.Models {
+﻿namespace PlantC.CitoyensEntreprises.BLL.Models {
     public class ProjetResumeModel {
 
         public int Id { get; set; }

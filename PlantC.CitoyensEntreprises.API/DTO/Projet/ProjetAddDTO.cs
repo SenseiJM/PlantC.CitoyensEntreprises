@@ -1,5 +1,4 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetAddDTO {
