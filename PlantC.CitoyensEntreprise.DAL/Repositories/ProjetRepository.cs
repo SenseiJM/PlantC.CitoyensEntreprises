@@ -28,17 +28,17 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 while (reader.Read()) {
                     result.Add(new ProjetResumeView {
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
-                        Description = (string)reader["description"],
-                        FirstImageUrl = (string)reader["url_photo"],
+                        Description = (string)reader["concat"],
+                        FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
-                        MontantRecolte = (decimal)reader["tot"],
+                        MontantRecolte = reader["tot"] as decimal? ?? 0,
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"]
                     });
                 }
                 return result;
             } catch (Exception e) {
-                throw;
+                throw; //'Unable to cast object of type 'System.DBNull' to type 'System.Decimal'.'
             } finally {
                 oConn.Close();
             }
@@ -60,8 +60,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 if (reader.Read()) {
                     p = new ProjetResumeView {
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
-                        Description = (string)reader["description"],
-                        FirstImageUrl = (string)reader["url_photo"],
+                        Description = (string)reader["concat"],
+                        FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
                         MontantRecolte = (decimal)reader["tot"],
                         NomLocalite = (string)reader["localite"],
@@ -126,6 +126,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                         SommeRecoltee = (decimal)reader["tot"],
                         Titre = (string)reader["titre"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
+                        Id = id
                     };
                     if (reader["url_photo"] != DBNull.Value) {
                         p.ImagesURLs = new List<string> {
@@ -171,7 +172,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 cmd.Parameters.AddWithValue("p13", p.DateCreation);
                 return (int)cmd.ExecuteScalar();
             } catch (Exception e) {
-                throw;
+                throw; //Numeric field overflow
             } finally {
                 oConn.Close();
             }
@@ -221,7 +222,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
             catch (Exception e)
             {
-                throw; //'42601: syntax error at or near "="
+                throw;
             }
             finally
             {
@@ -240,7 +241,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "DELETE FROM Projet WHERE Id = @p1";
+                cmd.CommandText = "DELETE FROM projet WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 return cmd.ExecuteNonQuery() != 0;
             }

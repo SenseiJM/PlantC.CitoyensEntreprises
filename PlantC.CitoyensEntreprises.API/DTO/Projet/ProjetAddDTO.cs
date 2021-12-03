@@ -4,9 +4,6 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
     public class ProjetAddDTO {
 
         [Required]
-        public int Id { get; set; }
-
-        [Required]
         public int IDLocalisation { get; set; }
 
         [Required]

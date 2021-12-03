@@ -21,11 +21,13 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(new { message = "Project deleted successfully" });
         }
 
-        [HttpGet("byID/{id}")]
-        public IActionResult GetByID(int id) {
-            ProjetIndexDTO dto = _projetService.GetByID(id).ToIndexDTO();
-            return Ok(dto);
-        }
+        //Not used anymore
+        //
+        //[HttpGet("byID/{id}")]
+        //public IActionResult GetByID(int id) {
+        //    ProjetIndexDTO dto = _projetService.GetByID(id).ToIndexDTO();
+        //    return Ok(dto);
+        //}
 
         [HttpPut("{id}")]
         public IActionResult UpdateProjet(int id, ProjetUpdateRequestDTO dto) {
@@ -47,7 +49,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_projetService.GetDetailsByID(id).ToDetailsDTO());
         }
 
-        [HttpGet("resume")]
+        [HttpGet("resume/all")]
         public IActionResult GetAllResume() {
             return Ok(_projetService.GetAllResume().Select(r => r.ToResumeDTO()));
         }
