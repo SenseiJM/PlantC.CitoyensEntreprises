@@ -16,7 +16,9 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Hectares = model.Hectares,
                 Metres = model.Metres,
                 NbFruits = model.NbFruits,
-                NbArbres = model.NbArbres
+                NbArbres = model.NbArbres,
+                Contribution = model.Contribution,
+                ListeTags = model.ListeTags
             };
         }
 

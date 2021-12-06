@@ -3,7 +3,8 @@ using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Mappers;
 using System;
 
-namespace PlantC.CitoyensEntreprises.BLL.Utils {
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
+{
     public class UserRepository 
     {
         private NpgsqlConnection oConn;

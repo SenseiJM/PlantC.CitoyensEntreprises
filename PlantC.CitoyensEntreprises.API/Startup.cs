@@ -8,6 +8,12 @@ using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ToolBox.Security.Configuration;
+using ToolBox.Security.DependencyInjection.Extensions;
 
 namespace PlantC.CitoyensEntreprises.API {
     public class Startup
@@ -30,12 +36,29 @@ namespace PlantC.CitoyensEntreprises.API {
             });
             NpgsqlConnection.GlobalTypeMapper.MapEnum<Fonction>("fonction");
             services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("MaConnection")));
+
+            #region JWT
+            services.AddJwt(Configuration.GetSection("JWT").Get<JwtConfiguration>());
+            #endregion
+
+
+            #region Service
             services.AddScoped<ParticipantService>();
-            services.AddScoped<ParticipantRepository>();
+            services.AddScoped<HashService>();
             services.AddScoped<ProjetService>();
-            services.AddScoped<ProjetRepository>();
-            services.AddScoped<LocalisationRepository>();
+            services.AddScoped<UserService>();
+            services.AddScoped<MarqueursService>();
             services.AddScoped<LocalisationService>();
+            #endregion
+
+
+            #region Repository
+            services.AddScoped<LocalisationRepository>();
+            services.AddScoped<ParticipantRepository>();
+            services.AddScoped<ProjetRepository>();
+            services.AddScoped<UserRepository>();
+            services.AddScoped<TagRepository>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

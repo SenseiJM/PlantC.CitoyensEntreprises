@@ -1,6 +1,6 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Models;
-using PlantC.CitoyensEntreprises.BLL.Utils;
 using System;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services {

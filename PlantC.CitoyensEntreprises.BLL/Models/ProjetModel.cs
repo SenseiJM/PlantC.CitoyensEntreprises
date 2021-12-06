@@ -1,4 +1,6 @@
 ﻿using System;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.BLL.Models {
     public class ProjetModel {
@@ -17,6 +19,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public double HeuresTravail { get; set; }
         public double CoutDuProjet { get; set; }
         public DateTime DateCreation { get; set; }
+        public double Contribution { get; set; }
+        public IEnumerable<Tag> ListeTags { get; set; }
 
     }
 }
