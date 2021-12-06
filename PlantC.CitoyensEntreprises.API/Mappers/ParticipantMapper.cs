@@ -1,11 +1,17 @@
-﻿using PlantC.CitoyensEntreprises.API.DTO.Participant;
+﻿using PlantC.CitoyensEntreprise.DAL.Views;
+using PlantC.CitoyensEntreprises.API.DTO.Marqueurs;
+using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.API.Mappers {
-    static class ParticipantMapper {
+    static class ParticipantMapper
+    {
 
-        public static ParticipantModel ToModel(this ParticipantAddDTO dto) {
-            return new ParticipantModel {
+        public static ParticipantModel ToModel(this ParticipantAddDTO dto)
+        {
+            return new ParticipantModel
+            {
                 BCE = dto.BCE,
                 Fonction = dto.Fonction,
                 Id = dto.Id,
@@ -18,8 +24,10 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
-        public static ParticipantIndexDTO ToIndexDTO(this ParticipantModel model) {
-            return new ParticipantIndexDTO {
+        public static ParticipantIndexDTO ToIndexDTO(this ParticipantModel model)
+        {
+            return new ParticipantIndexDTO
+            {
                 BCE = model.BCE,
                 Fonction = model.Fonction,
                 Id = model.Id,
@@ -44,6 +52,17 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Nom = dto.Nom,
                 Email = dto.Email,
                 Id = dto.Id
+            };
+        }
+
+        public static MarqueursDTO ToMarqueursDTO(this Marqueurs dal)
+        {
+            return new MarqueursDTO
+            {
+                Id = dal.Id,
+                Infrastructure = dal.Infrastructure,
+                Latitude = dal.Latitude,
+                Longitude = dal.Longitude
             };
         }
     }

@@ -1,4 +1,5 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Repositories;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using System;
@@ -10,6 +11,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
     public class ProjetService {
 
         private readonly ProjetRepository _projetRepository;
+        private readonly TagRepository _tagRepository;
 
         public ProjetService(ProjetRepository projetRepository) {
             _projetRepository = projetRepository;
@@ -62,7 +64,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         }
 
         public ProjetModel GetByID(int id) {
-            return _projetRepository.GetByID(id).ToSimpleModel();
+            ProjetModel temp = _projetRepository.GetByID(id).ToSimpleModel();
+            temp.ListeTags = _tagRepository.GetTagByProjet(id);
+            return temp;
         }
 
         public bool UpdateProjet(int id, ProjetModel model)

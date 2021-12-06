@@ -45,17 +45,17 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 //On peut faire un mapper ici aussi (sur IDataRecord)
                 while (reader.Read()) {
                     result.Add(new Projet {
-                        Reference = reader["Reference"].ToString(),
-                        Infrastructure = reader["Infrastructure"].ToString(),
-                        Hectares = (double)reader["Hectares"],
-                        Id = (int)reader["Id"],
-                        Metres = (int)reader["Metres"],
-                        NbArbres = (int)reader["NbArbres"],
-                        NbFruits = (int)reader["NbFruits"],
-                        IDLocalisation = (int)reader["IDLocalisation"],
-                        TonnesCO2 = (double)reader["TonnesCO2"],
-                        HeuresTravail = (double)reader["HeuresTravail"],
-                        CoutDuProjet = (double)reader["CoutDuProjet"],
+                        Reference = reader["reference"].ToString(),
+                        Infrastructure = reader["infrastructure"].ToString(),
+                        Hectares = (double)reader["hectare"],
+                        Id = (int)reader["id"],
+                        Metres = (int)reader["metre"],
+                        NbArbres = (int)reader["nb_arbre"],
+                        NbFruits = (int)reader["nb_fruits"],
+                        IDLocalisation = (int)reader["id_localisation"],
+                        TonnesCO2 = (double)reader["tonnes_co2"],
+                        HeuresTravail = (double)reader["heures_travail"],
+                        CoutDuProjet = (double)reader["cout_du_projet"],
                         Contribution = (double)reader["Contribution"]
                     });
                 }

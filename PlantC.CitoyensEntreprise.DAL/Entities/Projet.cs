@@ -1,4 +1,6 @@
-﻿namespace PlantC.CitoyensEntreprise.DAL.Entities {
+﻿using System.Collections.Generic;
+
+namespace PlantC.CitoyensEntreprise.DAL.Entities {
     public class Projet {
 
         public int Id { get; set; }
@@ -15,6 +17,8 @@
 
         public double Contribution { get; set; }
         //Ne pas le stocker en DB, le calcul sera fait au fur et à mesure
+
+        public IEnumerable<Tag> ListeTags { get; set; }
 
     }
 }

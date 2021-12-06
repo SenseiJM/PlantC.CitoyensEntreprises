@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Utils
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
 {
     public class UserRepository 
     {
