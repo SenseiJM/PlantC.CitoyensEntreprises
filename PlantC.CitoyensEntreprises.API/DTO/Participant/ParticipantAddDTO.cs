@@ -1,8 +1,10 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Participant {
-    public class ParticipantAddDTO {
+namespace PlantC.CitoyensEntreprises.API.DTO.Participant
+{
+    public class ParticipantAddDTO
+    {
 
         [Required]
         public int Id { get; set; }

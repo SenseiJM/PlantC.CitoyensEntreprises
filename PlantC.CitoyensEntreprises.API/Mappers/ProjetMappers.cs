@@ -1,11 +1,15 @@
 ﻿using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.BLL.Models;
 
-namespace PlantC.CitoyensEntreprises.API.Mappers {
-    static class ProjetMappers {
+namespace PlantC.CitoyensEntreprises.API.Mappers
+{
+    static class ProjetMappers
+    {
 
-        public static ProjetIndexDTO ToIndexDTO(this ProjetModel model) {
-            return new ProjetIndexDTO {
+        public static ProjetIndexDTO ToIndexDTO(this ProjetModel model)
+        {
+            return new ProjetIndexDTO
+            {
                 CoutDuProjet = model.CoutDuProjet,
                 HeuresTravail = model.HeuresTravail,
                 Id = model.Id,
@@ -22,8 +26,10 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             };
         }
 
-        public static ProjetModel ToModel(this ProjetAddDTO dto) {
-            return new ProjetModel {
+        public static ProjetModel ToModel(this ProjetAddDTO dto)
+        {
+            return new ProjetModel
+            {
                 CoutDuProjet = dto.CoutDuProjet,
                 HeuresTravail = dto.HeuresTravail,
                 IDLocalisation = dto.IDLocalisation,

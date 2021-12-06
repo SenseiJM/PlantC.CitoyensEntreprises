@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using ToolBox.Security.Models;
 
-namespace PlantC.CitoyensEntreprises.BLL.Models {
-    public class ParticipantModel : IPayload {
+namespace PlantC.CitoyensEntreprises.BLL.Models
+{
+    public class ParticipantModel : IPayload
+    {
         public int Id { get; set; }
         public Fonction Fonction { get; set; }
         public string NomEntreprise { get; set; }

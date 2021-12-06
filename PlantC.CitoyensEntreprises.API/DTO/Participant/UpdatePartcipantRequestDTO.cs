@@ -6,7 +6,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Participant {
     {
         [Required]
         public int Id { get; set; }
-        
+
         [Required]
         public Fonction Fonction { get; set; }
 

@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using ToolBox.Security.Services;
 
@@ -21,9 +18,9 @@ namespace ToolBox.Security.Middlewares
         public async Task InvokeAsync(HttpContext context, JwtService jwtService)
         {
             string token = GetToken(context.Request.Headers);
-            if(!(token is null))
+            if (!(token is null))
             {
-                if(jwtService.TryGetClaims(token, out ClaimsPrincipal claims))
+                if (jwtService.TryGetClaims(token, out ClaimsPrincipal claims))
                 {
                     context.User = claims;
                 }

@@ -25,7 +25,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             }
             string salt = Guid.NewGuid().ToString();
             string hashPassword = _hashService.Hash(contact.MdpContact, salt);
-            ParticipantModel temp = new ParticipantModel {
+            ParticipantModel temp = new ParticipantModel
+            {
                 Email = contact.Email,
                 MdpContact = hashPassword,
                 Nom = contact.Nom,
@@ -41,7 +42,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         public ParticipantModel Login(string mail, string password)
         {
             Participant contact = _userRepository.GetByMail(mail);
-            if(contact != null && contact.MdpClient == _hashService.Hash(password, contact.Salt))
+            if (contact != null && contact.MdpClient == _hashService.Hash(password, contact.Salt))
             {
                 return new ParticipantModel //check Front end quel info renvoyer
                 {

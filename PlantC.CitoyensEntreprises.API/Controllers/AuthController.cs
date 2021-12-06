@@ -48,7 +48,8 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         {
             try
             {
-                int temp = _userService.Register(new ParticipantModel {
+                int temp = _userService.Register(new ParticipantModel
+                {
                     Email = register.Mail,
                     MdpContact = register.MdpContact,
                     Nom = register.Nom,

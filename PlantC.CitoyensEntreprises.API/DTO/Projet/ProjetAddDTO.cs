@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
-    public class ProjetAddDTO {
+namespace PlantC.CitoyensEntreprises.API.DTO.Projet
+{
+    public class ProjetAddDTO
+    {
 
         [Required]
         public int IDLocalisation { get; set; }
@@ -21,17 +23,18 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public int? NbArbres { get; set; }
 
         public int? NbFruits { get; set; }
-
-        public int? Metres { get; set; }
-        public double? Hectares { get; set; }
-
-        [Required]
-        public double TonnesCO2 { get; set; }
+        public int Metres { get; set; }
+        public decimal Hectares { get; set; }
 
         [Required]
-        public double HeuresTravail { get; set; }
+        public decimal TonnesCO2 { get; set; }
 
         [Required]
-        public double CoutDuProjet { get; set; }
+        public decimal HeuresTravail { get; set; }
+
+        [Required]
+        public decimal CoutDuProjet { get; set; }
+
+        public decimal Contribution { get; set; }
     }
 }

@@ -24,15 +24,15 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
 
         public int? Metres { get; set; }
 
-        public double? Hectares { get; set; }
+        public decimal? Hectares { get; set; }
 
         [Required]
-        public double TonnesCO2 { get; set; }
+        public decimal TonnesCO2 { get; set; }
 
         [Required]
-        public double HeuresTravail { get; set; }
+        public decimal HeuresTravail { get; set; }
 
         [Required]
-        public double CoutDuProjet { get; set; }
+        public decimal CoutDuProjet { get; set; }
     }
 }

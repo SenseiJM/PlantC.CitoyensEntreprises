@@ -5,7 +5,7 @@ using System;
 
 namespace PlantC.CitoyensEntreprise.DAL.Repositories
 {
-    public class UserRepository 
+    public class UserRepository
     {
         private NpgsqlConnection oConn;
 
@@ -14,7 +14,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             this.oConn = oConn;
         }
 
-        public Participant GetByMail(string mail) 
+        public Participant GetByMail(string mail)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.CommandText = "SELECT * FROM Participant Where mail = @p1";
                 cmd.Parameters.AddWithValue("p1", mail);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-  
+
                 if (reader.Read())
                 {
                     return reader.ToParticipant();
@@ -45,7 +45,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     //        ZipCode = (int)reader["zipCode"]
                     //    }
                     //};
-                    
+
                 };
                 return null;
             }

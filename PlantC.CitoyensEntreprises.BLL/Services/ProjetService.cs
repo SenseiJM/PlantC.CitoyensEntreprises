@@ -8,7 +8,8 @@ using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services
 {
-    public class ProjetService {
+    public class ProjetService
+    {
 
         private readonly ProjetRepository _projetRepository;
         private readonly TagRepository _tagRepository;
@@ -24,7 +25,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
                     throw new ArgumentException("Les champs 'Nombre d'arbre', 'Nombre d'arbres fruitiers' et 'Nombre d'hectares' sont des champs requis pour les vergers !");
                 }
 
-                if (model.NbFruits > model.NbArbres) {
+                if (model.NbFruits > model.NbArbres)
+                {
                     throw new ArgumentException("Nombre d'arbres fruitiers trop important !");
                 }
 

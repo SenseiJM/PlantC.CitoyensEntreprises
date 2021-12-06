@@ -2,7 +2,6 @@
 using PlantC.CitoyensEntreprises.API.DTO.Marqueurs;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
-using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.API.Mappers {
     static class ParticipantMapper

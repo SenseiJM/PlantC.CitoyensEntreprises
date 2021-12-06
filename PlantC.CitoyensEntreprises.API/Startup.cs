@@ -8,10 +8,6 @@ using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ToolBox.Security.Configuration;
 using ToolBox.Security.DependencyInjection.Extensions;
 
@@ -33,6 +29,22 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlantC.CitoyensEntreprises.API", Version = "v1" });
+                OpenApiSecurityScheme securitySchema = new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+                c.AddSecurityDefinition("Bearer", securitySchema);
+                var securityRequirement = new OpenApiSecurityRequirement();
+                securityRequirement.Add(securitySchema, new[] { "Bearer" });
+                c.AddSecurityRequirement(securityRequirement);
             });
             NpgsqlConnection.GlobalTypeMapper.MapEnum<Fonction>("fonction");
             services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("MaConnection")));
@@ -49,6 +61,7 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<UserService>();
             services.AddScoped<MarqueursService>();
             services.AddScoped<LocalisationService>();
+            services.AddScoped<TacheService>();
             #endregion
 
 
@@ -58,7 +71,15 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<ProjetRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<TagRepository>();
+            services.AddScoped<TacheRepository>();
             #endregion
+
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
