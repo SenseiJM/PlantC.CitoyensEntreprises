@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToolBox.Security.Configuration
+﻿namespace ToolBox.Security.Configuration
 {
     public class JwtConfiguration
     {
@@ -15,7 +9,7 @@ namespace ToolBox.Security.Configuration
         public bool ValidateIssuer { get; set; }
         public bool ValidateAudience { get; set; }
         public bool ValidateLifetime { get; set; }
-        public GoogleAuthSettings GoogleAuthSettings {  get; set; }
+        public GoogleAuthSettings GoogleAuthSettings { get; set; }
     }
     public class GoogleAuthSettings
     {

@@ -1,4 +1,6 @@
-﻿using System;
+using PlantC.CitoyensEntreprise.DAL.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.BLL.Models {
     public class ProjetModel {
@@ -12,10 +14,12 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public int? NbArbres { get; set; }
         public int? NbFruits { get; set; }
         public int? Metres { get; set; }
-        public double? Hectares { get; set; }
-        public double TonnesCO2 { get; set; }
-        public double HeuresTravail { get; set; }
-        public double CoutDuProjet { get; set; }
+        public IEnumerable<Tag> ListeTags { get; set; }
+        public decimal? Hectares { get; set; }
+        public decimal TonnesCO2 { get; set; }
+        public decimal HeuresTravail { get; set; }
+        public decimal CoutDuProjet { get; set; }
+        public decimal Contribution { get; set; }
         public DateTime DateCreation { get; set; }
 
     }

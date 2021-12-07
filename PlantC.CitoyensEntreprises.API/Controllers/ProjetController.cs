@@ -4,17 +4,19 @@ using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using System.Linq;
 
-namespace PlantC.CitoyensEntreprises.API.Controllers {
+namespace PlantC.CitoyensEntreprises.API.Controllers
+{
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjetController : ControllerBase {
+    public class ProjetController : ControllerBase
+    {
 
         private readonly ProjetService _projetService;
 
-        public ProjetController(ProjetService projetService) {
+        public ProjetController(ProjetService projetService)
+        {
             _projetService = projetService;
         }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(int id) {
             _projetService.DeleteProjet(id);
@@ -36,10 +38,14 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Create(ProjetAddDTO dto) {
-            try {
+        public IActionResult Create(ProjetAddDTO dto)
+        {
+            try
+            {
                 return Ok(_projetService.Create(dto.ToModel()));
-            } catch (System.ArgumentException e) {
+            }
+            catch (System.ArgumentException e)
+            {
                 return BadRequest(e.Message);
             }
         }

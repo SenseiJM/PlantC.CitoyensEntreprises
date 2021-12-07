@@ -4,12 +4,15 @@ using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using System;
 using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprise.DAL.Repositories {
-    public class ProjetRepository {
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
+{
+    public class ProjetRepository
+    {
 
         private NpgsqlConnection oConn;
 
-        public ProjetRepository(NpgsqlConnection oConn) {
+        public ProjetRepository(NpgsqlConnection oConn)
+        {
             this.oConn = oConn;
         }
 
@@ -73,7 +76,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 }
             } catch (Exception e) {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -142,7 +147,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 }
             } catch (Exception e) {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }
@@ -260,36 +267,45 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
         /// </summary>
         /// <param name="id">ID to be searched</param>
         /// <returns>Returns corresponding Projet Entity</returns>
-        public Projet GetByID(int id) {
-            try {
+        public Projet GetByID(int id)
+        {
+            try
+            {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "SELECT * FROM Projet WHERE Id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 Projet p = null;
-                if (reader.Read()) {
-                    p = new Projet {
-                        CoutDuProjet = (double)reader["CoutDuProjet"],
-                        HeuresTravail = (double)reader["HeuresTravail"],
-                        Id = (int)reader["Id"],
-                        IDLocalisation = (int)reader["IDLocalisation"],
-                        Infrastructure = (string)reader["Infrastructure"],
-                        Reference = (string)reader["Reference"],
-                        TonnesCO2 = (double)reader["TonnesCO2"],
-                        NbArbres = (int)reader["NbArbres"],
-                        NbFruits = (int)reader["NbFruits"],
-                        Metres = (int)reader["Metres"],
-                        Hectares = (double)reader["Hectares"],
-                        Contribution = (double)reader["Contribution"]
+                if (reader.Read())
+                {
+                    p = new Projet
+                    {
+                        Reference = reader["reference"].ToString(),
+                        Infrastructure = reader["infrastructure"].ToString(),
+                        Hectares = reader["hectare"] as decimal?,
+                        Id = (int)reader["id"],
+                        Metres = reader["metre"] as int?,
+                        NbArbres = reader["nb_arbre"] as int?,
+                        NbFruits = reader["nb_fruits"] as int?,
+                        IDLocalisation = (int)reader["id_localisation"],
+                        TonnesCO2 = (decimal)reader["tonnes_co2"],
+                        HeuresTravail = (decimal)reader["heures_travail"],
+                        CoutDuProjet = (decimal)reader["cout_du_projet"]
                     };
                     return p;
-                } else {
+                }
+                else
+                {
                     return null;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw;
-            } finally {
+            }
+            finally
+            {
                 oConn.Close();
             }
         }

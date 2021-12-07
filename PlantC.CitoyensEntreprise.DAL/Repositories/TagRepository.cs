@@ -1,0 +1,117 @@
+﻿using Npgsql;
+using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PlantC.CitoyensEntreprise.DAL.Repositories
+{
+     public class TagRepository
+    {
+        private NpgsqlConnection oConn;
+
+        public TagRepository(NpgsqlConnection oConn)
+        {
+            this.oConn = oConn;
+        }
+
+        public IEnumerable<Tag> GetTagByProjet(int idprojet)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT tag_id,nom FROM projet_tag pt " +
+                    "JOIN tag t ON pt.id_tag = t.id " +
+                    "WHERE projet_id = @p1";
+                cmd.Parameters.AddWithValue("p1", idprojet);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Tag> result = new List<Tag>();
+                while (reader.Read())
+                {
+                    result.Add( new Tag
+                    {
+                        Id = (int)reader["id_tag"],
+                        Nom = (string)reader["nom"]
+                    });
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw; //return e.message?
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
+
+        public IEnumerable<Marqueurs> GetMarqueursByTag(List<string> tags , int? codepostal = null )
+        {
+            try
+            {
+                string whereP = "WHERE t.nom IN (";
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                //int count = 0;
+                //whereP += string.Join(",", tags.Select(x => {
+                //    cmd.Parameters.AddWithValue("p" + count, tags[count]);
+                //    return "@p" + count++;
+                //})) + ")";
+                for (int i = 0; i < tags.Count; i++)
+                {
+                    cmd.Parameters.AddWithValue("p" + i, tags[i]);
+                    if (i - 1 == tags.Count)
+                    {
+                        whereP = whereP + ("'@p" + i + "'");
+                        whereP = whereP + ")";
+                    }
+                    else
+                    {
+                        whereP = whereP + ("'@p" + i + "',");
+                    }
+                }
+                cmd.CommandText =
+                    "SELECT latitude, longitude, infrastructure, p.id" +
+                    "FROM projet p" +
+                    "JOIN localisation ON p.id_localisation = localisation.id)" +
+                    "WHERE p.id IN(" +
+                    "   SELECT pt.id_projet FROM projet_tag pt" +
+                    "   JOIN tag t ON t.id = pt.id_tag" +
+                    whereP +
+                    "AND ('@codepostal' is nuLL OR p.id IN (" +
+                    "   SELECT p.id" +
+                    "   FROM projet p" +
+                    "    JOIN localisation l on l.id = p.id_localisation" +
+                    "    WHERE code_postal LIKE '@codepostal'" +
+                    "))";
+                List<Marqueurs> result = new List<Marqueurs>();
+                cmd.Parameters.AddWithValue("codepostal", (object)codepostal ?? DBNull.Value);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new Marqueurs
+                    {
+                        Id = (int)reader["id"],
+                        Infrastructure = reader["infrastructure"].ToString(),
+                        Latitude = (double)reader["latitude"],
+                        Longitude =(double)reader["longitude"]
+                    });
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
+    }
+}

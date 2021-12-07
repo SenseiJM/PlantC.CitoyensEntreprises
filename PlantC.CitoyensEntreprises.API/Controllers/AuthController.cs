@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.API.DTO.Login;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
@@ -47,7 +48,8 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         {
             try
             {
-                int temp = _userService.Register(new ParticipantModel {
+                int temp = _userService.Register(new ParticipantModel
+                {
                     Email = register.Mail,
                     MdpContact = register.MdpContact,
                     Nom = register.Nom,

@@ -1,7 +1,9 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
 
-namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public class Participant {
+namespace PlantC.CitoyensEntreprise.DAL.Entities
+{
+    public class Participant
+    {
         public int Id { get; set; }
         public Fonction Fonction { get; set; }
         public string NomEntreprise { get; set; }

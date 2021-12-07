@@ -14,12 +14,12 @@ namespace PlantC.CitoyensEntreprises.API.Attribut {
         {
             foreach (string role in _roles)
             {
-                if (context.HttpContext.User.IsInRole(role)) 
+                if (context.HttpContext.User.IsInRole(role))
                 {
-                    return; 
+                    return;
                 }
             }
-            context.Result = new UnauthorizedResult(); 
+            context.Result = new UnauthorizedResult();
         }
     }
 }
