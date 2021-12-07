@@ -9,10 +9,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
         {
             return new Tache
             {
-                Id_localisation = model.Id_localisation,
                 Id_Participant = model.Id_Participant,
                 Id_Projet = model.Id_Projet,
-                Intitule = model.Intitule,
                 Date_Debut = model.Date_Debut,
                 Date_Fin = model.Date_Fin,
                 Type = model.Type,
@@ -27,10 +25,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 result.Add(new TacheModel
                 {
                     Id = tache.Id,
-                    Id_localisation = tache.Id_localisation,
                     Id_Participant = tache.Id_Participant,
                     Id_Projet = tache.Id_Projet,
-                    Intitule = tache.Intitule,
                     Date_Debut = tache.Date_Debut,
                     Date_Fin = tache.Date_Fin,
                     Description = tache.Description,
@@ -46,10 +42,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             return new TacheModel
             {
                 Id = model.Id,
-                Id_localisation = model.Id_localisation,
                 Id_Participant = model.Id_Participant,
                 Id_Projet = model.Id_Projet,
-                Intitule = model.Intitule,
                 Date_Debut = model.Date_Debut,
                 Date_Fin = model.Date_Fin,
                 Type = model.Type,
@@ -61,14 +55,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
             return new Tache
             {
                 Id= model.Id,
-                Id_localisation = model.Id_localisation,
                 Id_Participant = model.Id_Participant,
                 Id_Projet = model.Id_Projet,
-                Intitule = model.Intitule,
                 Date_Debut = model.Date_Debut,
                 Date_Fin = model.Date_Fin,
                 Type = model.Type,
                 Description = model.Description,
+                Est_Termine=model.Est_Termine,
             };
         }
     }

@@ -25,15 +25,13 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "INSERT INTO tache " +
-                    "(id_participant, intitule, date_debut, date_fin, id_projet, _type, id_localisation, description)" +
-                    " VALUES (@Id_Participant, @Intitule, @Date_Debut, @Date_Fin, @Id_Projet, @Type, @Id_localisation, @Description) returning id";
-                cmd.Parameters.AddWithValue("Id_Participant", t.Id_Participant);
-                cmd.Parameters.AddWithValue("Intitule", t.Intitule);
+                    "(id_participant, date_debut, date_fin, id_projet, _type, description)" +
+                    " VALUES (@Id_Participant, @Date_Debut, @Date_Fin, @Id_Projet, @Type, @Description) returning id";
+                cmd.Parameters.AddWithValue("Id_Participant", (object)t.Id_Participant?? DBNull.Value);
                 cmd.Parameters.AddWithValue("Date_Debut", (object)t.Date_Debut ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("Date_Fin", (object)t.Date_Fin ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("Id_Projet", t.Id_Projet);
                 cmd.Parameters.AddWithValue("Type", t.Type);
-                cmd.Parameters.AddWithValue("Id_localisation", t.Id_localisation);
                 cmd.Parameters.AddWithValue("Description", t.Description);
                 return (int)cmd.ExecuteScalar();
             }
@@ -65,10 +63,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     result.Add(new Tache
                     {
                         Id = (int)reader["id"],
-                        Id_localisation = (int)reader["id_localisation"],
-                        Id_Participant = (int)reader["id_participant"],
+                        Id_Participant = reader["id_participant"] as int?,
                         Id_Projet = (int)reader["id_projet"],
-                        Intitule = (string)reader["intitule"],
                         Type = (string)reader["_type"],
                         Description = (string)reader["description"],
                         Date_Debut = reader["date_debut"] as DateTime?,
@@ -100,19 +96,25 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "UPDATE tache" +
-                                  " SET id_localisation = " + t.Id_localisation +
-                                  " ,id_participant = " + t.Id_Participant +
-                                  " ,id_projet = " +t.Id_Projet+
-                                  " ,intitule = " +"'"+t.Intitule+"'"+
-                                  " ,date_debut = " + "'" + t.Date_Debut.Value.ToString("yyyy-MM-dd") + "'" +
-                                  " ,date_fin = " + "'" + t.Date_Fin.Value.ToString("yyyy-MM-dd") + "'" +
-                                  " ,description = " + "'" + t.Description + "'" +
-                                  " ,est_assigne = " +t.Est_Assigne +
-                                  " ,est_termine = " +t.Est_Termine +
-                                  " ,_type = " + "'" + t.Type+ "'" +
+                cmd.CommandText = "UPDATE tache SET" +
+                                  "  id_participant = @p1" +
+                                  " ,id_projet = @p2"+
+                                  " ,date_debut = @p3" +
+                                  " ,date_fin = @p4"+
+                                  " ,description =@p5 "+
+                                  " ,est_assigne = @p6" +
+                                  " ,est_termine = @p7" +
+                                  " ,_type = @p8" +
                                   " WHERE id = @Id "; 
                 cmd.Parameters.AddWithValue("Id", t.Id);
+                cmd.Parameters.AddWithValue("@p1", (object)t.Id_Participant?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@p2", t.Id_Projet);
+                cmd.Parameters.AddWithValue("@p3", t.Date_Debut);
+                cmd.Parameters.AddWithValue("@p4", t.Date_Fin);
+                cmd.Parameters.AddWithValue("@p5", t.Description);
+                cmd.Parameters.AddWithValue("@p6", t.Est_Assigne);
+                cmd.Parameters.AddWithValue("@p7", t.Est_Termine);
+                cmd.Parameters.AddWithValue("@p8", t.Type);
 
                 return cmd.ExecuteNonQuery() != 0;
             }
@@ -171,10 +173,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     result = (new Tache
                     {
                         Id = (int)reader["id"],
-                        Id_localisation = (int)reader["id_localisation"],
-                        Id_Participant = (int)reader["id_participant"],
+                        Id_Participant = reader["id_participant"] as int?,
                         Id_Projet = (int)reader["id_projet"],
-                        Intitule = (string)reader["intitule"],
                         Type = (string)reader["_type"],
                         Description = (string)reader["description"],
                         Date_Debut = reader["date_debut"] as DateTime?,
@@ -219,10 +219,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     result.Add(new Tache
                     {
                         Id = (int)reader["id"],
-                        Id_localisation = (int)reader["id_localisation"],
-                        Id_Participant = (int)reader["id_participant"],
+                        Id_Participant = reader["id_participant"] as int?,
                         Id_Projet = (int)reader["id_projet"],
-                        Intitule = (string)reader["intitule"],
                         Type = (string)reader["_type"],
                         Description = (string)reader["description"],
                         Date_Debut = reader["date_debut"] as DateTime?,
