@@ -66,7 +66,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Id = model.Id,
                 MontantRecolte = model.MontantRecolte,
                 NomLocalite = model.NomLocalite,
-                Titre = model.Titre
+                Titre = model.Titre,
+                Infrastructure = model.Infrastructure
             };
         }
 

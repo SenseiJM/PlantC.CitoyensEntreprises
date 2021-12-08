@@ -8,6 +8,7 @@
         public string NomLocalite { get; set; }
         public decimal CoutDuProjet { get; set; }
         public decimal MontantRecolte { get; set; }
+        public string Infrastructure { get; set; }
 
     }
 }

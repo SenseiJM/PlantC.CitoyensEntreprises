@@ -68,7 +68,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Id = (int)reader["id_projet"],
                         MontantRecolte = (decimal)reader["tot"],
                         NomLocalite = (string)reader["localite"],
-                        Titre = (string)reader["titre"]
+                        Titre = (string)reader["titre"],
+                        Infrastructure = (string)reader["infrastructure"]
                     };
                     return p;
                 } else {
