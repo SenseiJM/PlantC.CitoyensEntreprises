@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.BLL.Models {
     public class ProjetDetailsModel {
@@ -10,5 +11,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public decimal CoutDuProjet { get; set; }
         public decimal SommeRecoltee { get; set; }
         public decimal TonnesCO2 { get; set; }
+        public IEnumerable<Tag> ListeTags { get; set; }
     }
 }
