@@ -41,7 +41,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 }
                 return result;
             } catch (Exception e) {
-                throw; //'Unable to cast object of type 'System.DBNull' to type 'System.Decimal'.'
+                throw;
             } finally {
                 oConn.Close();
             }

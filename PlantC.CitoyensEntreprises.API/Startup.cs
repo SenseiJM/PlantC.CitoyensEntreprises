@@ -47,7 +47,7 @@ namespace PlantC.CitoyensEntreprises.API {
                 c.AddSecurityRequirement(securityRequirement);
             });
             NpgsqlConnection.GlobalTypeMapper.MapEnum<Fonction>("fonction");
-            services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("MaConnection")));
+            services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("Default")));
 
             #region JWT
             services.AddJwt(Configuration.GetSection("JWT").Get<JwtConfiguration>());
@@ -89,6 +89,8 @@ namespace PlantC.CitoyensEntreprises.API {
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors();
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlantC.CitoyensEntreprises.API v1"));
 

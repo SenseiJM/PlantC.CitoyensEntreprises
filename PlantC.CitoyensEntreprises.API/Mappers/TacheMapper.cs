@@ -10,9 +10,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             return new TacheModel
             {
                 Id_Participant = dto.Id_Participant,
-                Id_localisation = dto.Id_localisation,
                 Id_Projet = dto.Id_Projet,
-                Intitule = dto.Intitule,
                 Date_Debut = dto.Date_Debut,
                 Date_Fin = dto.Date_Fin,
                 Type = dto.Type,
@@ -25,13 +23,12 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             {
                 Id = dto.Id,
                 Id_Participant = dto.Id_Participant,
-                Id_localisation = dto.Id_localisation,
                 Id_Projet = dto.Id_Projet,
-                Intitule = dto.Intitule,
                 Date_Debut = dto.Date_Debut,
                 Date_Fin = dto.Date_Fin,
                 Type = dto.Type,
                 Description = dto.Description,
+                Est_Termine = dto.Est_Termine,
             };
         }
         public static IEnumerable<TacheIndexDTO> ToDTOIndexList(this IEnumerable<TacheModel> taches)
@@ -42,10 +39,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 result.Add(new TacheIndexDTO
                 {
                     Id = tache.Id,
-                    Id_localisation = tache.Id_localisation,
                     Id_Participant = tache.Id_Participant,
                     Id_Projet = tache.Id_Projet,
-                    Intitule = tache.Intitule,
                     Date_Debut = tache.Date_Debut,
                     Date_Fin = tache.Date_Fin,
                     Description = tache.Description,
@@ -62,9 +57,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
             {
                 Id = model.Id,
                 Id_Participant = model.Id_Participant,
-                Id_localisation = model.Id_localisation,
                 Id_Projet = model.Id_Projet,
-                Intitule = model.Intitule,
                 Date_Debut = model.Date_Debut,
                 Date_Fin = model.Date_Fin,
                 Type = model.Type,
