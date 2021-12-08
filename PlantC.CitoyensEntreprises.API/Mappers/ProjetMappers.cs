@@ -1,4 +1,5 @@
-﻿using PlantC.CitoyensEntreprises.API.DTO.Projet;
+﻿using PlantC.CitoyensEntreprises.API.DTO.Localisation;
+using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.BLL.Models;
 
 namespace PlantC.CitoyensEntreprises.API.Mappers
@@ -22,7 +23,11 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 NbFruits = model.NbFruits,
                 NbArbres = model.NbArbres,
                 Contribution = model.Contribution,
-                ListeTags = model.ListeTags
+                ListeTags = model.ListeTags,
+                Localisation = model.Localisation == null ? null : new LocalisationDTO {
+                    CodePostal = model?.Localisation.CodePostal,
+                    NomLocalite = model?.Localisation.NomLocalite,
+                }
             };
         }
 

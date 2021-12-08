@@ -1,4 +1,5 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprises.API.DTO.Localisation;
 using System.Collections.Generic;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
@@ -16,8 +17,8 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet {
         public decimal HeuresTravail { get; set; }
         public decimal CoutDuProjet { get; set; }
         public decimal Contribution { get; set; }
-
         public IEnumerable<Tag> ListeTags { get; set; }
+        public LocalisationDTO Localisation { get; set; }
 
     }
 }

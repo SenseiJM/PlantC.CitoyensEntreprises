@@ -1,5 +1,7 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Entities.Views;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -49,19 +51,18 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
         /// Recover the complete list of Task 
         /// </summary>
         /// <returns>IEnumerable of Task Entity</returns>
-        public IEnumerable<Tache> GetAll()
+        public IEnumerable<TacheDetails> GetAll()
         {
             try
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM tache";
+                cmd.CommandText = "SELECT * FROM tache_details";
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-                List<Tache> result = new List<Tache>();
+                List<TacheDetails> result = new List<TacheDetails>();
                 while (reader.Read())
                 {
-                    result.Add(new Tache
-                    {
+                    result.Add(new TacheDetails {
                         Id = (int)reader["id"],
                         Id_Participant = reader["id_participant"] as int?,
                         Id_Projet = (int)reader["id_projet"],
@@ -70,8 +71,16 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Date_Debut = reader["date_debut"] as DateTime?,
                         Date_Fin = reader["date_fin"] as DateTime?,
                         Est_Assigne = (bool)reader["est_assigne"],
-                        Est_Termine = (bool)reader["est_termine"]
-                    });
+                        Est_Termine = (bool)reader["est_termine"],
+                        CodePostal = (string)reader["code_postal"],
+                        Email = (string)reader["mail_participant"],
+                        Fonction = (Fonction)reader["fonction_participant"],
+                        Nom = (string)reader["nom_participant"],
+                        Prenom = (string)reader["prenom_participant"],
+                        NomLocalite = (string)reader["localite_projet"],
+                        Titre = (string)reader["titre_projet"],
+                        Reference = (string)reader["reference_projet"]
+                    }); 
                 }
                 return result;
             }

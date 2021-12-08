@@ -21,6 +21,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public decimal CoutDuProjet { get; set; }
         public decimal Contribution { get; set; }
         public DateTime DateCreation { get; set; }
-
+        public LocalisationModel Localisation { get; set; }
     }
 }

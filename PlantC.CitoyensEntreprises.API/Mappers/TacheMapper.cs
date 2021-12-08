@@ -47,6 +47,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                     Type = tache.Type,
                     Est_Assigne = tache.Est_Assigne,
                     Est_Termine = tache.Est_Termine,
+                    Projet = tache.Projet.ToIndexDTO(),
+                    Participant = tache.Participant?.ToIndexDTO(),
                 });
             }
             return result;

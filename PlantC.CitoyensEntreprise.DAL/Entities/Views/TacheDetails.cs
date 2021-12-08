@@ -1,13 +1,12 @@
-﻿using System;
+﻿using PlantC.CitoyensEntreprise.DAL.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Models
-{
-    public class TacheModel
-    {
+namespace PlantC.CitoyensEntreprise.DAL.Entities.Views {
+    public class TacheDetails {
         public int Id { get; set; }
         public int? Id_Participant { get; set; }
         public DateTime? Date_Debut { get; set; }
@@ -17,7 +16,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Models
         public string Description { get; set; }
         public bool Est_Assigne { get; set; }
         public bool Est_Termine { get; set; }
-        public ProjetModel Projet { get; set; }
-        public ParticipantModel Participant { get; set; }
+        public string NomLocalite { get; set; }
+        public string CodePostal { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string Email { get; set; }
+        public Fonction Fonction { get; set; }
+        public string Reference { get; set; }
+        public string Titre { get; set; }
     }
 }
