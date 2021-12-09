@@ -6,8 +6,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities
     {
         public int Id { get; set; }
         public Fonction Fonction { get; set; }
-        public string NomEntreprise { get; set; }
-        public string BCE { get; set; }
+        public string? NomEntreprise { get; set; }
+        public string? BCE { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
@@ -16,6 +16,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities
         public string Salt { get; set; }
         public string MdpClient { get; set; }
         public string UserLevel { get; set; }
+        public Adresse? Adresse { get; set; }
 
     }
 }

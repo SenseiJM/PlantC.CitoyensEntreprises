@@ -14,7 +14,6 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Login {
         [Required]
         [EmailAddress]
         public string Mail { get; set; }
-
         public string Telephone { get; set; }
 
         public int? IdAdresse { get; set; }

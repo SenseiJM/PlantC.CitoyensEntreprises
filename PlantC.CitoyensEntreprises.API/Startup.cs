@@ -10,6 +10,7 @@ using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using ToolBox.Security.Configuration;
 using ToolBox.Security.DependencyInjection.Extensions;
+using ToolBox.Security.Middlewares;
 
 namespace PlantC.CitoyensEntreprises.API {
     public class Startup
@@ -91,6 +92,8 @@ namespace PlantC.CitoyensEntreprises.API {
             }
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlantC.CitoyensEntreprises.API v1"));
+
+            app.UseMiddleware<JwtHandlerMiddleware>();
 
             app.UseRouting();
 

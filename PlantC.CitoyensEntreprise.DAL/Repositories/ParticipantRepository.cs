@@ -28,15 +28,15 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "INSERT INTO participant(fonction, nom_entreprise, bce, nom, prenom, mail, telephone, id_adresse, salt, mdp_client) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
                 cmd.Parameters.AddWithValue("p1", p.Fonction);
-                cmd.Parameters.AddWithValue("p2", p.NomEntreprise);
-                cmd.Parameters.AddWithValue("p3", p.BCE);
+                cmd.Parameters.AddWithValue("p2", (object)p.NomEntreprise??DBNull.Value);
+                cmd.Parameters.AddWithValue("p3", (object)p.BCE ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("p4", p.Nom);
                 cmd.Parameters.AddWithValue("p5", p.Prenom);
                 cmd.Parameters.AddWithValue("p6", p.Email);
                 cmd.Parameters.AddWithValue("p7", p.Telephone);
                 cmd.Parameters.AddWithValue("p8", (object)p.IdAdresse??DBNull.Value);
-                cmd.Parameters.AddWithValue("p9", "test");
-                cmd.Parameters.AddWithValue("p10", "test");
+                cmd.Parameters.AddWithValue("p9", p.Salt);
+                cmd.Parameters.AddWithValue("p10", p.MdpClient);
                 return (int)cmd.ExecuteScalar();
             }
             catch (Exception e)

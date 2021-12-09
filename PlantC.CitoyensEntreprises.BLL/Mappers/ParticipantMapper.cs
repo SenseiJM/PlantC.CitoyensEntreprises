@@ -18,7 +18,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Telephone = model.Telephone,
                 Prenom = model.Prenom,
                 Nom = model.Nom,
-                Email = model.Email
+                Email = model.Email,
+                Salt = model.Salt,
+                MdpClient = model.MdpContact,
+                UserLevel = model.Userlevel
             };
         }
 
