@@ -76,7 +76,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Email = (string)reader["Email"],
                         Nom = (string)reader["Nom"],
                         Prenom = (string)reader["Prenom"],
-                        Telephone = (string)reader["Telephone"]
+                        Telephone = (string)reader["Telephone"],
+                        EstVerifie = (bool)reader["est_verifie"]
                     };
                     return p;
                 }
@@ -145,7 +146,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Prenom = (string)reader["prenom"],
                         Nom = (string)reader["nom"],
                         Email = (string)reader["mail"],
-                        IdAdresse = reader["id_adresse"] as int?
+                        IdAdresse = reader["id_adresse"] as int?,
+                        EstVerifie = (bool)reader["est_verifie"]
                     });
                 }
                 return result;

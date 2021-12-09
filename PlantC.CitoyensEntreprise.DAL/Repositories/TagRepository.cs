@@ -24,9 +24,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "SELECT tag_id,nom FROM projet_tag pt " +
+                cmd.CommandText = "SELECT id_tag,nom FROM projet_tag pt " +
                     "JOIN tag t ON pt.id_tag = t.id " +
-                    "WHERE projet_id = @p1";
+                    "WHERE id_projet = @p1";
                 cmd.Parameters.AddWithValue("p1", idprojet);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
                 List<Tag> result = new List<Tag>();
