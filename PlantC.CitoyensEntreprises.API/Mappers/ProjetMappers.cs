@@ -1,11 +1,38 @@
-﻿using PlantC.CitoyensEntreprises.API.DTO.Projet;
+﻿using PlantC.CitoyensEntreprises.API.DTO.Localisation;
+using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.BLL.Models;
 
 namespace PlantC.CitoyensEntreprises.API.Mappers
 {
     static class ProjetMappers
     {
-
+        public static ProjetIndexDTO ToIndexDTO(this ProjetModel model)
+        {
+            return new ProjetIndexDTO
+            {
+                CoutDuProjet = model.CoutDuProjet,
+                HeuresTravail = model.HeuresTravail,
+                Id = model.Id,
+                IDLocalisation = model.IDLocalisation,
+                Infrastructure = model.Infrastructure,
+                Reference = model.Reference,
+                TonnesCO2 = model.TonnesCO2,
+                Hectares = model.Hectares,
+                Metres = model.Metres,
+                NbFruits = model.NbFruits,
+                NbArbres = model.NbArbres,
+                Contribution = model.Contribution,
+                ListeTags = model.ListeTags,
+                Localisation = model.Localisation == null ? null : new LocalisationDTO {
+                    AdressLine1 = model.Localisation.AdressLine1,
+                    AdressLine2 = model.Localisation.AdressLine2,
+                    Number = model.Localisation.Number,
+                    ZipCode = model.Localisation.ZipCode,
+                    City = model.Localisation.City,
+                    Country = model.Localisation.Country,
+                }
+            };
+        }
         public static ProjetModel ToModel(this ProjetAddDTO dto)
         {
             return new ProjetModel

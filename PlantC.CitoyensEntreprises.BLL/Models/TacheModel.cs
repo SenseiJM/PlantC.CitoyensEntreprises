@@ -17,5 +17,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Models
         public string Description { get; set; }
         public bool Est_Assigne { get; set; }
         public bool Est_Termine { get; set; }
+        public ProjetModel Projet { get; set; }
+        public ParticipantModel Participant { get; set; }
     }
 }
