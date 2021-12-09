@@ -2,8 +2,8 @@
 {
     public enum Fonction
     {
-        Citoyen,
-        Entreprise,
-        Beneficiaire
+        Citoyen = 0,
+        Entreprise = 1,
+        Beneficiaire = 2,
     }
 }
