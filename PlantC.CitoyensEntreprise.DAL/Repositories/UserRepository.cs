@@ -58,5 +58,21 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 oConn.Close();
             }
         }
+
+        public bool ValidateMail(string email) {
+            try {
+
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "UPDATE participant SET est_verifie = true WHERE mail = @p1";
+                cmd.Parameters.AddWithValue("p1", email);
+                return cmd.ExecuteNonQuery() == 1;
+
+            } catch (Exception) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
     }
 }
