@@ -25,8 +25,12 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Contribution = model.Contribution,
                 ListeTags = model.ListeTags,
                 Localisation = model.Localisation == null ? null : new LocalisationDTO {
-                    CodePostal = model?.Localisation.CodePostal,
-                    NomLocalite = model?.Localisation.NomLocalite,
+                    AdressLine1 = model.Localisation.AdressLine1,
+                    AdressLine2 = model.Localisation.AdressLine2,
+                    Number = model.Localisation.Number,
+                    ZipCode = model.Localisation.ZipCode,
+                    City = model.Localisation.City,
+                    Country = model.Localisation.Country,
                 }
             };
         }

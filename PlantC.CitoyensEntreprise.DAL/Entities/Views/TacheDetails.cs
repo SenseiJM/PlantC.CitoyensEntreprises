@@ -1,9 +1,5 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprise.DAL.Entities.Views {
     public class TacheDetails {
@@ -16,13 +12,17 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities.Views {
         public string Description { get; set; }
         public bool Est_Assigne { get; set; }
         public bool Est_Termine { get; set; }
-        public string NomLocalite { get; set; }
-        public string CodePostal { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
         public Fonction Fonction { get; set; }
         public string Reference { get; set; }
         public string Titre { get; set; }
+        public string AdressLine1 { get; set; }
+        public string AdressLine2 { get; set; }
+        public string Number { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
     }
 }

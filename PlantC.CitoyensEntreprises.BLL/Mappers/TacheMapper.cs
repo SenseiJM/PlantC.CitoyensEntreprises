@@ -44,15 +44,19 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                         Titre = tache.Titre,
                         Reference = tache.Reference,
                         Localisation = new LocalisationModel {
-                            CodePostal = tache.CodePostal,
-                            NomLocalite = tache.NomLocalite,
+                            AdressLine1 = tache.AdressLine1,
+                            AdressLine2 = tache.AdressLine2,
+                            Number = tache.Number,
+                            ZipCode = tache.ZipCode,
+                            City = tache.City,
+                            Country = tache.Country,
                         }
                     }
                 });
             }
             return result;
         }
-        public static TacheModel ToBLLIndexId(this Tache model)
+        public static TacheModel ToBLLIndexId(this TacheDetails model)
         {
             return new TacheModel
             {
@@ -61,8 +65,28 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers {
                 Id_Projet = model.Id_Projet,
                 Date_Debut = model.Date_Debut,
                 Date_Fin = model.Date_Fin,
-                Type = model.Type,
                 Description = model.Description,
+                Type = model.Type,
+                Est_Assigne = model.Est_Assigne,
+                Est_Termine = model.Est_Termine,
+                Participant = model.Id_Participant == null ? null : new ParticipantModel {
+                    Nom = model.Nom,
+                    Prenom = model.Prenom,
+                    Fonction = model.Fonction,
+                    Email = model.Email,
+                },
+                Projet = new ProjetModel {
+                    Titre = model.Titre,
+                    Reference = model.Reference,
+                    Localisation = new LocalisationModel {
+                        AdressLine1 = model.AdressLine1,
+                        AdressLine2 = model.AdressLine2,
+                        Number = model.Number,
+                        ZipCode = model.ZipCode,
+                        City = model.City,
+                        Country = model.Country,
+                    }
+                }
             };
         }
         public static Tache ToDALPut(this TacheModel model)

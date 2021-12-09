@@ -48,7 +48,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                     Est_Assigne = tache.Est_Assigne,
                     Est_Termine = tache.Est_Termine,
                     Projet = tache.Projet.ToIndexDTO(),
-                    Participant = tache.Participant?.ToIndexDTO(),
+                    Participant = tache.Participant?.ToIndexDTO()
                 });
             }
             return result;
@@ -64,6 +64,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 Date_Fin = model.Date_Fin,
                 Type = model.Type,
                 Description = model.Description,
+                Projet = model.Projet.ToIndexDTO(),
+                Participant = model.Participant?.ToIndexDTO()
             };
         }
     }
