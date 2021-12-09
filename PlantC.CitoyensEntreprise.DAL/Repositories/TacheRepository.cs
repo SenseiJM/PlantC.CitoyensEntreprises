@@ -81,7 +81,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         AdressLine1 = reader["adresse_1"] as string,
                         AdressLine2 = reader["adresse_2"] as string,
                         City = reader["localite"] as string,
-                        Number = reader["num"] as string,
+                        Number = reader["numero"] as string,
                         ZipCode = reader["code_postal"] as string,
                         Country = reader["pays"] as string
                     }); 
@@ -180,11 +180,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.CommandText = "SELECT * FROM tache_details WHERE Id = @id";
                 cmd.Parameters.AddWithValue("id", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-                TacheDetails result = new TacheDetails();
-                if (reader.Read())
-                {
-                    result = (new TacheDetails
-                    {
+                if (reader.Read()) {
+                    return new TacheDetails {
                         Id = (int)reader["id"],
                         Id_Participant = reader["id_participant"] as int?,
                         Id_Projet = (int)reader["id_projet"],
@@ -203,24 +200,19 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         AdressLine1 = reader["adresse_1"] as string,
                         AdressLine2 = reader["adresse_2"] as string,
                         City = reader["localite"] as string,
-                        Number = reader["num"] as string,
+                        Number = reader["numero"] as string,
                         ZipCode = reader["code_postal"] as string,
                         Country = reader["pays"] as string
-                    });
-
-                    return result;
+                    };
                 }
-                else
-                {
+                else {
                     return null;
                 }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 throw;
             }
-            finally
-            {
+            finally {
                 oConn.Close();
             }
         }
@@ -238,7 +230,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.CommandText = "SELECT * FROM tache_details WHERE id_projet = @id";
                 cmd.Parameters.AddWithValue("id", id);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
-                List<TacheDetails> result = new List<TacheDetails>();
+                List<TacheDetails> result = new();
                 while (reader.Read())
                 {
                     result.Add(new TacheDetails {
@@ -260,7 +252,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         AdressLine1 = reader["adresse_1"] as string,
                         AdressLine2 = reader["adresse_2"] as string,
                         City = reader["localite"] as string,
-                        Number = reader["num"] as string,
+                        Number = reader["numero"] as string,
                         ZipCode = reader["code_postal"] as string,
                         Country = reader["pays"] as string
                     });
@@ -304,7 +296,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         AdressLine1 = reader["adresse_1"] as string,
                         AdressLine2 = reader["adresse_2"] as string,
                         City = reader["localite"] as string,
-                        Number = reader["num"] as string,
+                        Number = reader["numero"] as string,
                         ZipCode = reader["code_postal"] as string,
                         Country = reader["pays"] as string
                     });

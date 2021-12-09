@@ -22,6 +22,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         }
         public TacheModel GetById(int id)
         {
+            if (_tacheRepository.GetByID(id)==null){
+                return null;
+            }
             return _tacheRepository.GetByID(id).ToBLLIndexId();
         }
         public IEnumerable<TacheModel> GetByProjectId(int id)

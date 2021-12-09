@@ -4,6 +4,8 @@
     {
         Citoyen,
         Entreprise,
-        Beneficiaire
+        Beneficiaire,
+        Agriculteur,
+        Planteur
     }
 }
