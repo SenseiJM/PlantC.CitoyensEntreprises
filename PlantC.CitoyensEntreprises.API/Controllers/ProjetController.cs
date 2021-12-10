@@ -25,11 +25,10 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
 
         //Not used anymore
         //
-        //[HttpGet("byID/{id}")]
-        //public IActionResult GetByID(int id) {
-        //    ProjetIndexDTO dto = _projetService.GetByID(id).ToIndexDTO();
-        //    return Ok(dto);
-        //}
+        [HttpGet("TestKhun")]
+        public IActionResult TestKhun() {
+            return Ok(42);
+        }
 
         [HttpPut("{id}")]
         public IActionResult UpdateProjet(int id, ProjetUpdateRequestDTO dto) {
