@@ -65,5 +65,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 return Problem(ex.Message);
             }
         }
+
+        [HttpGet("Validate")]
+        public IActionResult Validate([FromQuery]string token) {
+            bool result = _userService.Validate(token);
+            if(result) { return Ok(); }
+            return BadRequest();
+        }
     }
 }

@@ -18,7 +18,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Telephone = model.Telephone,
                 Prenom = model.Prenom,
                 Nom = model.Nom,
-                Email = model.Email
+                Email = model.Email,
+                EstVerifie = model.EstVerifie
             };
         }
 
@@ -34,7 +35,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Nom = p.Nom,
                 Prenom = p.Prenom,
                 Telephone = p.Telephone,
-                IdAdresse = p.IdAdresse
+                IdAdresse = p.IdAdresse,
+                EstVerifie = p.EstVerifie
             };
         }
 

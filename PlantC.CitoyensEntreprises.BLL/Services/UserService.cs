@@ -3,6 +3,9 @@ using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using System;
 using System.Transactions;
+using System.Security.Claims;
+using ToolBox.Security.Services;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class UserService
@@ -11,13 +14,15 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         private readonly HashService _hashService;
         private readonly ParticipantService _contactService;
         private readonly MailService _mailService;
+        private readonly JwtService _jwtService;
 
-        public UserService(UserRepository userRepository, HashService hashService, ParticipantService contactService, MailService mailService)
+        public UserService(UserRepository userRepository, HashService hashService, ParticipantService contactService, MailService mailService, JwtService jwt)
         {
             _userRepository = userRepository;
             _hashService = hashService;
             _contactService = contactService;
             _mailService = mailService;
+            _jwtService = jwt;
         }
 
         public int Register(ParticipantModel contact)
@@ -62,6 +67,16 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
                 };
             }
             return null;
+        }
+
+        public bool Validate(string token) {
+
+            _jwtService.TryGetClaims(token, out ClaimsPrincipal claims);
+            if (claims != null) {
+                string email = claims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                return _userRepository.ValidateMail(email);
+            }
+            return false;
         }
     }
 }

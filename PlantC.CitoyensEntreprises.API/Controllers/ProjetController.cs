@@ -23,13 +23,6 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
             return Ok(new { message = "Project deleted successfully" });
         }
 
-        //Not used anymore
-        //
-        [HttpGet("TestKhun")]
-        public IActionResult TestKhun() {
-            return Ok(42);
-        }
-
         [HttpPut("{id}")]
         public IActionResult UpdateProjet(int id, ProjetUpdateRequestDTO dto) {
             _projetService.UpdateProjet(id, dto.UpdateRequestToModel());

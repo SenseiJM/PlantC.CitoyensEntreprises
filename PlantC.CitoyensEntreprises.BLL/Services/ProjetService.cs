@@ -53,12 +53,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             return _projetRepository.DeleteProjet(id);
         }
 
-        public ProjetModel GetByID(int id) {
-            ProjetModel temp = _projetRepository.GetByID(id).ToSimpleModel();
-            temp.ListeTags = _tagRepository.GetTagByProjet(id);
-            return temp;
-        }
-
         public bool UpdateProjet(int id, ProjetModel model)
         {
             return _projetRepository.Update(id, model.ToEntity());
@@ -73,7 +67,10 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         }
 
         public ProjetDetailsModel GetDetailsByID(int id) {
-            return _projetRepository.GetDetailsByID(id).ToSimpleModel();
+            ProjetDetailsModel temp =_projetRepository.GetDetailsByID(id).ToSimpleModel();
+            temp.ListeTags = _tagRepository.GetTagByProjet(id);
+            return temp;
+            
         }
 
         public IEnumerable<MarqueurModel> GetAllMarqueurs() {

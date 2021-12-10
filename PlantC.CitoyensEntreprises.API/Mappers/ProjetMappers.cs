@@ -6,26 +6,6 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
     static class ProjetMappers
     {
 
-        public static ProjetIndexDTO ToIndexDTO(this ProjetModel model)
-        {
-            return new ProjetIndexDTO
-            {
-                CoutDuProjet = model.CoutDuProjet,
-                HeuresTravail = model.HeuresTravail,
-                Id = model.Id,
-                IDLocalisation = model.IDLocalisation,
-                Infrastructure = model.Infrastructure,
-                Reference = model.Reference,
-                TonnesCO2 = model.TonnesCO2,
-                Hectares = model.Hectares,
-                Metres = model.Metres,
-                NbFruits = model.NbFruits,
-                NbArbres = model.NbArbres,
-                Contribution = model.Contribution,
-                ListeTags = model.ListeTags
-            };
-        }
-
         public static ProjetModel ToModel(this ProjetAddDTO dto)
         {
             return new ProjetModel
@@ -73,7 +53,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Localite = model.Localite,
                 MontantRecolte = model.MontantRecolte,
                 Titre = model.Titre,
-                TonnesCO2 = model.TonnesCO2
+                TonnesCO2 = model.TonnesCO2,
+                ListeTags = model.ListeTags
             };
         }
 
@@ -85,7 +66,8 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Id = model.Id,
                 MontantRecolte = model.MontantRecolte,
                 NomLocalite = model.NomLocalite,
-                Titre = model.Titre
+                Titre = model.Titre,
+                Infrastructure = model.Infrastructure
             };
         }
 
