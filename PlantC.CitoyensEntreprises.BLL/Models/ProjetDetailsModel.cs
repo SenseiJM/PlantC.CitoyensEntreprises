@@ -8,7 +8,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Models {
         public string Localite { get; set; }
         public string Description { get; set; }
         public decimal CoutDuProjet { get; set; }
-        public decimal SommeRecoltee { get; set; }
+        public decimal MontantRecolte { get; set; }
         public decimal TonnesCO2 { get; set; }
     }
 }

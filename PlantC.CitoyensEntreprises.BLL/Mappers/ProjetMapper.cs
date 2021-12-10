@@ -43,7 +43,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 CoutDuProjet = p.CoutDuProjet,
                 Description = p.Description,
                 Localite = p.Localite,
-                SommeRecoltee = p.SommeRecoltee,
+                MontantRecolte = p.MontantRecolte,
                 Titre = p.Titre,
                 TonnesCO2 = p.TonnesCO2,
                 Id = p.Id

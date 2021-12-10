@@ -8,6 +8,7 @@ using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System.Net.Mail;
 using ToolBox.Security.Configuration;
 using ToolBox.Security.DependencyInjection.Extensions;
 
@@ -47,14 +48,19 @@ namespace PlantC.CitoyensEntreprises.API {
                 c.AddSecurityRequirement(securityRequirement);
             });
             NpgsqlConnection.GlobalTypeMapper.MapEnum<Fonction>("fonction");
-            services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("MaConnection")));
+            services.AddScoped<NpgsqlConnection>((s) => new NpgsqlConnection(Configuration.GetConnectionString("Default")));
 
             #region JWT
             services.AddJwt(Configuration.GetSection("JWT").Get<JwtConfiguration>());
             #endregion
 
+            #region Service Mail
+            services.AddSingleton(Configuration.GetSection("SMTP").Get<MailConfig>());
+            services.AddScoped<SmtpClient>();
+            services.AddScoped<MailService>(); 
+            #endregion
 
-            #region Service
+            #region Service Data
             services.AddScoped<ParticipantService>();
             services.AddScoped<HashService>();
             services.AddScoped<ProjetService>();
@@ -89,6 +95,8 @@ namespace PlantC.CitoyensEntreprises.API {
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors();
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlantC.CitoyensEntreprises.API v1"));
 

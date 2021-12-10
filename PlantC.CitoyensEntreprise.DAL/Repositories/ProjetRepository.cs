@@ -31,7 +31,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 while (reader.Read()) {
                     result.Add(new ProjetResumeView {
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
-                        Description = (string)reader["concat"],
+                        Description = (string)reader["description"],
                         FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
                         MontantRecolte = reader["tot"] as decimal? ?? 0,
@@ -41,7 +41,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 }
                 return result;
             } catch (Exception e) {
-                throw; //'Unable to cast object of type 'System.DBNull' to type 'System.Decimal'.'
+                throw;
             } finally {
                 oConn.Close();
             }
@@ -63,7 +63,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 if (reader.Read()) {
                     p = new ProjetResumeView {
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
-                        Description = (string)reader["concat"],
+                        Description = (string)reader["description"],
                         FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
                         MontantRecolte = (decimal)reader["tot"],
@@ -128,7 +128,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         Localite = (string)reader["localite"],
-                        SommeRecoltee = (decimal)reader["tot"],
+                        MontantRecolte = (decimal)reader["tot"],
                         Titre = (string)reader["titre"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
                         Id = id
