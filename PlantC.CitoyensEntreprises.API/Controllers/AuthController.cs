@@ -23,7 +23,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         }
         [HttpPost("Login")]
         [Produces(typeof(LoginDTO))]
-        public IActionResult Login(LoginDTO login)
+        public IActionResult Login([FromBody]LoginDTO login)
         {
             try
             {

@@ -64,6 +64,24 @@ namespace ToolBox.Security.Services
         }
 
         /// <summary>
+        /// Creates token based on payload and configuration
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <returns></returns>
+        public string CreateSimpleToken(string email)
+        {
+            JwtSecurityToken JwtToken = new JwtSecurityToken(
+                _config.Issuer,
+                _config.Audience,
+                new List<Claim> { new Claim(ClaimTypes.Email, email) },
+                _config.ValidateLifetime ? DateTime.Now : null,
+                _config.ValidateLifetime ? DateTime.Now.AddSeconds(_config.ExpirationDuration) : null,
+                _credentials
+            );
+            return _handler.WriteToken(JwtToken);
+        }
+
+        /// <summary>
         /// Token validation based on configuration
         /// Create a ClaimsPricipal or null if not valid
         /// </summary>

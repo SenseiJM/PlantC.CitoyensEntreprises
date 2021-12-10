@@ -37,7 +37,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p8", (object)p.IdAdresse??DBNull.Value);
                 cmd.Parameters.AddWithValue("p9", p.Salt);
                 cmd.Parameters.AddWithValue("p10", p.MdpClient);
-                return (int)cmd.ExecuteScalar();
+                int newId = (int)cmd.ExecuteScalar();
+                p.Id = newId;
+                return newId;
             }
             catch (Exception e)
             {
