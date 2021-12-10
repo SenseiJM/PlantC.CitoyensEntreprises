@@ -20,6 +20,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Models
         public IEnumerable<string> Roles { get { yield return Userlevel; } }
         public string MdpContact { get; set; }
         public string Salt { get; set; }
-
+        public bool EstVerifie { get; set; }
     }
 }

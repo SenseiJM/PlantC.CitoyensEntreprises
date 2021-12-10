@@ -1,5 +1,5 @@
-﻿namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public class Localisation {
+﻿namespace PlantC.CitoyensEntreprises.API.DTO.Localisation {
+    public class LocalisationDTO {
         public string AdressLine1 { get; set; }
         public string AdressLine2 { get; set; }
         public string Number { get; set; }

@@ -1,5 +1,5 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities.Views;
-using PlantC.CitoyensEntreprises.BLL.Services;
+using PlantC.CitoyensEntreprises.BLL.Models;
 
 namespace PlantC.CitoyensEntreprises.BLL.Mappers {
     static class LocalisationMapper {

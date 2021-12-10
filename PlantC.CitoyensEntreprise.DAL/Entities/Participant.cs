@@ -17,6 +17,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities
         public string MdpClient { get; set; }
         public string UserLevel { get; set; }
         public Adresse? Adresse { get; set; }
+        public bool EstVerifie { get; set; }
+
 
     }
 }

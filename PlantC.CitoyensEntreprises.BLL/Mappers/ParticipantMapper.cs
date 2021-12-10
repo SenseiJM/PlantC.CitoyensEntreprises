@@ -21,7 +21,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Email = model.Email,
                 Salt = model.Salt,
                 MdpClient = model.MdpContact,
-                UserLevel = model.Userlevel
+                UserLevel = model.Userlevel,
+                EstVerifie = model.EstVerifie
             };
         }
 
@@ -37,7 +38,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Nom = p.Nom,
                 Prenom = p.Prenom,
                 Telephone = p.Telephone,
-                IdAdresse = p.IdAdresse
+                IdAdresse = p.IdAdresse,
+                EstVerifie = p.EstVerifie
             };
         }
 

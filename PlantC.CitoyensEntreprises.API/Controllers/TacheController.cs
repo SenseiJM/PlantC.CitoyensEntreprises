@@ -70,6 +70,18 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
                 return NotFound(e.Message);
             }
         }
+        // GET: TacheController/GetByParticipantId
+        [HttpGet("ByParticipantID/{id}")]
+        public IActionResult GetByParticipantId(int id) {
+            try {
+                if (_tacheService.GetByParticipantId(id) == null) {
+                    return Ok("Pas de données");
+                }
+                return Ok(_tacheService.GetByParticipantId(id));
+            } catch (Exception e) {
+                return NotFound(e.Message);
+            }
+        }
 
         // POST: TacheController/Create
         [HttpPost]

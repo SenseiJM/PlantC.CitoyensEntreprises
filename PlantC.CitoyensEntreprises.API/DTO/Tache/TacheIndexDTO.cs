@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PlantC.CitoyensEntreprises.API.DTO.Participant;
+using PlantC.CitoyensEntreprises.API.DTO.Projet;
+using System;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Tache
 {
@@ -13,5 +15,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Tache
         public string Description { get; set; }
         public bool Est_Assigne { get; set; }
         public bool Est_Termine { get; set; }
+        public ProjetIndexDTO Projet { get; set; }
+        public ParticipantIndexDTO Participant { get; set; }
     }
 }

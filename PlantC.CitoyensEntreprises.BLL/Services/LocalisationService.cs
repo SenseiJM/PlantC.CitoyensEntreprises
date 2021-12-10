@@ -1,5 +1,6 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
+using PlantC.CitoyensEntreprises.BLL.Models;
 using System.Collections.Generic;
 using System.Linq;
 

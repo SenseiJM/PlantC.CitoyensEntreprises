@@ -28,6 +28,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         {
             return _tacheRepository.GetByProjectId(id).ToBLLModel();
         }
+        public IEnumerable<TacheModel> GetByParticipantId(int id) {
+            return _tacheRepository.GetByParticipantId(id).ToBLLModel();
+        }
         public bool Delete(int id)
         {
             return _tacheRepository.DeleteTache(id);

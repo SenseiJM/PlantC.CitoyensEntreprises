@@ -1,5 +1,11 @@
-﻿namespace PlantC.CitoyensEntreprise.DAL.Entities {
-    public class Localisation {
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PlantC.CitoyensEntreprises.BLL.Models {
+    public class LocalisationModel {
         public string AdressLine1 { get; set; }
         public string AdressLine2 { get; set; }
         public string Number { get; set; }
