@@ -33,7 +33,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Mappers
                 Id = p.Id,
                 MontantRecolte = p.MontantRecolte,
                 NomLocalite = p.NomLocalite,
-                Titre = p.Titre
+                Titre = p.Titre,
+                Infrastructure = p.Infrastructure
             };
         }
 

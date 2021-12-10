@@ -41,7 +41,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 }
                 return result;
             } catch (Exception e) {
-                throw; //'Unable to cast object of type 'System.DBNull' to type 'System.Decimal'.'
+                throw;
             } finally {
                 oConn.Close();
             }
@@ -68,7 +68,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Id = (int)reader["id_projet"],
                         MontantRecolte = (decimal)reader["tot"],
                         NomLocalite = (string)reader["localite"],
-                        Titre = (string)reader["titre"]
+                        Titre = (string)reader["titre"],
+                        Infrastructure = (string)reader["infrastructure"]
                     };
                     return p;
                 } else {
