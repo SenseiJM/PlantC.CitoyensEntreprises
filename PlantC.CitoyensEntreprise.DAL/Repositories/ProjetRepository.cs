@@ -130,7 +130,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         Localite = (string)reader["localite"],
-                        SommeRecoltee = (decimal)reader["tot"],
+                        MontantRecolte = (decimal)reader["tot"],
                         Titre = (string)reader["titre"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
                         Id = id

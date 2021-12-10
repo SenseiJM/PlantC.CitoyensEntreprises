@@ -20,20 +20,20 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
     public class MailService
     {
         private MailConfig _config;
-        private SmtpClient _smtpclient;
+        private SmtpClient _client;
 
         public MailService(MailConfig config, SmtpClient smtpclient)
         {
             _config = config;
-            _smtpclient = smtpclient;
+            _client = smtpclient;
         }
 
         public void SendEmail(string subject, string content, params string[] mails)
         {
-            _smtpclient.Credentials = new NetworkCredential(_config.Mail, _config.Pwd);
-            _smtpclient.Host = _config.Host;
-            _smtpclient.Port = _config.Port;
-            _smtpclient.EnableSsl = true;
+            _client.Credentials = new NetworkCredential(_config.Mail, _config.Pwd);
+            _client.Host = _config.Host;
+            _client.Port = _config.Port;
+            _client.EnableSsl = true;
             MailMessage message = new MailMessage();
             message.Subject = subject;
             message.Body = content;
@@ -45,7 +45,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             }
             try
             {
-                _smtpclient.Send(message);
+                _client.Send(message);
             }
             catch (Exception ex)
             {

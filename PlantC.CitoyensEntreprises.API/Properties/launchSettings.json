@@ -1,8 +1,12 @@
-﻿{
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost:80",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:56459",
       "sslPort": 0
@@ -19,13 +23,17 @@
     },
     "PlantC.CitoyensEntreprises.API": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5000",
+      "dotnetRunMessages": "true"
+    },
+    "Profil 1": {
+      "commandName": "IIS",
+      "launchBrowser": true
     }
   }
 }

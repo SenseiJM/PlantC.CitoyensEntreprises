@@ -44,7 +44,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             }
         }
         [HttpPost("Register")]
-        public IActionResult Register(RegisterDTO register)
+        public IActionResult Register([FromBody]RegisterDTO register)
         {
             try
             {
