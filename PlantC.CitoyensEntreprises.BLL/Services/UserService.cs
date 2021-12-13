@@ -68,7 +68,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
                     Nom = contact.Nom,
                     Prenom = contact.Prenom,
                     Userlevel = contact.UserLevel,
-                    Id = contact.Id
+                    Id = contact.Id,
+                    Fonction = contact.Fonction
                 };
             }
             return null;
