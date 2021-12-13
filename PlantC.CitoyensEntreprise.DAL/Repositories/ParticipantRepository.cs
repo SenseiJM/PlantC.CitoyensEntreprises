@@ -33,7 +33,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p4", p.Nom);
                 cmd.Parameters.AddWithValue("p5", p.Prenom);
                 cmd.Parameters.AddWithValue("p6", p.Email);
-                cmd.Parameters.AddWithValue("p7", p.Telephone);
+                cmd.Parameters.AddWithValue("p7", (object)p.Telephone ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("p8", (object)p.IdAdresse??DBNull.Value);
                 cmd.Parameters.AddWithValue("p9", p.Salt);
                 cmd.Parameters.AddWithValue("p10", p.MdpClient);

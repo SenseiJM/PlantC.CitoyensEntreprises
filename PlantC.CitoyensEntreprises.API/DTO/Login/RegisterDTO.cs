@@ -17,6 +17,8 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Login {
         public string Telephone { get; set; }
 
         public int? IdAdresse { get; set; }
+
+        [Required]
         public string MdpContact { get; set; }
 
     }
