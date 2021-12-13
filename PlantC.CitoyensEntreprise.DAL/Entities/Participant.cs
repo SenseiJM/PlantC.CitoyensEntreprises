@@ -11,7 +11,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Entities
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
-        public string Telephone { get; set; }
+        public string? Telephone { get; set; }
         public int? IdAdresse { get; set; }
         public string Salt { get; set; }
         public string MdpClient { get; set; }
