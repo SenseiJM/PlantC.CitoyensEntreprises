@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PlantC.CitoyensEntreprises.API.DTO.Marqueurs;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using PlantC.CitoyensEntreprises.API.Mappers;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.API.Controllers
-{
+namespace PlantC.CitoyensEntreprises.API.Controllers {
     public class MarqueursController : Controller
     {
         private readonly MarqueursService _marqueursService;

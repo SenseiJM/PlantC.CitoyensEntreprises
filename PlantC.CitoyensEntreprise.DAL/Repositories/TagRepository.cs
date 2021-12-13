@@ -1,15 +1,10 @@
 ﻿using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Entities;
-using PlantC.CitoyensEntreprise.DAL.Views;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprise.DAL.Repositories
-{
-     public class TagRepository
+namespace PlantC.CitoyensEntreprise.DAL.Repositories {
+    public class TagRepository
     {
         private NpgsqlConnection oConn;
 

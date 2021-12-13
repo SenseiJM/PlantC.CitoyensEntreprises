@@ -1,4 +1,4 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Views;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprises.API.DTO.Marqueurs;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;

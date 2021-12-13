@@ -1,13 +1,11 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Repositories;
-using PlantC.CitoyensEntreprise.DAL.Views;
-using System;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Repositories;
+using PlantC.CitoyensEntreprises.BLL.Mappers;
+using PlantC.CitoyensEntreprises.BLL.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PlantC.CitoyensEntreprises.BLL.Services
-{
+namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class MarqueursService
     {
         private readonly TagRepository _tagRepository;
@@ -17,9 +15,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             _tagRepository = tagRepository;
         }
 
-        public IEnumerable<Marqueurs> GetMarqueurs()
+        public IEnumerable<MarqueurModel> GetMarqueurs()
         {
-            return _tagRepository.GetMarqueurs();
+            IEnumerable<MarqueurModel> list = _tagRepository.GetMarqueurs().Select(m => m.ToModel());
+            foreach (MarqueurModel marqueurs in list) {
+               marqueurs.ListTags = _tagRepository.GetTagByProjet(marqueurs.IdProjet);
+            }
+            return list;
         }
     }
 }

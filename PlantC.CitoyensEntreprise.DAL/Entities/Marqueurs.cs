@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprise.DAL.Views
-{
+namespace PlantC.CitoyensEntreprise.DAL.Entities {
     public class Marqueurs
     {
         public int Id { get; set; }
