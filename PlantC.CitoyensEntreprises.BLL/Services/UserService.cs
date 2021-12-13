@@ -27,32 +27,35 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
 
         public int Register(ParticipantModel contact)
         {
-            //if (_userRepository.GetByMail(contact.Email) != null)
-            //{
-            //    throw new Exception();
-            //}
-            //string salt = Guid.NewGuid().ToString();
-            //string hashPassword = _hashService.Hash(contact.MdpContact, salt);
-            //ParticipantModel temp = new ParticipantModel
-            //{
-            //    Email = contact.Email,
-            //    MdpContact = hashPassword,
-            //    Nom = contact.Nom,
-            //    Prenom = contact.Prenom,
-            //    Telephone = contact.Telephone,
-            //    Salt = salt,
-            //    Userlevel = "USER",
-            //    IdAdresse = contact.IdAdresse,
-            //    //EmailVerif = false
-            //};
+            if (_userRepository.GetByMail(contact.Email) != null)
+            {
+                throw new Exception();
+            }
+            string salt = Guid.NewGuid().ToString();
+            string hashPassword = _hashService.Hash(contact.MdpContact, salt);
+            ParticipantModel temp = new ParticipantModel
+            {
+                Email = contact.Email,
+                MdpContact = hashPassword,
+                Nom = contact.Nom,
+                Prenom = contact.Prenom,
+                Telephone = contact.Telephone,
+                Salt = salt,
+                Userlevel = "USER",
+                IdAdresse = contact.IdAdresse,
+                EstVerifie = false
+            };
             using (TransactionScope scope = new TransactionScope())
             {
-                //_contactService.Create(temp);
-                _mailService.SendEmail("Nouvel inscription", "coucou", contact.Email);
+                temp.Id =_contactService.Create(temp);
+                string token = _jwtService.CreateSimpleToken(temp.Email);
+                string content = "<div><p>Veuillez cliquer sur le lien suivant pour activer votre compte <br>" +
+                    $"<a href = 'http://localhost:3000/check?token={token}'>Activer votre compte<a/> " +
+                    "<p/></div>";
+                _mailService.SendEmail("Nouvelle inscription", content, contact.Email);
                 scope.Complete();
             }
-            //return temp.Id;
-            return 0;
+            return temp.Id;
         }
         public ParticipantModel Login(string mail, string password)
         {
