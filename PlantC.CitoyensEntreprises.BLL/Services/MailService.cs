@@ -54,5 +54,30 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
                 throw;
             }
         }
+
+        public void SendEmailWithObject(string subject, string content, string replyTo, params string[] mails) {
+            _client.Credentials = new NetworkCredential(_config.Mail, _config.Pwd);
+            _client.Host = _config.Host;
+            _client.Port = _config.Port;
+            _client.EnableSsl = true;
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(_config.Mail);
+            message.Headers.Add("Reply-To", replyTo);
+            //message.Sender = new MailAddress(_config.Mail);
+            //message.ReplyToList.Add(new MailAddress(replyTo));
+            message.Subject = subject;
+            message.Body = content;
+            message.IsBodyHtml = true;
+            foreach (string mail in mails) {
+                message.To.Add(mail);
+            }
+            try {
+                _client.Send(message);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex.Message);
+                //ecrire dans un fichier de log 
+                throw;
+            }
+        }
     }
 }

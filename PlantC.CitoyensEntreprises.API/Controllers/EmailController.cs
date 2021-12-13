@@ -23,10 +23,9 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 string content = "<div>" +
                 $"<p>L'utilisateur {dto.Name} {dto.Surname} vous a envoyé le message suivant : </p>" +
                 $"<p>{dto.Content}</p>" +
-                $"<p>Vous pouvez lui répondre à l'adresse suivante : <a href='mailto:{dto.Email}'>{dto.Email}</a></p>" +
                 "</div>";
 
-                _mailService.SendEmail(dto.Subject, content, "loudeche.jean-michel@hotmail.fr");
+                _mailService.SendEmailWithObject(dto.Subject, content, dto.Email, /*Insert email here -> */"");
                 return Ok();
 
             } catch (Exception e) {
