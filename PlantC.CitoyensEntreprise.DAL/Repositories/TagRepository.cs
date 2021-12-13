@@ -98,8 +98,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     {
                         Id = (int)reader["id"],
                         Infrastructure = reader["infrastructure"].ToString(),
-                        Latitude = (double)reader["latitude"],
-                        Longitude =(double)reader["longitude"]
+                        Latitude = (decimal)reader["latitude"],
+                        Longitude =(decimal)reader["longitude"]
                     });
                 }
                 return result;
@@ -110,6 +110,32 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             }
             finally
             {
+                oConn.Close();
+            }
+        }
+
+        public IEnumerable<Marqueurs> GetMarqueurs() {
+            try {
+
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT latitude, longitude, infrastructure, p.id FROM projet p JOIN localisation ON p.id_localisation = localisation.id";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Marqueurs> result = new();
+
+                while (reader.Read()) {
+                    result.Add(new Marqueurs {
+                        Id = (int)reader["id"],
+                        Infrastructure = (string)reader["infrastructure"],
+                        Latitude = (decimal)reader["latitude"],
+                        Longitude = (decimal)reader["longitude"]
+                    });
+                }
+                return result;
+
+            } catch (Exception e) {
+                throw;
+            } finally {
                 oConn.Close();
             }
         }

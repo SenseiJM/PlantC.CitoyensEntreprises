@@ -17,9 +17,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
             _tagRepository = tagRepository;
         }
 
-        public IEnumerable<Marqueurs> GetMarqueurs(List<string> tags, int? codepostal = null)
+        public IEnumerable<Marqueurs> GetMarqueurs()
         {
-            return _tagRepository.GetMarqueursByTag(tags, codepostal);
+            return _tagRepository.GetMarqueurs();
         }
     }
 }

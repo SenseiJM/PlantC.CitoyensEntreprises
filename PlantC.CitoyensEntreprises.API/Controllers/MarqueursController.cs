@@ -18,11 +18,16 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
             _marqueursService = marqueursService;
         }
 
+        //[HttpGet]
+        //public IActionResult GetMarqueursByTag(List<string> tags, int? codepostal = null)
+        //{
+        //    IEnumerable<MarqueursDTO> dto = _marqueursService.GetMarqueurs(tags, codepostal).Select(m =>m.ToMarqueursDTO());
+        //    return Ok(dto);
+        //}
+
         [HttpGet]
-        public IActionResult GetMarqueursByTag(List<string> tags, int? codepostal = null)
-        {
-            IEnumerable<MarqueursDTO> dto = _marqueursService.GetMarqueurs(tags, codepostal).Select(m =>m.ToMarqueursDTO());
-            return Ok(dto);
+        public IActionResult GetAll() {
+            return Ok(_marqueursService.GetMarqueurs().Select(m => m.ToMarqueursDTO()));
         }
     }
 }
