@@ -29,7 +29,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             {
                 ParticipantModel contact = _userService.Login(login.Email, login.Password);
                 if (contact == null) return Unauthorized();
-                else return Ok(new ParticipantIndexDTO
+                else return Ok(new ParticipantLoginDTO
                 {
                     Id = contact.Id,
                     Email = contact.Email,
@@ -44,7 +44,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             }
         }
         [HttpPost("Register")]
-        public IActionResult Register(RegisterDTO register)
+        public IActionResult Register([FromBody]RegisterDTO register)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                     Nom = register.Nom,
                     Prenom = register.Prenom,
                     Telephone = register.Telephone,
-                    IdAdresse = register.IdAdresse
+                    IdAdresse = register.IdAdresse,
 
                 });
                 return Ok(temp);
@@ -64,6 +64,13 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             {
                 return Problem(ex.Message);
             }
+        }
+
+        [HttpGet("Validate")]
+        public IActionResult Validate([FromQuery]string token) {
+            bool result = _userService.Validate(token);
+            if(result) { return Ok(); }
+            return BadRequest();
         }
     }
 }

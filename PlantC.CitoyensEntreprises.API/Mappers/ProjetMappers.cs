@@ -78,7 +78,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Id = model.Id,
                 ImagesURLs = model.ImagesURLs,
                 Localite = model.Localite,
-                SommeRecoltee = model.SommeRecoltee,
+                MontantRecolte = model.MontantRecolte,
                 Titre = model.Titre,
                 TonnesCO2 = model.TonnesCO2,
                 ListeTags = model.ListeTags

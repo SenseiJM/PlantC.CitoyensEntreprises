@@ -8,8 +8,10 @@ using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System.Net.Mail;
 using ToolBox.Security.Configuration;
 using ToolBox.Security.DependencyInjection.Extensions;
+using ToolBox.Security.Middlewares;
 
 namespace PlantC.CitoyensEntreprises.API {
     public class Startup
@@ -53,8 +55,13 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddJwt(Configuration.GetSection("JWT").Get<JwtConfiguration>());
             #endregion
 
+            #region Service Mail
+            services.AddSingleton(Configuration.GetSection("SMTP").Get<MailConfig>());
+            services.AddScoped<SmtpClient>();
+            services.AddScoped<MailService>(); 
+            #endregion
 
-            #region Service
+            #region Service Data
             services.AddScoped<ParticipantService>();
             services.AddScoped<HashService>();
             services.AddScoped<ProjetService>();
@@ -93,6 +100,8 @@ namespace PlantC.CitoyensEntreprises.API {
             
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlantC.CitoyensEntreprises.API v1"));
+
+            app.UseMiddleware<JwtHandlerMiddleware>();
 
             app.UseRouting();
 
