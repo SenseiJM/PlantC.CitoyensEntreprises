@@ -13,7 +13,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Models
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
-        public string Telephone { get; set; }
+        public string? Telephone { get; set; }
         public int? IdAdresse { get; set; }
         public string Userlevel { get; set; }
         public string Identifier { get { return Id.ToString(); } }

@@ -33,9 +33,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 {
                     Id = contact.Id,
                     Email = contact.Email,
-                    Token = _jwtService.CreateToken(contact),
-                    Nom = contact.Nom,
-                    Prenom = contact.Prenom
+                    Token = _jwtService.CreateToken(contact)
                 });
             }
             catch (Exception e)
