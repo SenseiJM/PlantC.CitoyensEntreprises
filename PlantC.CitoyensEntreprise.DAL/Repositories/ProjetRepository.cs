@@ -165,7 +165,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             try {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO Projet(id_localisation, reference, titre, description, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet, date_creation) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) RETURNING id";
+                cmd.CommandText = "INSERT INTO projet(id_localisation, reference, titre, description, infrastructure, nb_arbre, nb_fruits, metre, hectare, tonnes_co2, heures_travail, cout_du_projet, date_creation) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) RETURNING id";
                 cmd.Parameters.AddWithValue("p1", p.IDLocalisation);
                 cmd.Parameters.AddWithValue("p2", p.Reference);
                 cmd.Parameters.AddWithValue("p3", p.Titre);
@@ -181,7 +181,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p13", p.DateCreation);
                 return (int)cmd.ExecuteScalar();
             } catch (Exception e) {
-                throw; //Numeric field overflow
+                throw;
             } finally {
                 oConn.Close();
             }

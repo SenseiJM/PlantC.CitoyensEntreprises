@@ -24,7 +24,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
 
         public int? NbFruits { get; set; }
         public int Metres { get; set; }
-        public decimal Hectares { get; set; }
+        public decimal? Hectares { get; set; }
 
         [Required]
         public decimal TonnesCO2 { get; set; }
