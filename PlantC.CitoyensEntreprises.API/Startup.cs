@@ -79,6 +79,7 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<UserRepository>();
             services.AddScoped<TagRepository>();
             services.AddScoped<TacheRepository>();
+            services.AddScoped<AdressRepository>();
             #endregion
 
             services.AddCors(options => options.AddDefaultPolicy(builder =>

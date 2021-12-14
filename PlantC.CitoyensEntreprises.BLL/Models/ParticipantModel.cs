@@ -1,4 +1,5 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Enums;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 using System.Collections.Generic;
 using ToolBox.Security.Models;
 
@@ -21,5 +22,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Models
         public string MdpContact { get; set; }
         public string Salt { get; set; }
         public bool EstVerifie { get; set; }
+        public AdresseModel Adress { get; set; }
     }
 }

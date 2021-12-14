@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.API.DTO.Login;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
@@ -31,11 +32,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 if (contact == null) return Unauthorized();
                 else return Ok(new ParticipantLoginDTO
                 {
-                    Id = contact.Id,
-                    Email = contact.Email,
                     Token = _jwtService.CreateToken(contact),
-                    Nom = contact.Nom,
-                    Prenom = contact.Prenom
                 });
             }
             catch (Exception e)
@@ -55,7 +52,15 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                     Nom = register.Nom,
                     Prenom = register.Prenom,
                     Telephone = register.Telephone,
-                    IdAdresse = register.IdAdresse,
+                    Adress = new AdresseModel
+                    {
+                        AdressLine1 = register.AdressLine1,
+                        AdressLine2 = register.AdressLine2,
+                        Number = register.Number,
+                        City = register.City,
+                        ZipCode = register.ZipCode,
+                        Country = register.Country
+                    }
 
                 });
                 return Ok(temp);
@@ -71,6 +76,38 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             bool result = _userService.Validate(token);
             if(result) { return Ok(); }
             return BadRequest();
+        }
+
+        [HttpPost("RegisterByPlantC")]
+        public IActionResult RegisterByPlantC([FromBody]RegisterPlantCDTO register)
+        {
+            try
+            {
+                int temp = _userService.RegisterByPlantC(new ParticipantModel
+                {
+                    Email = register.Mail,
+                    Nom = register.Nom,
+                    Prenom = register.Prenom,
+                    Telephone = register.Telephone,
+                    Fonction = register.Fonction,
+                    BCE = register.BCE,
+                    NomEntreprise = register.NomEntreprise,
+                    Adress = new AdresseModel
+                    {
+                        AdressLine1 = register.AdressLine1,
+                        AdressLine2 = register.AdressLine2,
+                        Number = register.Number,
+                        City = register.City,
+                        ZipCode = register.ZipCode,
+                        Country = register.Country
+                    }
+                });
+                return Ok(temp);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
     }
 }
