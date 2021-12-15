@@ -1,4 +1,5 @@
 ﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
@@ -76,6 +77,20 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
         public IEnumerable<MarqueurModel> GetAllMarqueurs() {
             return _projetRepository.GetAllMarqueurs().Select(m => m.ToSimpleModel());
         }
+
+        public CompteursModel GetCompteurs() {
+
+            IEnumerable<CompteursView> list = _projetRepository.GetCompteurs();
+
+            CompteursModel model = new();
+            foreach (CompteursView item in list) {
+                model.NbArbres += (item.NbArbres ?? 0);
+                model.TonnesCO2 += item.TonnesCO2;
+                model.Fini += item.CoutDuProjet <= item.TotalContribution ? 1 : 0;
+            }
+
+            return model;
+        } 
 
     }
 }

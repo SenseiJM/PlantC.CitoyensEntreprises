@@ -62,5 +62,10 @@ namespace PlantC.CitoyensEntreprises.API.Controllers
             return Ok(_projetService.GetAllMarqueurs());
         }
 
+        [HttpGet("compteurs")]
+        public IActionResult GetCompteurs() {
+            return Ok(_projetService.GetCompteurs());
+        }
+
     }
 }
