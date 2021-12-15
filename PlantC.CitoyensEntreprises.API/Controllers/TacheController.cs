@@ -92,27 +92,30 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 if (!_tacheService.UpDate(dto.ToBLLPut())) {
                     return NotFound("La tache que vous voulez modifier n'existe pas");
                 }
-                if (dto.Id_Participant != _tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant) {
-                    string subject = "PlantC Fin Tâche";
-                    string content = "<div>" +
-                    $"<p>Une tâche vous a été retiré : </p>" +
-                    $"<p>{dto.Type}</p>" +
-                    "</div>";
+                string subject = "PlantC Fin Tâche";
+                string content = "<div>" +
+                $"<p>Une tâche vous a été retiré : </p>" +
+                $"<p>{dto.Type}</p>" +
+                "</div>";
+                int? oldId = _tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant;
+                if (dto.Id_Participant != oldId && oldId != null) {
+                    
                     _mailService.SendEmail(
                         subject, 
                         content, 
                         _participantService.GetByID((int)_tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant).Email);
-                    if (dto.Id_Participant != null) {
+                }
+                if (dto.Id_Participant != null) {
                     subject = "PlantC Nouvelle Tâche";
-                        content = "<div>" +
-                        $"<p>Une nouvelle tâche vous a été attribué : </p>" +
-                        $"<p>{dto.Type}</p>" +
-                        "</div>";
-                        _mailService.SendEmail(
-                            subject, 
-                            content, 
-                            _participantService.GetByID((int)dto.Id_Participant).Email);
-                    }                }
+                    content = "<div>" +
+                    $"<p>Une nouvelle tâche vous a été attribué : </p>" +
+                    $"<p>{dto.Type}</p>" +
+                    "</div>";
+                    _mailService.SendEmail(
+                        subject,
+                        content,
+                        _participantService.GetByID((int)dto.Id_Participant).Email);
+                }
                 return Ok(_tacheService.UpDate(dto.ToBLLPut()));
             } catch (Exception e) {
                 return Problem(e.Message);
