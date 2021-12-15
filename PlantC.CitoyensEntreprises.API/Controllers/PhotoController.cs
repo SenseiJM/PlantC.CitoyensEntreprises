@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprises.API.DTO.Photo;
+using PlantC.CitoyensEntreprises.API.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using System;
@@ -30,7 +31,10 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_photoService.Create(new PhotoModel { IdProjet = dto.IdProjet, IsPublic = dto.IsPublic, URLPhoto = filePath }));
         }
 
-
+        [HttpGet("ByProjetID/{projetID}")]
+        public IActionResult GetByProjetID(int projetID) {
+            return Ok(_photoService.GetByProjetID(projetID).ToDTO());
+        }
 
     }
 }

@@ -31,7 +31,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
-        public IEnumerable<Photo> GetByProject(int id) {
+        public IEnumerable<Photo> GetAllByProjetID(int id) {
             oConn.Open();
             NpgsqlCommand cmd = oConn.CreateCommand();
             cmd.CommandText = "SELECT * FROM photo WHERE id_projet = @id";
