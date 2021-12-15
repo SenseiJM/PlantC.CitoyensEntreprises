@@ -312,5 +312,34 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             }
         }
 
+        public IEnumerable<CompteursView> GetCompteurs() {
+            try {
+
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM compteurs_data";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<CompteursView> compteurs = new List<CompteursView>();
+
+                while (reader.Read()) {
+                    compteurs.Add(new CompteursView {
+                        CoutDuProjet = (decimal)reader["cout_du_projet"],
+                        Id = (int)reader["Id"],
+                        NbArbres = (int?)reader["nb_arbres"],
+                        TonnesCO2 = (decimal)reader["tonnes_co2"],
+                        TotalContribution = (decimal?)reader["tot"]
+                    });
+                }
+
+                return compteurs;
+
+            } catch (Exception e) {
+
+                throw;
+            } finally {
+                oConn.Close();
+            }
+        }
+
     }
 }

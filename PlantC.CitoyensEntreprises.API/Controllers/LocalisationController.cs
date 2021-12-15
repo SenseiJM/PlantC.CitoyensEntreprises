@@ -17,6 +17,11 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_localisationService.GetAllLocalisationZip());
         }
 
+        [HttpGet]
+        public IActionResult GetAllLocalisation() {
+            return Ok(_localisationService.GetAllLocalisation());
+        }
+
         [HttpGet("GeoCode/{adresse}")]
         public IActionResult GetGeoCode(string adresse) {
             return Ok(_localisationService.GetGeoCode(adresse));

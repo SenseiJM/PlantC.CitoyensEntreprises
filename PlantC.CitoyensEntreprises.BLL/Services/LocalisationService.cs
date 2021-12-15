@@ -17,6 +17,13 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             return _localisationRepository.GetAllLocalisationByZip().Select(l => l.ToSimpleModel());
         }
 
+        public IEnumerable<LocalisationModel> GetAllLocalisation() {
+            return _localisationRepository.GetAllLocalisation().Select(l => new LocalisationModel {
+                City = l.City,
+                ZipCode = l.ZipCode
+            });
+        }
+
         public LocalisationGeoCodeModel GetGeoCode(string adresse) {
             return _localisationRepository.GetGeocodeByAddress(adresse).ToSimpleModel();
         }

@@ -48,6 +48,30 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
 
         }
 
+        public IEnumerable<Localisation> GetAllLocalisation() {
+
+            try {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM localisation_zip";
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Localisation> result = new List<Localisation>();
+                while (reader.Read()) {
+                    Localisation lzv = new Localisation {
+                        ZipCode = (string)reader["code_postal"],
+                        City = (string)reader["localite"]
+                    };
+                    result.Add(lzv);
+                }
+                return result;
+            } catch (Exception e) {
+                throw;
+            } finally {
+                oConn.Close();
+            }
+
+        }
+
         public LocalisationGeoCode GetGeocodeByAddress(string adresse) {
   
             adresse = adresse.Replace(" ", "%20");
