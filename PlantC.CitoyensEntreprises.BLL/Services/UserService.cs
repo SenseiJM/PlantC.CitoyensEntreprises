@@ -6,6 +6,8 @@ using System.Transactions;
 using System.Security.Claims;
 using ToolBox.Security.Services;
 using System.Linq;
+using Google.Apis.Auth;
+using System.Threading.Tasks;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class UserService
@@ -83,6 +85,49 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
                 };
             }
             return null;
+        }
+
+        public async Task<string> LoginWithGoogle(string token)
+        {
+            GoogleJsonWebSignature.Payload payload = await _jwtService.VerifyGoogleToken(token);
+
+            if(payload == null)
+            {
+                throw new Exception();
+            }
+
+            Participant u = _userRepository.GetByMail(payload.Email);
+            ParticipantModel p = null;
+            if(u == null)
+            {
+                //enregistrer l'utilisateur
+                string salt = Guid.NewGuid().ToString();
+                string hashPassword = _hashService.Hash(Guid.NewGuid().ToString(), salt);
+                p = new ParticipantModel
+                {
+                    Email = payload.Email,
+                    EstVerifie = true,
+                    Userlevel = "USER",
+                    MdpContact = hashPassword,
+                    Nom = payload.FamilyName,
+                    Prenom = payload.GivenName,
+                    Salt = salt,
+                };
+                int id = _contactService.Create(p);
+                p.Id = id;
+            }
+            else
+            {
+                p = new ParticipantModel //check Front end quel info renvoyer
+                {
+                    Email = u.Email,
+                    Nom = u.Nom,
+                    Prenom = u.Prenom,
+                    Userlevel = u.UserLevel,
+                    Id = u.Id
+                };
+            }
+            return _jwtService.CreateToken(p);
         }
 
         public bool Validate(string token) {

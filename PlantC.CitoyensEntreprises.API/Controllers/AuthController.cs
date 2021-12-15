@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlantC.CitoyensEntreprise.DAL.Entities;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
+using PlantC.CitoyensEntreprises.API.DTO;
 using PlantC.CitoyensEntreprises.API.DTO.Login;
 using PlantC.CitoyensEntreprises.API.DTO.Participant;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using PlantC.CitoyensEntreprises.BLL.Services;
 using PlantC.CitoyensEntreprises.BLL.Utils;
 using System;
+using System.Threading.Tasks;
 using ToolBox.Security.Services;
 
 namespace PlantC.CitoyensEntreprises.API.Controllers {
@@ -79,7 +81,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         }
 
         [HttpPost("RegisterByPlantC")]
-        public IActionResult RegisterByPlantC([FromBody]RegisterPlantCDTO register)
+        public IActionResult RegisterByPlantC([FromBody] RegisterPlantCDTO register)
         {
             try
             {
@@ -107,6 +109,19 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             catch (Exception ex)
             {
                 return Problem(ex.Message);
+            }
+        }
+
+        [HttpPost("OauthLogin")]
+        public async Task<IActionResult> OauthLogin([FromBody] ParticipantLoginDTO token)
+        {
+            try
+            {
+                return Ok( await _userService.LoginWithGoogle(token.Token));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
             }
         }
     }

@@ -8,6 +8,8 @@ using Npgsql;
 using PlantC.CitoyensEntreprise.DAL.Enums;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Services;
+using System;
+using System.Net.Http;
 using System.Net.Mail;
 using ToolBox.Security.Configuration;
 using ToolBox.Security.DependencyInjection.Extensions;
@@ -81,6 +83,8 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<TacheRepository>();
             services.AddScoped<AdressRepository>();
             #endregion
+
+            services.AddScoped(g => new HttpClient { BaseAddress = new Uri("https://nominatim.openstreetmap.org") });
 
             services.AddCors(options => options.AddDefaultPolicy(builder =>
             {
