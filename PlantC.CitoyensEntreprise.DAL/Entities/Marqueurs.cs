@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace PlantC.CitoyensEntreprises.API.DTO.Marqueurs
-{
-    public class MarqueursDTO
+namespace PlantC.CitoyensEntreprise.DAL.Entities {
+    public class Marqueurs
     {
         public int Id { get; set; }
         public decimal Longitude { get; set; }
