@@ -10,8 +10,12 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
     [ApiController]
     public class TacheController : ControllerBase {
         private readonly TacheService _tacheService;
-        public TacheController(TacheService tacheService) {
+        private readonly MailService _mailService;
+        private readonly ParticipantService _participantService;
+        public TacheController(TacheService tacheService, MailService mailService, ParticipantService participantService) {
             _tacheService = tacheService;
+            _mailService = mailService;
+            _participantService = participantService;
         }
         // GET: TacheController
         [HttpGet]
@@ -65,6 +69,17 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         [HttpPost]
         public IActionResult Create(TacheAddDTO dto) {
             try {
+                if (dto.Id_Participant != null) {
+                    string subject = "PlantC Nouvelle Tâche";
+                    string content = "<div>" +
+                    $"<p>Une nouvelle tâche vous a été attribué : </p>" +
+                    $"<p>{dto.Type}</p>" +
+                    "</div>";
+                    _mailService.SendEmail(
+                        subject,
+                        content, 
+                        _participantService.GetByID((int)dto.Id_Participant).Email);
+                }
                 return Ok(_tacheService.Create(dto.ToBLLAdd()));
             } catch (Exception e) {
                 return BadRequest(e.Message);
@@ -77,6 +92,27 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 if (!_tacheService.UpDate(dto.ToBLLPut())) {
                     return NotFound("La tache que vous voulez modifier n'existe pas");
                 }
+                if (dto.Id_Participant != _tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant) {
+                    string subject = "PlantC Fin Tâche";
+                    string content = "<div>" +
+                    $"<p>Une tâche vous a été retiré : </p>" +
+                    $"<p>{dto.Type}</p>" +
+                    "</div>";
+                    _mailService.SendEmail(
+                        subject, 
+                        content, 
+                        _participantService.GetByID((int)_tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant).Email);
+                    if (dto.Id_Participant != null) {
+                    subject = "PlantC Nouvelle Tâche";
+                        content = "<div>" +
+                        $"<p>Une nouvelle tâche vous a été attribué : </p>" +
+                        $"<p>{dto.Type}</p>" +
+                        "</div>";
+                        _mailService.SendEmail(
+                            subject, 
+                            content, 
+                            _participantService.GetByID((int)dto.Id_Participant).Email);
+                    }                }
                 return Ok(_tacheService.UpDate(dto.ToBLLPut()));
             } catch (Exception e) {
                 return Problem(e.Message);
