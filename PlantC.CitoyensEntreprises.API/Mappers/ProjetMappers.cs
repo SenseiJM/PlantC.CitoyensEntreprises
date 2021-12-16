@@ -43,9 +43,9 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 Infrastructure = dto.Infrastructure,
                 TonnesCO2 = dto.TonnesCO2,
                 NbArbres = dto.NbArbres,
-                NbFruits= dto.NbFruits,
-                Metres= dto.Metres,
-                Hectares= dto.Hectares,
+                NbFruits = dto.NbFruits,
+                Metres = dto.Metres,
+                Hectares = dto.Hectares,
                 Titre = dto.Titre,
                 Description = dto.Description,
                 Localisation = new LocalisationModel
@@ -58,7 +58,7 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
                 ListeTags = dto.Tag.Select(t => new CitoyensEntreprise.DAL.Entities.Tag
                 {
                     Nom = t
-                })
+                }),
             };
         }
 

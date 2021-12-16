@@ -71,6 +71,7 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<MarqueursService>();
             services.AddScoped<LocalisationService>();
             services.AddScoped<TacheService>();
+            services.AddScoped<PhotoService>();
             #endregion
 
 
@@ -82,6 +83,7 @@ namespace PlantC.CitoyensEntreprises.API {
             services.AddScoped<TagRepository>();
             services.AddScoped<TacheRepository>();
             services.AddScoped<AdressRepository>();
+            services.AddScoped<PhotoRepository>();
             #endregion
 
             services.AddScoped(g => new HttpClient { BaseAddress = new Uri("https://nominatim.openstreetmap.org") });
@@ -105,10 +107,12 @@ namespace PlantC.CitoyensEntreprises.API {
             
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlantC.CitoyensEntreprises.API v1"));
+            app.UseStaticFiles();
 
             app.UseMiddleware<JwtHandlerMiddleware>();
 
             app.UseRouting();
+
 
             app.UseAuthorization();
 

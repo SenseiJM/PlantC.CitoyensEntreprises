@@ -24,7 +24,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             byte[] base64 = Convert.FromBase64String(base64String);
 
             Guid guid = Guid.NewGuid();
-            string filePath = "assets/images/" + guid + "." + fileExtension;
+            string filePath = "assets/images/" + guid.ToString() + "." + fileExtension;
 
             System.IO.File.WriteAllBytes("wwwroot/" + filePath, base64);
 

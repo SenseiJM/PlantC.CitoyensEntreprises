@@ -16,7 +16,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
 
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO photo(id_projet, est_publique, url_photo, est_principale) VALUES (@p1, @p2, @p3, @p4)";
+                cmd.CommandText = "INSERT INTO photo(id_projet, est_publique, url_photo, est_principale) VALUES (@p1, @p2, @p3, @p4) RETURNING id";
                 cmd.Parameters.AddWithValue("p1", p.IdProjet);
                 cmd.Parameters.AddWithValue("p2", p.IsPublic);
                 cmd.Parameters.AddWithValue("p3", p.URLPhoto);

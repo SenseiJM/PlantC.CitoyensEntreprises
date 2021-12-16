@@ -6,6 +6,7 @@ using PlantC.CitoyensEntreprises.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class ProjetService
@@ -26,56 +27,72 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
 
         public int Create(ProjetModel model) {
 
-            model.Reference = createReference(model);
+            using (TransactionScope scope = new TransactionScope())
+            {
 
-            if (model.Infrastructure == "Verger") {
-                if (model.NbArbres == 0 || model.NbFruits == 0 || model.Hectares == 0) {
-                    throw new ArgumentException("Les champs 'Nombre d'arbre', 'Nombre d'arbres fruitiers' et 'Nombre d'hectares' sont des champs requis pour les vergers !");
-                }
+                model.Reference = createReference(model);
 
-                if (model.NbFruits > model.NbArbres)
+                if (model.Infrastructure == "Verger")
                 {
-                    throw new ArgumentException("Nombre d'arbres fruitiers trop important !");
+                    if (model.NbArbres == 0 || model.NbFruits == 0 || model.Hectares == 0)
+                    {
+                        throw new ArgumentException("Les champs 'Nombre d'arbre', 'Nombre d'arbres fruitiers' et 'Nombre d'hectares' sont des champs requis pour les vergers !");
+                    }
+
+                    if (model.NbFruits > model.NbArbres)
+                    {
+                        throw new ArgumentException("Nombre d'arbres fruitiers trop important !");
+                    }
+
                 }
+                else if (model.Infrastructure == "Haie")
+                {
+                    if (model.NbArbres == 0 || model.Metres == 0)
+                    {
+                        throw new ArgumentException("Les champs 'Mètres' et 'NbArbres' sont des champs requis pour les haies !");
+                    }
 
-            } else if (model.Infrastructure == "Haie") {
-                if (model.NbArbres == 0 || model.Metres == 0) {
-                    throw new ArgumentException("Les champs 'Mètres' et 'NbArbres' sont des champs requis pour les haies !");
                 }
-
-            } else if (model.Infrastructure == "Miscanthus") {
-                if (model.Hectares == 0) {
-                    throw new ArgumentException("Le champ 'Hectares' est un champ requis pour le Miscanthus !");
+                else if (model.Infrastructure == "Miscanthus")
+                {
+                    if (model.Hectares == 0)
+                    {
+                        throw new ArgumentException("Le champ 'Hectares' est un champ requis pour le Miscanthus !");
+                    }
                 }
-            } else if (model.Infrastructure == "Reboisement") {
-                if (model.Hectares == 0 || model.NbArbres == 0) {
-                    throw new ArgumentException("Les champs 'Hectares' et 'NbArbres' sont des champs requis pour le reboisement !");
+                else if (model.Infrastructure == "Reboisement")
+                {
+                    if (model.Hectares == 0 || model.NbArbres == 0)
+                    {
+                        throw new ArgumentException("Les champs 'Hectares' et 'NbArbres' sont des champs requis pour le reboisement !");
+                    }
                 }
-            }
-            model.DateCreation = DateTime.Now;
+                model.DateCreation = DateTime.Now;
 
-            int addId = _adRepository.AddAdress(new Adresse
-            {
-                AdressLine1 = model.Localisation.AdressLine1,
-                City = model.Localisation.City,
-                Number= model.Localisation.Number,
-                ZipCode= model.Localisation.ZipCode
-            });
+                int addId = _adRepository.AddAdress(new Adresse
+                {
+                    AdressLine1 = model.Localisation.AdressLine1,
+                    City = model.Localisation.City,
+                    Number = model.Localisation.Number,
+                    ZipCode = model.Localisation.ZipCode
+                });
 
-            var l = _locRepository.GetGeocodeByAddress(model.Localisation.AdressLine1, model.Localisation.City);
+                var l = _locRepository.GetGeocodeByAddress(model.Localisation.AdressLine1, model.Localisation.City);
 
-            int locId = _locRepository.Insert(new Localisation
+                int locId = _locRepository.Insert(new Localisation
                 { City = model.Localisation.City, ZipCode = model.Localisation.ZipCode },
-                l.Lat,l.Lon,addId
-            );
+                    l.Lat, l.Lon, addId
+                );
 
-            model.IDLocalisation = locId;
-            int pId = _projetRepository.Create(model.ToEntity());
-            foreach (var item in model.ListeTags)
-            {
-                _tagRepository.Insert(item, pId);
+                model.IDLocalisation = locId;
+                int pId = _projetRepository.Create(model.ToEntity());
+                foreach (var item in model.ListeTags)
+                {
+                    _tagRepository.Insert(item, pId);
+                }
+                scope.Complete();
+                return pId;
             }
-            return pId;
         }
 
         private string createReference(ProjetModel model)
