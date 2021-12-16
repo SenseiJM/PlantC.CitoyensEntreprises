@@ -3,7 +3,7 @@
 
         public int NbArbres { get; set; }
         public decimal TonnesCO2 { get; set; }
-        public decimal? Fini { get; set; }
+        public int Fini { get; set; }
 
     }
 }
