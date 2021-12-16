@@ -122,7 +122,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             foreach (CompteursView item in list) {
                 model.NbArbres += (item.NbArbres ?? 0);
                 model.TonnesCO2 += item.TonnesCO2;
-                model.Fini += item.CoutDuProjet <= item.TotalContribution ? 1 : 0;
+                model.Fini += item.CoutDuProjet <= (item.TotalContribution ?? 0) ? 1 : 0;
             }
 
             return model;

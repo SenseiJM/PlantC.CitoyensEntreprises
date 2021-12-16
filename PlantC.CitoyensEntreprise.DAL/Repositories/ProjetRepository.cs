@@ -67,7 +67,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Description = (string)reader["description"],
                         FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
-                        MontantRecolte = (decimal)reader["tot"],
+                        MontantRecolte = reader["tot"] as decimal? ?? 0,
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"],
                         Infrastructure = (string)reader["infrastructure"]
@@ -130,7 +130,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         Localite = (string)reader["localite"],
-                        MontantRecolte = (decimal)reader["tot"],
+                        MontantRecolte = reader["tot"] as decimal? ?? 0,
                         Titre = (string)reader["titre"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
                         Id = id
@@ -330,9 +330,9 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     compteurs.Add(new CompteursView {
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Id = (int)reader["Id"],
-                        NbArbres = (int?)reader["nb_arbres"],
+                        NbArbres = reader["nb_arbre"] as int?,
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
-                        TotalContribution = (decimal?)reader["tot"]
+                        TotalContribution = reader["tot"] as decimal?
                     });
                 }
 
