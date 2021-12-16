@@ -185,7 +185,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                     "Prenom = @p6," +
                     "Telephone = @p7," +
                     "IdAdresse = @p8," +
-                    "Email = @p9";
+                    "Email = @p9" +
+                    "WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
                 cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
