@@ -8,6 +8,7 @@ using ToolBox.Security.Services;
 using System.Linq;
 using Google.Apis.Auth;
 using System.Threading.Tasks;
+using PlantC.CitoyensEntreprise.DAL.Enums;
 
 namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class UserService
@@ -39,18 +40,23 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             string hashPassword = _hashService.Hash(contact.MdpContact, salt);
             using (TransactionScope scope = new TransactionScope())
             {
-            int adresseIdTemp = _adresseRepository.AddAdress(
-                new Adresse {
-                    AdressLine1 = contact.Adress.AdressLine1,
-                    AdressLine2 = contact.Adress.AdressLine2,
-                    Number = contact.Adress.Number,
-                    ZipCode = contact.Adress.ZipCode,
-                    City = contact.Adress.City,
-                    Country = contact.Adress.Country
-            });
+                int? adresseIdTemp = null;
+                if (contact.Adress.AdressLine1 != null)
+                {
+
+                    adresseIdTemp = _adresseRepository.AddAdress(
+                        new Adresse {
+                            AdressLine1 = contact.Adress.AdressLine1,
+                            AdressLine2 = contact.Adress.AdressLine2,
+                            Number = contact.Adress.Number,
+                            ZipCode = contact.Adress.ZipCode,
+                            City = contact.Adress.City,
+                            Country = contact.Adress.Country
+                    });
+                }
                 ParticipantModel temp = new ParticipantModel
                 {
-                    Fonction = CitoyensEntreprise.DAL.Enums.Fonction.Citoyen,
+                    Fonction = 0,
                     Email = contact.Email,
                     MdpContact = hashPassword,
                     Nom = contact.Nom,
