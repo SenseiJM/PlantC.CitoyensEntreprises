@@ -73,9 +73,9 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             }
         }
 
-        [HttpGet("Validate")]
-        public IActionResult Validate([FromQuery]string token) {
-            bool result = _userService.Validate(token);
+        [HttpPost("Validate")]
+        public IActionResult Validate([FromBody] ParticipantLoginDTO token) {
+            bool result = _userService.Validate(token.Token);
             if(result) { return Ok(); }
             return BadRequest();
         }
@@ -113,15 +113,15 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
         }
 
         [HttpPost("OauthLogin")]
-        public async Task<IActionResult> OauthLogin([FromBody] ParticipantLoginDTO token)
+        public IActionResult OauthLogin([FromBody] ParticipantLoginDTO token)
         {
             try
             {
-                return Ok( await _userService.LoginWithGoogle(token.Token));
+                return Ok(_userService.LoginWithGoogle(token.Token));
             }
             catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex);
             }
         }
     }

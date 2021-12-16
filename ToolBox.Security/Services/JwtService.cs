@@ -38,7 +38,7 @@ namespace ToolBox.Security.Services
                 ValidateAudience = _config.ValidateAudience,
                 ValidAudience = _config.Audience,
                 ValidateLifetime = _config.ValidateLifetime,
-                ValidateIssuerSigningKey = true,
+                ValidateIssuerSigningKey = false,
                 IssuerSigningKey = _securityKey
             };
             //furfooz import
