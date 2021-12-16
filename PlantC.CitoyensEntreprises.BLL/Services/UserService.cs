@@ -74,9 +74,9 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
         public ParticipantModel Login(string mail, string password)
         {
             Participant contact = _userRepository.GetByMail(mail);
-            if (contact != null /*&& contact.EmailVerif*/ && contact.MdpClient == _hashService.Hash(password, contact.Salt))
+            if (contact != null && contact.EstVerifie && contact.MdpClient == _hashService.Hash(password, contact.Salt))
             {
-                return new ParticipantModel //check Front end quel info renvoyer
+                return new ParticipantModel
                 {
                     Email = contact.Email,
                     Nom = contact.Nom,
@@ -103,7 +103,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             {
                 //enregistrer l'utilisateur
                 string salt = Guid.NewGuid().ToString();
-                string hashPassword = _hashService.Hash(Guid.NewGuid().ToString(), salt);
+                string hashPassword = _hashService.Hash(Guid.NewGuid().ToString().Substring(0, 8), salt);
                 p = new ParticipantModel
                 {
                     Email = payload.Email,
@@ -119,7 +119,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             }
             else
             {
-                p = new ParticipantModel //check Front end quel info renvoyer
+                p = new ParticipantModel
                 {
                     Email = u.Email,
                     Nom = u.Nom,
@@ -147,8 +147,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             {
                 throw new Exception();
             }
-            string mdpTemp = Guid.NewGuid().ToString();
-            mdpTemp = mdpTemp.Substring(0, 8);
+            string mdpTemp = Guid.NewGuid().ToString().Substring(0, 8);
             string salt = Guid.NewGuid().ToString();
             string hashPassword = _hashService.Hash(mdpTemp, salt);
             using (TransactionScope scope = new TransactionScope())

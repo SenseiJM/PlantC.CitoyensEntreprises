@@ -26,7 +26,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "INSERT INTO participant(fonction, nom_entreprise, bce, nom, prenom, mail, telephone, id_adresse, salt, mdp_client) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) RETURNING id";
+                cmd.CommandText = "INSERT INTO participant(fonction, nom_entreprise, bce, nom, prenom, mail, telephone, id_adresse, salt, mdp_client, user_level, est_verifie) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12) RETURNING id";
                 cmd.Parameters.AddWithValue("p1", p.Fonction);
                 cmd.Parameters.AddWithValue("p2", (object)p.NomEntreprise??DBNull.Value);
                 cmd.Parameters.AddWithValue("p3", (object)p.BCE ?? DBNull.Value);
@@ -37,6 +37,8 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p8", (object)p.IdAdresse??DBNull.Value);
                 cmd.Parameters.AddWithValue("p9", p.Salt);
                 cmd.Parameters.AddWithValue("p10", p.MdpClient);
+                cmd.Parameters.AddWithValue("p11", p.UserLevel);
+                cmd.Parameters.AddWithValue("p12", p.EstVerifie);
                 int newId = (int)cmd.ExecuteScalar();
                 p.Id = newId;
                 return newId;
@@ -70,15 +72,15 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 {
                     p = new Participant
                     {
-                        BCE = (string)reader["BCE"],
-                        Fonction = (Fonction)reader["Fonction"],
-                        Id = (int)reader["Id"],
-                        NomEntreprise = (string)reader["NomEntreprise"],
-                        IdAdresse = (int)reader["IdAdresse"],
-                        Email = (string)reader["Email"],
-                        Nom = (string)reader["Nom"],
-                        Prenom = (string)reader["Prenom"],
-                        Telephone = (string)reader["Telephone"],
+                        BCE = reader["bce"] as string,
+                        Fonction = (Enums.Fonction)reader["fonction"],
+                        Id = (int)reader["id"],
+                        NomEntreprise = reader["nom_entreprise"] as string,
+                        Telephone = (string)reader["telephone"],
+                        Prenom = (string)reader["prenom"],
+                        Nom = (string)reader["nom"],
+                        Email = (string)reader["mail"],
+                        IdAdresse = reader["id_adresse"] as int?,
                         EstVerifie = (bool)reader["est_verifie"]
                     };
                     return p;
