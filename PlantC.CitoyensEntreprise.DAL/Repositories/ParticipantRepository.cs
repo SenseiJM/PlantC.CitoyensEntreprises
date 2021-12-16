@@ -111,7 +111,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "DELETE FROM Participant WHERE Id = @p1";
+                cmd.CommandText = "DELETE FROM participant WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 return cmd.ExecuteNonQuery() != 0;
             }
@@ -177,15 +177,16 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             {
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                cmd.CommandText = "UPDATE Participant SET" +
-                    "Fonction = @p2," +
-                    "NomEntreprise = @p3," +
-                    "BCE = @p4," +
-                    "Nom = @p5," +
-                    "Prenom = @p6," +
-                    "Telephone = @p7," +
-                    "IdAdresse = @p8," +
-                    "Email = @p9";
+                cmd.CommandText = "UPDATE participant SET " +
+                    "fonction = @p2," +
+                    "nom_entreprise = @p3," +
+                    "bce = @p4," +
+                    "nom = @p5," +
+                    "prenom = @p6," +
+                    "telephone = @p7," +
+                    "id_adresse = @p8," +
+                    "email = @p9 " +
+                    "WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
                 cmd.Parameters.AddWithValue("p3", p.NomEntreprise);
