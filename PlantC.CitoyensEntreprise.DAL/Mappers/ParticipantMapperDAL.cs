@@ -14,10 +14,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Mappers {
                 Nom = (string)reader["nom"],
                 Prenom = (string)reader["prenom"],
                 Email = (string)reader["mail"],
-                Telephone = (string)reader["telephone"],
+                Telephone = (object)reader["telephone"] as string,
                 Salt = (string)reader["salt"],
                 MdpClient = (string)reader["mdp_client"],
-                UserLevel = (string)reader["user_level"]
+                UserLevel = (string)reader["user_level"],
+                EstVerifie = (bool)reader["est_verifie"]
                 //Adresse = new Adresse
                 //{
                 //    AdressLine1 = (string)reader["adressLine1"],
