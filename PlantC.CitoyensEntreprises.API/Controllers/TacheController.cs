@@ -94,7 +94,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 }
                 string subject = "PlantC Fin Tâche";
                 string content = "<div>" +
-                $"<p>Une tâche vous a été retiré : </p>" +
+                $"<p>Une tâche vous a été retirée : </p>" +
                 $"<p>{dto.Type}</p>" +
                 "</div>";
                 int? oldId = _tacheService.GetById(dto.Id).ToDTOIndexId().Id_Participant;
@@ -108,7 +108,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 if (dto.Id_Participant != null) {
                     subject = "PlantC Nouvelle Tâche";
                     content = "<div>" +
-                    $"<p>Une nouvelle tâche vous a été attribué : </p>" +
+                    $"<p>Une nouvelle tâche vous a été attribuée : </p>" +
                     $"<p>{dto.Type}</p>" +
                     "</div>";
                     _mailService.SendEmail(
