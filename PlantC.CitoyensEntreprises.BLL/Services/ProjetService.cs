@@ -1,5 +1,4 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Entities;
-using PlantC.CitoyensEntreprise.DAL.Entities.Views;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
@@ -7,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PlantC.CitoyensEntreprises.BLL.Services
-{
+namespace PlantC.CitoyensEntreprises.BLL.Services {
     public class ProjetService
     {
 
