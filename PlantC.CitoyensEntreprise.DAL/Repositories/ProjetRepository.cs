@@ -67,7 +67,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Description = (string)reader["description"],
                         FirstImageUrl = reader["url_photo"] as string,
                         Id = (int)reader["id_projet"],
-                        MontantRecolte = (decimal)reader["tot"],
+                        MontantRecolte = reader["tot"] as decimal? ?? 0,
                         NomLocalite = (string)reader["localite"],
                         Titre = (string)reader["titre"],
                         Infrastructure = (string)reader["infrastructure"]
@@ -130,7 +130,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         CoutDuProjet = (decimal)reader["cout_du_projet"],
                         Description = (string)reader["description"],
                         Localite = (string)reader["localite"],
-                        MontantRecolte = (decimal)reader["tot"],
+                        MontantRecolte = reader["tot"] as decimal? ?? 0,
                         Titre = (string)reader["titre"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
                         Id = id
