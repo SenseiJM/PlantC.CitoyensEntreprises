@@ -52,11 +52,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
                 string whereP = "WHERE t.nom IN (";
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
-                //int count = 0;
-                //whereP += string.Join(",", tags.Select(x => {
-                //    cmd.Parameters.AddWithValue("p" + count, tags[count]);
-                //    return "@p" + count++;
-                //})) + ")";
                 for (int i = 0; i < tags.Count; i++)
                 {
                     cmd.Parameters.AddWithValue("p" + i, tags[i]);
