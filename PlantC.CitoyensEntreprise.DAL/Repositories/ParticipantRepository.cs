@@ -178,14 +178,13 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 oConn.Open();
                 NpgsqlCommand cmd = oConn.CreateCommand();
                 cmd.CommandText = "UPDATE participant SET " +
-                    "fonction = @p2," +
-                    "nom_entreprise = @p3," +
-                    "bce = @p4," +
-                    "nom = @p5," +
-                    "prenom = @p6," +
-                    "telephone = @p7," +
-                    "id_adresse = @p8," +
-                    "email = @p9 " +
+                    "fonction = @p2, " +
+                    "nom_entreprise = @p3, " +
+                    "bce = @p4, " +
+                    "nom = @p5, " +
+                    "prenom = @p6, " +
+                    "telephone = @p7, " +
+                    "id_adresse = @p8 " +
                     "WHERE id = @p1";
                 cmd.Parameters.AddWithValue("p1", id);
                 cmd.Parameters.AddWithValue("p2", p.Fonction);
@@ -195,7 +194,6 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p6", p.Prenom);
                 cmd.Parameters.AddWithValue("p7", p.Telephone);
                 cmd.Parameters.AddWithValue("p8", p.IdAdresse);
-                cmd.Parameters.AddWithValue("p9", p.Email);
 
                 return cmd.ExecuteNonQuery() != 0;
             }

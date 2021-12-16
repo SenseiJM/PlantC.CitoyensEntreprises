@@ -47,10 +47,17 @@ namespace PlantC.CitoyensEntreprises.API.Mappers {
                 BCE = dto.BCE,
                 Prenom = dto.Prenom,
                 Telephone = dto.Telephone,
-                IdAdresse = dto.IdAdresse,
                 Nom = dto.Nom,
-                Email = dto.Email,
-                Id = dto.Id
+                IdAdresse = dto.IdAdresse,
+                Adress = new AdresseModel
+                {
+                    AdressLine1 = dto.AdressLine1,
+                    AdressLine2 = dto.AdressLine2,
+                    City = dto.City,
+                    Country = dto.Country,
+                    Number = dto.Number,
+                    ZipCode = dto.ZipCode
+                }
             };
         }
 

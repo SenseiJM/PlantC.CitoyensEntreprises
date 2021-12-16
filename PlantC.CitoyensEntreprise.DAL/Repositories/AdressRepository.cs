@@ -43,5 +43,39 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 oConn.Close();
             }
         }
+
+        public void UpdateAdress(Adresse adress)
+        {
+            try
+            {
+                oConn.Open();
+                NpgsqlCommand cmd = oConn.CreateCommand();
+                cmd.CommandText = "UPDATE adresse SET " +
+                    "ligne_adresse_1 = @p1, " +
+                    "ligne_adresse_2 = @p2, " +
+                    "numero = @p3, " +
+                    "code_postal = @p4, " +
+                    "localite = @p5, " +
+                    "pays = @p6 " +
+                    "WHERE id = @p7"
+                    ;
+                cmd.Parameters.AddWithValue("p1", adress.AdressLine1);
+                cmd.Parameters.AddWithValue("p2", adress.AdressLine2);
+                cmd.Parameters.AddWithValue("p3", adress.Number);
+                cmd.Parameters.AddWithValue("p4", adress.ZipCode);
+                cmd.Parameters.AddWithValue("p5", adress.City);
+                cmd.Parameters.AddWithValue("p6", adress.Country);
+                cmd.Parameters.AddWithValue("p7", adress.Id);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw; //return e.Message
+            }
+            finally
+            {
+                oConn.Close();
+            }
+        }
     }
 }
