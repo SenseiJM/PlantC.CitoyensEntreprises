@@ -50,6 +50,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             });
                 ParticipantModel temp = new ParticipantModel
                 {
+                    Fonction = CitoyensEntreprise.DAL.Enums.Fonction.Citoyen,
                     Email = contact.Email,
                     MdpContact = hashPassword,
                     Nom = contact.Nom,
@@ -93,7 +94,7 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
 
             if(payload == null)
             {
-                throw new Exception();
+                throw new Exception("Invalid google payload");
             }
 
             Participant u = _userRepository.GetByMail(payload.Email);

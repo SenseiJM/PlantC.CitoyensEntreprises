@@ -121,7 +121,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             }
             catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex);
             }
         }
     }
