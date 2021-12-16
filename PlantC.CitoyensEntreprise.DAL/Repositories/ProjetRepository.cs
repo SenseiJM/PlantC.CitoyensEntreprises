@@ -171,10 +171,10 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p3", p.Titre);
                 cmd.Parameters.AddWithValue("p4", p.Description);
                 cmd.Parameters.AddWithValue("p5", p.Infrastructure);
-                cmd.Parameters.AddWithValue("p6", (object)p.NbArbres??DBNull.Value);
-                cmd.Parameters.AddWithValue("p7", (object)p.NbFruits??DBNull.Value);
-                cmd.Parameters.AddWithValue("p8", (object)p.Metres??DBNull.Value);
-                cmd.Parameters.AddWithValue("p9", (object)p.Hectares??DBNull.Value);
+                cmd.Parameters.AddWithValue("p6", (object)NullIf0(p.NbArbres) ??DBNull.Value);
+                cmd.Parameters.AddWithValue("p7", (object)NullIf0(p.NbFruits)??DBNull.Value);
+                cmd.Parameters.AddWithValue("p8", (object)NullIf0(p.Metres)??DBNull.Value);
+                cmd.Parameters.AddWithValue("p9", (object)NullIf0(p.Hectares)??DBNull.Value);
                 cmd.Parameters.AddWithValue("p10", p.TonnesCO2);
                 cmd.Parameters.AddWithValue("p11", p.HeuresTravail);
                 cmd.Parameters.AddWithValue("p12", p.CoutDuProjet);
@@ -185,6 +185,11 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
             } finally {
                 oConn.Close();
             }
+        }
+
+        private decimal? NullIf0(decimal? v)
+        {
+            return v == 0 ? null : v;
         }
 
         /// <summary>

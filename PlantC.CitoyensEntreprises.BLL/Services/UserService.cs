@@ -66,7 +66,6 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
                     Userlevel = "USER",
                     IdAdresse = adresseIdTemp,
                     EstVerifie = false,
-                    Fonction = 0
                 };
                 temp.Id =_contactService.Create(temp);
                 string token = _jwtService.CreateSimpleToken(temp.Email);

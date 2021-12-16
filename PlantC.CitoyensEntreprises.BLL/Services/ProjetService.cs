@@ -1,4 +1,5 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Entities.Views;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Entities.Views;
 using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
@@ -12,13 +13,21 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
 
         private readonly ProjetRepository _projetRepository;
         private readonly TagRepository _tagRepository;
+        private readonly LocalisationRepository _locRepository;
+        private readonly AdressRepository _adRepository;
 
-        public ProjetService(ProjetRepository projetRepository, TagRepository tagRepository) {
+        public ProjetService(ProjetRepository projetRepository, TagRepository tagRepository, LocalisationRepository locRepository, AdressRepository adRepository)
+        {
             _projetRepository = projetRepository;
             _tagRepository = tagRepository;
+            _locRepository = locRepository;
+            _adRepository = adRepository;
         }
 
         public int Create(ProjetModel model) {
+
+            model.Reference = createReference(model);
+
             if (model.Infrastructure == "Verger") {
                 if (model.NbArbres == 0 || model.NbFruits == 0 || model.Hectares == 0) {
                     throw new ArgumentException("Les champs 'Nombre d'arbre', 'Nombre d'arbres fruitiers' et 'Nombre d'hectares' sont des champs requis pour les vergers !");
@@ -44,7 +53,36 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
                 }
             }
             model.DateCreation = DateTime.Now;
-            return _projetRepository.Create(model.ToEntity());
+
+            int addId = _adRepository.AddAdress(new Adresse
+            {
+                AdressLine1 = model.Localisation.AdressLine1,
+                City = model.Localisation.City,
+                Number= model.Localisation.Number,
+                ZipCode= model.Localisation.ZipCode
+            });
+
+            var l = _locRepository.GetGeocodeByAddress(model.Localisation.AdressLine1, model.Localisation.City);
+
+            int locId = _locRepository.Insert(new Localisation
+                { City = model.Localisation.City, ZipCode = model.Localisation.ZipCode },
+                l.Lat,l.Lon,addId
+            );
+
+            model.IDLocalisation = locId;
+            int pId = _projetRepository.Create(model.ToEntity());
+            foreach (var item in model.ListeTags)
+            {
+                _tagRepository.Insert(item, pId);
+            }
+            return pId;
+        }
+
+        private string createReference(ProjetModel model)
+        {
+            string result = model.Localisation.City.Substring(0,4);
+            int count = _projetRepository.GetAllResume().Count(p => p.NomLocalite == model.Localisation.City);
+            return $"{result}{("00" + (count+1)).Substring(("00" + (count + 1)).Length - 3, 3)}";
         }
 
         public bool DeleteProjet(int id)

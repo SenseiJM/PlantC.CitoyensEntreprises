@@ -31,7 +31,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                 cmd.Parameters.AddWithValue("p3", adress.Number);
                 cmd.Parameters.AddWithValue("p4", adress.ZipCode);
                 cmd.Parameters.AddWithValue("p5", adress.City);
-                cmd.Parameters.AddWithValue("p6", adress.Country);
+                cmd.Parameters.AddWithValue("p6", adress.Country ?? "");
                 return (int)cmd.ExecuteScalar();
             }
             catch (Exception e)

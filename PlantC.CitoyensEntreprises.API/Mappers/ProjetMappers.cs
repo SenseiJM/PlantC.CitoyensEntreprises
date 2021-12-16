@@ -1,6 +1,7 @@
 ﻿using PlantC.CitoyensEntreprises.API.DTO.Localisation;
 using PlantC.CitoyensEntreprises.API.DTO.Projet;
 using PlantC.CitoyensEntreprises.BLL.Models;
+using System.Linq;
 
 namespace PlantC.CitoyensEntreprises.API.Mappers
 {
@@ -39,16 +40,25 @@ namespace PlantC.CitoyensEntreprises.API.Mappers
             {
                 CoutDuProjet = dto.CoutDuProjet,
                 HeuresTravail = dto.HeuresTravail,
-                IDLocalisation = dto.IDLocalisation,
                 Infrastructure = dto.Infrastructure,
-                Reference = dto.Reference,
                 TonnesCO2 = dto.TonnesCO2,
                 NbArbres = dto.NbArbres,
                 NbFruits= dto.NbFruits,
                 Metres= dto.Metres,
                 Hectares= dto.Hectares,
                 Titre = dto.Titre,
-                Description = dto.Description
+                Description = dto.Description,
+                Localisation = new LocalisationModel
+                {
+                    AdressLine1 = dto.Rue,
+                    Number = dto.NumeroRue,
+                    City = dto.Localite,
+                    ZipCode = dto.CodePostal,
+                },
+                ListeTags = dto.Tag.Select(t => new CitoyensEntreprise.DAL.Entities.Tag
+                {
+                    Nom = t
+                })
             };
         }
 

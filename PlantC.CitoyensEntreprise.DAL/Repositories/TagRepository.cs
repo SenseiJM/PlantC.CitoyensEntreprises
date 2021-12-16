@@ -104,6 +104,17 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
             }
         }
 
+        public void Insert(Tag item, int idProj)
+        {
+            oConn.Open();
+            var cmd = oConn.CreateCommand();
+            cmd.CommandText = "INSERT INTO projet_tag(id_projet, id_tag) VALUES (@p1, (SELECT id FROM tag WHERE nom LIKE @p2))";
+            cmd.Parameters.AddWithValue("p1", idProj);
+            cmd.Parameters.AddWithValue("p2", item.Nom);
+            cmd.ExecuteNonQuery();
+            oConn.Close();
+        }
+
         public IEnumerable<Marqueurs> GetMarqueurs() {
             try {
 

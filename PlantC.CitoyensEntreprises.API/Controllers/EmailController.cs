@@ -25,7 +25,7 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
                 $"<p>{dto.Content}</p>" +
                 "</div>";
 
-                _mailService.SendEmailWithObject(dto.Subject, content, dto.Email, /*Insert email here -> */"");
+                _mailService.SendEmailWithObject(dto.Subject, content, dto.Email, /*Insert email here -> */"lykhun@gmail.com");
                 return Ok();
 
             } catch (Exception e) {

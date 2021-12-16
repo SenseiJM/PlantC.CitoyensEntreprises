@@ -72,11 +72,26 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories {
 
         }
 
-        public LocalisationGeoCode GetGeocodeByAddress(string adresse) {
+        public int Insert(Localisation l, decimal lat, decimal lng, int idAdd)
+        {
+            oConn.Open();
+            var cmd = oConn.CreateCommand();
+            cmd.CommandText = "INSERT INTO localisation(localite,code_postal, latitude, longitude, id_adresse) VALUES(@p1, @p2, @p3, @p4, @p5)  RETURNING id";
+            cmd.Parameters.AddWithValue("p1", l.City);
+            cmd.Parameters.AddWithValue("p2", l.ZipCode);
+            cmd.Parameters.AddWithValue("p3", lat);
+            cmd.Parameters.AddWithValue("p4", lng);
+            cmd.Parameters.AddWithValue("p5", idAdd);
+            int result = (int)cmd.ExecuteScalar();
+            oConn.Close();
+            return result;
+        }
+
+        public LocalisationGeoCode GetGeocodeByAddress(string adresse, string city) {
   
             adresse = adresse.Replace(" ", "%20");
             _client.DefaultRequestHeaders.Add("User-Agent", "Other");
-            HttpResponseMessage message = _client.GetAsync("/search?street=" + adresse + "&format=json").Result;
+            HttpResponseMessage message = _client.GetAsync("/search?street=" + adresse + "&city=" + city + "&format=json").Result;
             if (message.IsSuccessStatusCode) {
                 string json = message.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<List<LocalisationGeoCode>>(json).FirstOrDefault();

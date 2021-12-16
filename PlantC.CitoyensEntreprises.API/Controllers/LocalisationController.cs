@@ -22,9 +22,9 @@ namespace PlantC.CitoyensEntreprises.API.Controllers {
             return Ok(_localisationService.GetAllLocalisation());
         }
 
-        [HttpGet("GeoCode/{adresse}")]
-        public IActionResult GetGeoCode(string adresse) {
-            return Ok(_localisationService.GetGeoCode(adresse));
+        [HttpGet("GeoCode/{adresse}/{city}")]
+        public IActionResult GetGeoCode(string adresse, string city) {
+            return Ok(_localisationService.GetGeoCode(adresse, city));
         }
 
     }

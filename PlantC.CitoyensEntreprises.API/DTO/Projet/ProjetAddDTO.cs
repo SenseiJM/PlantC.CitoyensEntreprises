@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlantC.CitoyensEntreprises.API.DTO.Projet
 {
@@ -6,10 +7,16 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
     {
 
         [Required]
-        public int IDLocalisation { get; set; }
+        public string Localite { get; set; }
 
         [Required]
-        public string Reference { get; set; }
+        public string Rue { get; set; }
+
+        [Required]
+        public string NumeroRue { get; set; }
+
+        [Required]
+        public string CodePostal { get; set; }
 
         [Required]
         public string Titre { get; set; }
@@ -36,5 +43,7 @@ namespace PlantC.CitoyensEntreprises.API.DTO.Projet
         public decimal CoutDuProjet { get; set; }
 
         public decimal Contribution { get; set; }
+
+        public string[] Tag { get; set; }
     }
 }

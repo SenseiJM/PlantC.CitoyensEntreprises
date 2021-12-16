@@ -24,8 +24,8 @@ namespace PlantC.CitoyensEntreprises.BLL.Services {
             });
         }
 
-        public LocalisationGeoCodeModel GetGeoCode(string adresse) {
-            return _localisationRepository.GetGeocodeByAddress(adresse).ToSimpleModel();
+        public LocalisationGeoCodeModel GetGeoCode(string adresse, string city) {
+            return _localisationRepository.GetGeocodeByAddress(adresse, city).ToSimpleModel();
         }
 
     }
