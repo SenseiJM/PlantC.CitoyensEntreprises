@@ -332,7 +332,7 @@ namespace PlantC.CitoyensEntreprise.DAL.Repositories
                         Id = (int)reader["Id"],
                         NbArbres = (int?)reader["nb_arbres"],
                         TonnesCO2 = (decimal)reader["tonnes_co2"],
-                        TotalContribution = (decimal?)reader["tot"]
+                        TotalContribution = reader["tot"] as decimal?
                     });
                 }
 
