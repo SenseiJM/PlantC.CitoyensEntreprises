@@ -1,4 +1,5 @@
-﻿using PlantC.CitoyensEntreprise.DAL.Repositories;
+﻿using PlantC.CitoyensEntreprise.DAL.Entities;
+using PlantC.CitoyensEntreprise.DAL.Repositories;
 using PlantC.CitoyensEntreprises.BLL.Mappers;
 using PlantC.CitoyensEntreprises.BLL.Models;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
     {
 
         private readonly ParticipantRepository _participantRepository;
+        private readonly AdressRepository _adressRepository;
 
-        public ParticipantService(ParticipantRepository participantRepository)
+        public ParticipantService(ParticipantRepository participantRepository, AdressRepository adressRepository)
         {
             _participantRepository = participantRepository;
+            _adressRepository = adressRepository;
         }
 
         public int Create(ParticipantModel model)
@@ -38,6 +41,24 @@ namespace PlantC.CitoyensEntreprises.BLL.Services
 
         public bool UpdateParticipant(int id, ParticipantModel model)
         {
+            _adressRepository.UpdateAdress(new Adresse
+            {
+                AdressLine1 = model.Adress.AdressLine1,
+                AdressLine2 = model.Adress.AdressLine2,
+                City = model.Adress.City,
+                Country = model.Adress.Country,
+                Number = model.Adress.Number,
+                ZipCode = model.Adress.ZipCode,
+                Id = model.IdAdresse ?? _adressRepository.AddAdress(new Adresse
+                {
+                    AdressLine1 = model.Adress.AdressLine1,
+                    AdressLine2 = model.Adress.AdressLine2,
+                    City = model.Adress.City,
+                    Country = model.Adress.Country,
+                    Number = model.Adress.Number,
+                    ZipCode = model.Adress.ZipCode
+                })
+            });
             return _participantRepository.UpdateParticipant(id, model.ToEntity());
         }
     }
